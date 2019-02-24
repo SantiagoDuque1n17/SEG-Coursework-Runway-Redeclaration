@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-         private String RunwayDesignator; // Code for runways, e.g.: 09L
+        private String RunwayDesignator; // Code for runways, e.g.: 09L
         private int LDA; //Landing distance available
         private int RESA; // Runway	End	Safety	Area
         private int TORA; // Take-Off Run Available
