@@ -1,13 +1,12 @@
 public class Calculations {
 
-    private void landingOverObstacle(Runway r, Obstacle o) {
-        
+    private void landingOverObstacle(Runway r, Obstacle o, int distanceToThreshold) {
+
         //TODO: Proper calculations
 
-        r.setASDA(1);
-        r.setLDA(1);
-        r.setTORA(1);
-        r.setTODA(1);
+        int currentLDA = r.getLDA();
+        int newLDA = currentLDA - distanceToThreshold - (50*o.getHeight()) - 60;
+        r.setLDA(newLDA);
     }
 
 }
