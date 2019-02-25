@@ -4,8 +4,10 @@ public class Obstacle {
     private int length;
     private String name;
 
-    public Obstacle(int height, String name) {
+    public Obstacle(int height, int width, int length, String name) {
         this.height = height;
+        this.width = width;
+        this.length = length;
         this.name = name;
     }
 }
