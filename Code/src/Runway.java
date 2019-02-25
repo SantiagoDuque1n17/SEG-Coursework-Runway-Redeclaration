@@ -29,4 +29,20 @@ public class Runway {
     public int getASDA() {
         return ASDA;
     }
+    
+    public void setLDA(int LDA) {
+        this.LDA = LDA;
+    }
+
+    public void setTORA(int TORA) {
+        this.TORA = TORA;
+    }
+
+    public void setTODA(int TODA) {
+        this.TODA = TODA;
+    }
+
+    public void setASDA(int ASDA) {
+        this.ASDA = ASDA;
+    }
 }
