@@ -41,6 +41,16 @@ public class Calculations {
         int newASDA;
 
         newTORA = distanceToThreshold + displacedThreshold - o.getHeight()*50 - 60;
+        newTODA = newTORA + clearway;
+        newASDA = newTORA + stopway;
 
+        if(newTORA<=0)
+        {
+
+        }
+
+        r.setTORA(newTORA);
+        r.setTODA(newTODA);
+        r.setASDA(newASDA);
     }
 }
