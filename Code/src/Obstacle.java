@@ -10,4 +10,20 @@ public class Obstacle {
         this.length = length;
         this.name = name;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

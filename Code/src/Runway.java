@@ -6,6 +6,9 @@ public class Runway {
     private int TORA; // Take-Off Run Available
     private int TODA; // Take-Off Distance Available
     private int ASDA; // Accelerate-Stop Distance Available
+    private int stopway;
+    private int clearway;
+    private int displacedThreshold;
     private String ID;
 
     public Runway(String ID, int LDA, int TORA, int TODA, int ASDA) {
@@ -30,6 +33,18 @@ public class Runway {
 
     public int getASDA() {
         return ASDA;
+    }
+
+    public int getClearway() {
+        return clearway;
+    }
+
+    public int getStopway() {
+        return stopway;
+    }
+
+    public int getDisplacedThreshold() {
+        return displacedThreshold;
     }
 
     public void setLDA(int LDA) {

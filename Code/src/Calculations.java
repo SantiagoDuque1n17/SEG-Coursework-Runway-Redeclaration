@@ -15,7 +15,7 @@ public class Calculations {
 
     public void takeoffAwayObstacle(Runway r, Obstacle o, int distanceToThreshold) {
         int currentTORA = r.getTORA;
-        int limitation = 300 + distanceToThreshold
+        int limitation = 300 + distanceToThreshold;
         int newTORA = currentTORA - limitation;
         int
 
@@ -26,5 +26,21 @@ public class Calculations {
         r.setTODA(r.getTODA-limitation);
         r.setASDA(r.getASDA-limitation);
         //TODO: add better calculations
+    }
+
+    public void takeOffTowardsObstacle(Runway r, Obstacle o, int distanceToThreshold)
+    {
+        int currentTORA = r.getTORA();
+        int currentTODA = r.getTODA();
+        int currentASDA = r.getASDA();
+        int displacedThreshold = r.getDisplacedThreshold();
+        int stopway = r.getStopway();
+
+        int newTORA;
+        int newTODA;
+        int newASDA;
+
+        newTORA = distanceToThreshold + displacedThreshold - o.getHeight()*50 - 60;
+
     }
 }
