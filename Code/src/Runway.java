@@ -5,7 +5,7 @@ public class Runway {
     private int LDA; //Landing distance available
     private int TORA; // Take-Off Run Available
     private int TODA; // Take-Off Distance Available
-    private int ASDA; // Landing distance available
+    private int ASDA; // Accelerate-Stop Distance Available
     private String ID;
 
     public Runway(String ID, int LDA, int TORA, int TODA, int ASDA) {
