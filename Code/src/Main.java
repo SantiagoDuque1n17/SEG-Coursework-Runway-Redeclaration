@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/* TODO: 
+Obstacle list
+Runway list
+Possibly airport list?
+*/
+
 public class Main {
     public static void main(String[] args) {
 
