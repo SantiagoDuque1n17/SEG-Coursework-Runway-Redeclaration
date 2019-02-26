@@ -1,13 +1,15 @@
 public class Runway {
-    
+
     //TODO: Not sure what else to put in here
-    
+
     private int LDA; //Landing distance available
     private int TORA; // Take-Off Run Available
     private int TODA; // Take-Off Distance Available
-    private int ASDA; // Landing distance available 
+    private int ASDA; // Landing distance available
+    private String ID;
 
-    public Runway(int LDA, int TORA, int TODA, int ASDA) {
+    public Runway(String ID, int LDA, int TORA, int TODA, int ASDA) {
+        this.ID = ID;
         this.LDA = LDA;
         this.TORA = TORA;
         this.TODA = TODA;
@@ -29,7 +31,7 @@ public class Runway {
     public int getASDA() {
         return ASDA;
     }
-    
+
     public void setLDA(int LDA) {
         this.LDA = LDA;
     }
@@ -44,5 +46,9 @@ public class Runway {
 
     public void setASDA(int ASDA) {
         this.ASDA = ASDA;
+    }
+
+    public String getID() {
+        return ID;
     }
 }
