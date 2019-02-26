@@ -1,19 +1,24 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        private String RunwayDesignator; // Code for runways, e.g.: 09L
-        private int LDA; // Landing distance available
-        private int RESA; // Runway End Safety Area
-        private int TORA; // Take-Off Run Available //
-        private int TODA; // Take-Off Distance Available // TORA + Clearway
-        private int ASDA; // Landing distance available // TORA + Stopway
-        private int DisplacedThreshold; //
-        private int TOCS; // Take-Off Climb Surface
-        private int ALS; // Approach-Landing Surface
-        
-        /*
-        In case of a recalculation, the variables that must be recalculated are
-        TODA, TORA, ASDA and LDA
-        */
+
+        final Calculations calculations = new Calculations();
+        Runway testRunway = new Runway("27R",3884, 3884, 3962, 3884);
+        Obstacle testObstacle = new Obstacle(25, 50, 50, "big ass obstacle");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter distance to threshold: ");
+        Integer dtt = scanner.nextInt();
+
+        calculations.landingOverObstacle(testRunway, testObstacle, dtt);
+
+        System.out.println("Recalculated runway parameters:");
+        System.out.println("TORA = " + testRunway.getTORA());
+        System.out.println("TODA = " + testRunway.getTODA());
+        System.out.println("ASDA = " + testRunway.getASDA());
+        System.out.println("LDA = " + testRunway.getLDA());
 
     }
 }
+
