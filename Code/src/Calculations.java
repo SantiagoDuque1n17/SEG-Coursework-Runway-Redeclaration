@@ -1,5 +1,5 @@
 public class Calculations {
-    private final static int blastProtection = 300;
+    private static final int blastProtection = 300;
 
     public void landingOverObstacle(Runway r, Obstacle o, int distanceToThreshold) {
 
