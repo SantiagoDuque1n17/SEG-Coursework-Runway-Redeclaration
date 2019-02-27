@@ -35,6 +35,10 @@ public class Calculations {
         //TODO: add better calculations
     }
 
+    public void landingTowardsObstacle(Runway r, int distanceToThreshold) {
+
+    }
+
     public void takeOffTowardsObstacle(Runway r, Obstacle o, int distanceToThreshold)
     {
         int currentTORA = r.getTORA();
