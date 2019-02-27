@@ -1,15 +1,17 @@
+import RunwayRedeclaration.Exceptions.NegativeParameterException;
+
 public class Calculations {
     private static final int blastProtection = 300;
 
-    public void landingOverObstacle(Runway r, Obstacle o, int distanceToThreshold) {
+    public void landingOverObstacle(Runway r, Obstacle o, int distanceToThreshold) throws NegativeParameterException {
 
-        //TODO: Proper calculations
+        //TODO: Refine calculations
 
         int currentLDA = r.getLDA();
         int newLDA = currentLDA - distanceToThreshold - (50*o.getHeight()) - 60;
 
         if (newLDA <= 0) {
-            //TODO: Create new exception
+            throw new NegativeParameterException("Obstacle dimensions too great, can't redeclare, can't use runway.");
         }
         r.setLDA(newLDA);
     }
