@@ -10,10 +10,10 @@ public class Calculations {
         //TODO: Refine calculations
 
         int originalLDA = r.getOriginalLDA();
-        int tempThreshold = RESA;
+        int slopeCalc = RESA;
         if ((50*o.getHeight())>RESA)
-            tempThreshold = 50*o.getHeight();
-        int newLDA = originalLDA - distanceToThreshold - tempThreshold - stripEnd;
+            slopeCalc = 50*o.getHeight();
+        int newLDA = originalLDA - distanceToThreshold - slopeCalc - stripEnd;
 
         if (newLDA <= 0) {
             throw new NegativeParameterException("Obstacle dimensions too great, can't redeclare, can't use runway.");
