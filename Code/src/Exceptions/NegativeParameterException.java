@@ -1,3 +1,5 @@
+package RunwayRedeclaration.Exceptions;
+
 public class NegativeParameterException extends Exception {
     public NegativeParameterException() {
         super();
