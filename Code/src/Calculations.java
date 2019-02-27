@@ -3,13 +3,17 @@ import RunwayRedeclaration.Exceptions.NegativeParameterException;
 public class Calculations {
     private static final int blastProtection = 300;
     private static final int RESA = 240;
+    private static final int stripEnd = 60;
 
     public void landingOverObstacle(Runway r, Obstacle o, int distanceToThreshold) throws NegativeParameterException {
 
         //TODO: Refine calculations
 
         int originalLDA = r.getOriginalLDA();
-        int newLDA = originalLDA - distanceToThreshold - (50*o.getHeight()) - 60;
+        int tempThreshold = RESA;
+        if ((50*o.getHeight())>RESA)
+            tempThreshold = 50*o.getHeight();
+        int newLDA = originalLDA - distanceToThreshold - tempThreshold - stripEnd;
 
         if (newLDA <= 0) {
             throw new NegativeParameterException("Obstacle dimensions too great, can't redeclare, can't use runway.");
@@ -36,7 +40,9 @@ public class Calculations {
     }
 
     public void landingTowardsObstacle(Runway r, int distanceToThreshold) {
-
+        int newLDA = distanceToThreshold - RESA - stripEnd;
+        if (r.getOriginalLDA()>newLDA)
+            r.setLDA(newLDA);
     }
 
     public void takeOffTowardsObstacle(Runway r, Obstacle o, int distanceToThreshold)
@@ -45,16 +51,18 @@ public class Calculations {
         int currentTODA = r.getTODA();
         int currentASDA = r.getASDA();
         int displacedThreshold = r.getDisplacedThreshold();
-        int clearway = r.getClearway();
-        int stopway = r.getStopway();
 
         int newTORA;
         int newTODA;
         int newASDA;
 
-        newTORA = distanceToThreshold + displacedThreshold - o.getHeight()*50 - 60;
-        newTODA = newTORA + clearway;
-        newASDA = newTORA + stopway;
+        int tempThreshold = RESA;
+        if ((50*o.getHeight())>RESA)
+            tempThreshold = 50*o.getHeight();
+
+        newTORA = distanceToThreshold + displacedThreshold - tempThreshold - 60;
+        newTODA = newTORA;
+        newASDA = newTORA;
 
         if(newTORA<=0)
         {
