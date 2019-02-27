@@ -7,8 +7,8 @@ public class Calculations {
 
         //TODO: Refine calculations
 
-        int currentLDA = r.getLDA();
-        int newLDA = currentLDA - distanceToThreshold - (50*o.getHeight()) - 60;
+        int originalLDA = r.getOriginalLDA();
+        int newLDA = originalLDA - distanceToThreshold - (50*o.getHeight()) - 60;
 
         if (newLDA <= 0) {
             throw new NegativeParameterException("Obstacle dimensions too great, can't redeclare, can't use runway.");
@@ -16,12 +16,12 @@ public class Calculations {
         r.setLDA(newLDA);
     }
 
-    public void takeOffAwayObstacle(Runway r, Obstacle o, int distanceToThreshold) {
-        int currentTORA = r.getTORA();
+    public void takeOffAwayObstacle(Runway r, int distanceToThreshold) {
+        int originalTORA = r.getOriginalTORA();
         int displacedThreshold = r.getDisplacedThreshold();
         int clearway = r.getClearway();
         int stopway = r.getStopway();
-        int newTORA = currentTORA - blastProtection - distanceToThreshold - displacedThreshold;
+        int newTORA = originalTORA - blastProtection - distanceToThreshold - displacedThreshold;
         int newTODA = newTORA + clearway;
         int newASDA = newTORA + stopway;
 
