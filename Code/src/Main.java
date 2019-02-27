@@ -2,7 +2,7 @@ import RunwayRedeclaration.Exceptions.NegativeParameterException;
 
 import java.util.Scanner;
 
-/* TODO: 
+/* TODO:
 Obstacle list
 Runway list
 Possibly airport list?
@@ -14,7 +14,7 @@ public class Main {
         final Calculations calculations = new Calculations();
         Runway testRunway[] = {new Runway("09L",3595, 3902, 3902, 3902, 306),
                 new Runway("27R",3884, 3884, 3962, 3884, 0)};
-        Obstacle testObstacle = new Obstacle(25, "big ass obstacle");
+        Obstacle testObstacle = new Obstacle(25, "big ass obstacle", 50, 40);
 
         /*Scanner scanner = new Scanner(System.in);
         System.out.println("Enter distance to threshold: ");
@@ -45,4 +45,3 @@ public class Main {
 
     }
 }
-
