@@ -2,23 +2,45 @@ public class Runway {
 
     //TODO: Not sure what else to put in here
 
-    private int LDA; //Landing distance available
-    private int TORA; // Take-Off Run Available
-    private int TODA; // Take-Off Distance Available
-    private int ASDA; // Accelerate-Stop Distance Available
+    private final int originalLDA; //Landing distance available
+    private final int originalTORA; // Take-Off Run Available
+    private final int originalTODA; // Take-Off Distance Available
+    private final int originalASDA; // Accelerate-Stop Distance Available
     private final int stopway;
     private final int clearway;
-    private int displacedThreshold;
+    private final int displacedThreshold;
+    private int LDA, TORA, TODA, ASDA;
     private String ID;
 
-    public Runway(String ID, int LDA, int TORA, int TODA, int ASDA) {
+    public Runway(String ID, int LDA, int TORA, int TODA, int ASDA, int displacedThreshold) {
         this.ID = ID;
+        this.originalLDA = LDA;
         this.LDA = LDA;
+        this.originalTORA = TORA;
         this.TORA = TORA;
+        this.originalTODA = TODA;
         this.TODA = TODA;
+        this.originalASDA = ASDA;
         this.ASDA = ASDA;
-        stopway = ASDA - TORA;
-        clearway = TODA - TORA;
+        this.stopway = ASDA - TORA;
+        this.clearway = TODA - TORA;
+        this.displacedThreshold = displacedThreshold;
+    }
+
+    public int getOriginalLDA() {
+        return originalLDA;
+    }
+
+    public int getOriginalTORA() {
+        return originalTORA;
+    }
+
+    public int getOriginalTODA() {
+        return originalTODA;
+    }
+
+    public int getOriginalASDA() {
+        return originalASDA;
     }
 
     public int getLDA() {
