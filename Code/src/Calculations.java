@@ -1,4 +1,5 @@
 public class Calculations {
+    private final static int blastProtection = 300;
 
     public void landingOverObstacle(Runway r, Obstacle o, int distanceToThreshold) {
 
@@ -13,18 +14,21 @@ public class Calculations {
         r.setLDA(newLDA);
     }
 
-    public void takeoffAwayObstacle(Runway r, Obstacle o, int distanceToThreshold) {
-        int currentTORA = r.getTORA;
-        int limitation = 300 + distanceToThreshold;
-        int newTORA = currentTORA - limitation;
-        int
+    public void takeOffAwayObstacle(Runway r, Obstacle o, int distanceToThreshold) {
+        int currentTORA = r.getTORA();
+        int displacedThreshold = r.getDisplacedThreshold();
+        int clearway = r.getClearway();
+        int stopway = r.getStopway();
+        int newTORA = currentTORA - blastProtection - distanceToThreshold - displacedThreshold;
+        int newTODA = newTORA + clearway;
+        int newASDA = newTORA + stopway;
 
         if (newTORA <=0) {
             //TODO: exceptions
         }
         r.setTORA(newTORA);
-        r.setTODA(r.getTODA-limitation);
-        r.setASDA(r.getASDA-limitation);
+        r.setTODA(newTODA);
+        r.setASDA(newASDA);
         //TODO: add better calculations
     }
 
@@ -34,6 +38,7 @@ public class Calculations {
         int currentTODA = r.getTODA();
         int currentASDA = r.getASDA();
         int displacedThreshold = r.getDisplacedThreshold();
+        int clearway = r.getClearway();
         int stopway = r.getStopway();
 
         int newTORA;
