@@ -2,6 +2,7 @@ import RunwayRedeclaration.Exceptions.NegativeParameterException;
 
 public class Calculations {
     private static final int blastProtection = 300;
+    private static final int RESA = 240;
 
     public void landingOverObstacle(Runway r, Obstacle o, int distanceToThreshold) throws NegativeParameterException {
 
