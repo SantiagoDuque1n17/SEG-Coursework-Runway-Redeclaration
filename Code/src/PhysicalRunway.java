@@ -37,7 +37,7 @@ public class PhysicalRunway {
     }
 
     private void landingOverObstacle(Runway r, int dtt, int height) throws NegativeParameterException {
-
+        System.out.println("Calculating landing over the obstacle for runway "+r.getID());
         int originalLDA = r.getOriginalLDA();
         int slopeCalc = RESA;
         if ((50*height)>RESA)
@@ -48,11 +48,12 @@ public class PhysicalRunway {
         if (newLDA <= 0) {
             throw new NegativeParameterException();
         }
+        System.out.println("LDA: Original value: "+originalLDA+", Previous value: "+r.getLDA()+", New value: "+newLDA);
         r.setLDA(newLDA);
     }
 
     private void takeOffAwayObstacle(Runway r, int dtt) throws NegativeParameterException {
-
+        System.out.println("Calculating take-off away from the obstacle for runway "+r.getID());
         int originalTORA = r.getOriginalTORA();
         int displacedThreshold = r.getDisplacedThreshold();
         int clearway = r.getClearway();
@@ -64,23 +65,26 @@ public class PhysicalRunway {
         if (newTORA <=0) {
             throw new NegativeParameterException();
         }
+        System.out.println("TORA: Original value: "+originalTORA+", Previous value: "+r.getTORA()+", New value: "+newTORA);
         r.setTORA(newTORA);
+        System.out.println("TODA: Original value: "+r.getOriginalTODA()+", Previous value: "+r.getTODA()+", New value: "+newTODA);
         r.setTODA(newTODA);
+        System.out.println("ASDA: Original value: "+r.getOriginalASDA()+", Previous value: "+r.getASDA()+", New value: "+newASDA);
         r.setASDA(newASDA);
     }
 
-    private void landingTowardsObstacle(Runway r, int dtt) {
-
+    private void landingTowardsObstacle(Runway r, int dtt) throws DontNeedRedeclarationException {
+        System.out.println("Calculating landing towards the obstacle for runway "+r.getID());
         int newLDA = dtt - RESA - stripEnd;
-        if (r.getOriginalLDA()>newLDA)
+        if (r.getOriginalLDA()>newLDA) {
+            System.out.println("LDA: Original value: "+r.getOriginalLDA()+", Previous value: "+r.getLDA()+", New value: "+newLDA);
             r.setLDA(newLDA);
+        }
+        throw new DontNeedRedeclarationException();
     }
 
     private void takeOffTowardsObstacle(Runway r, int dtt, int height) throws NegativeParameterException {
-
-        int currentTORA = r.getTORA();
-        int currentTODA = r.getTODA();
-        int currentASDA = r.getASDA();
+        System.out.println("Calculating take-off towards the obstacle for runway "+r.getID());
         int displacedThreshold = r.getDisplacedThreshold();
 
         int newTORA;
@@ -99,9 +103,12 @@ public class PhysicalRunway {
         {
             throw new NegativeParameterException();
         }
-
+        System.out.println("TORA: Original value: "+r.getOriginalTORA()+", Previous value: "+r.getTORA()+", New value: "+newTORA);
         r.setTORA(newTORA);
+        System.out.println("TODA: Original value: "+r.getOriginalTODA()+", Previous value: "+r.getTODA()+", New value: "+newTODA);
         r.setTODA(newTODA);
+        System.out.println("ASDA: Original value: "+r.getOriginalASDA()+", Previous value: "+r.getASDA()+", New value: "+newASDA);
         r.setASDA(newASDA);
+
     }
 }
