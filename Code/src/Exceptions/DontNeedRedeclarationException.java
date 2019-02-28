@@ -1,4 +1,4 @@
-package RunwayRedeclaration.Exceptions;
+package Exceptions;
 
 public class DontNeedRedeclarationException extends Exception {
     public DontNeedRedeclarationException() {

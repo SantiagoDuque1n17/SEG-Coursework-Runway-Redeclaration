@@ -1,8 +1,8 @@
-package RunwayRedeclaration.Exceptions;
+package Exceptions;
 
 public class NegativeParameterException extends Exception {
-    public NegativeParameterException("Invalid parameters; runway can't be redeclared.") {
-        super();
+    public NegativeParameterException() {
+        super("Invalid parameters; runway can't be redeclared.");
     }
     public NegativeParameterException(String msg) {
         super(msg);
