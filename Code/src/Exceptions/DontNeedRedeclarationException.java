@@ -1,3 +1,5 @@
+package RunwayRedeclaration.Exceptions;
+
 public class DontNeedRedeclarationException extends Exception {
     public DontNeedRedeclarationException() {
         super("Obstacle out of the way; redeclaration unnecessary.");
