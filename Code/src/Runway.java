@@ -1,3 +1,5 @@
+import Exceptions.NegativeParameterException;
+
 public class Runway {
 
     //TODO: Not sure what else to put in here
@@ -11,6 +13,10 @@ public class Runway {
     private final int displacedThreshold;
     private int LDA, TORA, TODA, ASDA;
     private String ID;
+
+    private static final int blastProtection = 300;
+    private static final int RESA = 240;
+    private static final int stripEnd = 60;
 
     public Runway(String ID, int LDA, int TORA, int TODA, int ASDA, int displacedThreshold) {
         this.ID = ID;
@@ -89,5 +95,78 @@ public class Runway {
 
     public String getID() {
         return ID;
+    }
+
+    public void landingOverObstacle(int dtt, int height) throws NegativeParameterException {
+        System.out.println("Calculating landing over the obstacle for runway "+this.getID());
+        int originalLDA = this.getOriginalLDA();
+        int slopeCalc = RESA;
+        if ((50*height)>RESA)
+            slopeCalc = 50*height;
+
+        int newLDA = originalLDA - dtt - slopeCalc - stripEnd;
+
+        if (newLDA <= 0) {
+            throw new NegativeParameterException();
+        }
+        System.out.println("LDA: Original value: "+originalLDA+", Previous value: "+this.getLDA()+", New value: "+newLDA);
+        this.setLDA(newLDA);
+    }
+
+    void takeOffAwayObstacle(int dtt) throws NegativeParameterException {
+        System.out.println("Calculating take-off away from the obstacle for runway "+this.getID());
+        int originalTORA = this.getOriginalTORA();
+        int displacedThreshold = this.getDisplacedThreshold();
+        int clearway = this.getClearway();
+        int stopway = this.getStopway();
+        int newTORA = originalTORA - blastProtection - dtt - displacedThreshold;
+        int newTODA = newTORA + clearway;
+        int newASDA = newTORA + stopway;
+
+        if (newTORA <=0) {
+            throw new NegativeParameterException();
+        }
+        System.out.println("TORA: Original value: "+originalTORA+", Previous value: "+this.getTORA()+", New value: "+newTORA);
+        this.setTORA(newTORA);
+        System.out.println("TODA: Original value: "+this.getOriginalTODA()+", Previous value: "+this.getTODA()+", New value: "+newTODA);
+        this.setTODA(newTODA);
+        System.out.println("ASDA: Original value: "+this.getOriginalASDA()+", Previous value: "+this.getASDA()+", New value: "+newASDA);
+        this.setASDA(newASDA);
+    }
+
+    void landingTowardsObstacle(int dtt) {
+        System.out.println("Calculating landing towards the obstacle for runway "+this.getID());
+        int newLDA = dtt - RESA - stripEnd;
+        System.out.println("LDA: Original value: "+this.getOriginalLDA()+", Previous value: "+this.getLDA()+", New value: "+newLDA);
+        this.setLDA(newLDA);
+    }
+
+    void takeOffTowardsObstacle(int dtt, int height) throws NegativeParameterException {
+        System.out.println("Calculating take-off towards the obstacle for runway "+this.getID());
+        int displacedThreshold = this.getDisplacedThreshold();
+
+        int newTORA;
+        int newTODA;
+        int newASDA;
+
+        int slopeCalc = RESA;
+        if ((50*height)>RESA)
+            slopeCalc = 50*height;
+
+        newTORA = dtt + displacedThreshold - slopeCalc - 60;
+        newTODA = newTORA;
+        newASDA = newTORA;
+
+        if(newTORA<=0)
+        {
+            throw new NegativeParameterException();
+        }
+        System.out.println("TORA: Original value: "+this.getOriginalTORA()+", Previous value: "+this.getTORA()+", New value: "+newTORA);
+        this.setTORA(newTORA);
+        System.out.println("TODA: Original value: "+this.getOriginalTODA()+", Previous value: "+this.getTODA()+", New value: "+newTODA);
+        this.setTODA(newTODA);
+        System.out.println("ASDA: Original value: "+this.getOriginalASDA()+", Previous value: "+this.getASDA()+", New value: "+newASDA);
+        this.setASDA(newASDA);
+
     }
 }
