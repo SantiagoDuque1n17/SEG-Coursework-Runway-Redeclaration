@@ -30,4 +30,17 @@ public class Obstacle {
     public int getDistToCentreline() {
         return distToCentreline;
     }
+
+    public void setDistToThreshold1(int distToThreshold1) {
+        this.distToThreshold1 = distToThreshold1;
+    }
+
+    public void setDistToThreshold2(int distToThreshold2) {
+        this.distToThreshold2 = distToThreshold2;
+    }
+
+    public void setDistToCentreline(int distToCentreline) {
+        this.distToCentreline = distToCentreline;
+    }
 }
+
