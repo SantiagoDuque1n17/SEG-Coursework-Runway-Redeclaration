@@ -4,6 +4,12 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+/*
+Used the values from the scenarios to test if the calculations
+are done correctly.
+Runways used for testing are 09L and 27R.
+*/
+
 public class Testing extends TestCase
 {
     PhysicalRunway runway;
@@ -29,9 +35,9 @@ public class Testing extends TestCase
     @Test
     public void testLandingOverObstacle()
     {
-        testLDA1 = 2335;
+        testLDA1 = 2985;
         try {
-            runway1.landingOverObstacle(-50, 25);
+            runway1.landingOverObstacle(-50, 12);
         }
         catch(NegativeParameterException e)
         {
@@ -39,9 +45,9 @@ public class Testing extends TestCase
         }
         assertEquals("Calculations not correct", testLDA1, runway1.getLDA());
 
-        testLDA2 = 2074;
+        testLDA2 = 2774;
         try {
-            runway2.landingOverObstacle(500, 25);
+            runway2.landingOverObstacle(50, 20);
         }
         catch(NegativeParameterException e)
         {
@@ -51,18 +57,31 @@ public class Testing extends TestCase
     }
 
     @Test
-    public void testTakeOffAwayObstacle() throws NegativeParameterException
+    public void testTakeOffAwayObstacle()
     {
-        runway1.takeOffAwayObstacle(-50);
         testTORA1 = 3346;
+        try {
+            runway1.takeOffAwayObstacle(-50);
+        }
+        catch(NegativeParameterException e)
+        {
+            e.printStackTrace();
+        }
         assertEquals("Calculations not correct", testTORA1, runway1.getTORA());
         testTODA1 = testTORA1 + runway1.getClearway();
         assertEquals("Calculations not correct", testTODA1, runway1.getTODA());
         testASDA1 = testTORA1 + runway1.getStopway();
         assertEquals("Calculations not correct", testASDA1, runway1.getASDA());
 
-        runway2.takeOffAwayObstacle(50);
         testTORA2 = 3534;
+        try {
+            runway2.takeOffAwayObstacle(50);
+        }
+        catch(NegativeParameterException e)
+        {
+            e.printStackTrace();
+        }
+
         assertEquals("Calculations not correct", testTORA2, runway2.getTORA());
         testTODA2 = testTORA2 + runway2.getClearway();
         assertEquals("Calculations not correct", testTODA2, runway2.getTODA());
@@ -71,7 +90,7 @@ public class Testing extends TestCase
     }
 
     @Test
-    public void testLandingTowardsObstacle() throws DontNeedRedeclarationException
+    public void testLandingTowardsObstacle()
     {
         testLDA1 = 3246;
         runway1.landingTowardsObstacle(3546);
@@ -83,18 +102,30 @@ public class Testing extends TestCase
     }
 
     @Test
-    public void testTakeOffTowardsObstacle() throws NegativeParameterException
+    public void testTakeOffTowardsObstacle()
     {
-        runway1.takeOffTowardsObstacle(2500, 25);
-        testTORA1 = 1496;
+        testTORA1 = 2792;
+        try {
+            runway1.takeOffTowardsObstacle(3546, 20);
+        }
+        catch(NegativeParameterException e)
+        {
+            e.printStackTrace();
+        }
         assertEquals("Calculations not correct", testTORA1, runway1.getTORA());
         testTODA1 = testTORA1;
         assertEquals("Calculations not correct", testTODA1, runway1.getTODA());
         testASDA1 = testTORA1;
         assertEquals("Calculations not correct", testASDA1, runway1.getASDA());
 
-        runway2.takeOffTowardsObstacle(2500, 25);
-        testTORA2 = 1190;
+        testTORA2 = 2986;
+        try {
+            runway2.takeOffTowardsObstacle(3646, 12);
+        }
+        catch(NegativeParameterException e)
+        {
+            e.printStackTrace();
+        }
         assertEquals("Calculations not correct", testTORA2, runway2.getTORA());
         testTODA2 = testTORA2;
         assertEquals("Calculations not correct", testTODA2, runway2.getTODA());
