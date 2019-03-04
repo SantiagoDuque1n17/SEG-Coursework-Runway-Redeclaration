@@ -3,8 +3,6 @@ import Exceptions.NegativeParameterException;
 
 public class Runway {
 
-    //TODO: Not sure what else to put in here
-
     private final int originalLDA; //Landing distance available
     private final int originalTORA; // Take-Off Run Available
     private final int originalTODA; // Take-Off Distance Available
@@ -99,6 +97,7 @@ public class Runway {
     }
 
     public void landingOverObstacle(int dtt, int height) throws NegativeParameterException {
+        System.out.println("\n");
         System.out.println("***************************************************************");
         System.out.println("Calculating landing over the obstacle for runway "+this.getID());
         System.out.println("***************************************************************");
@@ -114,10 +113,16 @@ public class Runway {
             throw new NegativeParameterException();
         }
         System.out.println("LDA: Original value: "+originalLDA+", Previous value: "+this.getLDA()+", New value: "+newLDA);
+        System.out.println
+                ("Formula: \n New LDA = Original LDA (" + originalLDA + ") " +
+                        "+ Distance from threshold (" + dtt + ") - Strip end (" + stripEnd +") - Slope calculation (50*" + height + " = " + slopeCalc + ")." +
+                        "\n_________________________________________________________________" );
+
         this.setLDA(newLDA);
     }
 
     void takeOffAwayObstacle(int dtt) throws NegativeParameterException {
+        System.out.println("\n");
         System.out.println("***************************************************************");
         System.out.println("Calculating take-off away from the obstacle for runway "+this.getID());
         System.out.println("***************************************************************");
@@ -135,23 +140,33 @@ public class Runway {
         }
         System.out.println("TORA: Original value: "+originalTORA+", Previous value: "+this.getTORA()+", New value: "+newTORA);
         this.setTORA(newTORA);
+        System.out.println("Formula:\n New TORA = Original TORA (" +
+                        originalTORA + ") - Blast Protection (" + blastProtection + ") - Distance to threshold (" + dtt + ") - Displaced threshold (" + displacedThreshold + ") " +
+                            "\n__________________________________________________________________________");
         System.out.println("TODA: Original value: "+this.getOriginalTODA()+", Previous value: "+this.getTODA()+", New value: "+newTODA);
         this.setTODA(newTODA);
+        System.out.println("Formula:\n New TODA = New TORA (" + newTORA + ") + Clearway (" + clearway + ")." +
+                            "\n__________________________________________________________________________");
         System.out.println("ASDA: Original value: "+this.getOriginalASDA()+", Previous value: "+this.getASDA()+", New value: "+newASDA);
         this.setASDA(newASDA);
+        System.out.println("Formula:\n New ASDA = New TORA (" + newTORA + ") + Stopway (" + stopway + ")." +
+                            "\n__________________________________________________________________________");
     }
 
     void landingTowardsObstacle(int dtt) {
+        System.out.println("\n");
         System.out.println("***************************************************************");
         System.out.println("Calculating landing towards the obstacle for runway "+this.getID());
         System.out.println("***************************************************************");
         int newLDA = dtt - RESA - stripEnd;
-        System.out.println("LDA: Original value: "+this.getOriginalLDA()+", Previous value: "+this.getLDA()+", New value: "+newLDA);
+        System.out.println("LDA: Original value: "+  this.getOriginalLDA() +", Previous value: "+this.getLDA()+", New value: "+newLDA);
         this.setLDA(newLDA);
+        System.out.println("Formula:\n New LDA = Distance to threshold");
+        System.out.println("__________________________________________________________________________");
     }
 
     void takeOffTowardsObstacle(int dtt, int height) throws NegativeParameterException {
-        System.out.println("***************************************************************");
+        System.out.println("\n***************************************************************");
         System.out.println("Calculating take-off towards the obstacle for runway "+this.getID());
         System.out.println("***************************************************************");
         int displacedThreshold = this.getDisplacedThreshold();
@@ -164,7 +179,7 @@ public class Runway {
         if ((50*height)>RESA)
             slopeCalc = 50*height;
 
-        newTORA = dtt + displacedThreshold - slopeCalc - 60;
+        newTORA = dtt + displacedThreshold - slopeCalc - stripEnd;
         newTODA = newTORA;
         newASDA = newTORA;
 
@@ -174,10 +189,18 @@ public class Runway {
         }
         System.out.println("TORA: Original value: "+this.getOriginalTORA()+", Previous value: "+this.getTORA()+", New value: "+newTORA);
         this.setTORA(newTORA);
+        System.out.println
+                ("Formula:\n New TORA = Original TORA (" +
+                        getOriginalTORA() + ") + Displaced threshold ("
+                        + displacedThreshold + ")  - Slope calculation (50*" + height + " = " + slopeCalc + ") - Visual Strip End (" + stripEnd + ")." +
+                        "\n _________________________________________________________________");
         System.out.println("TODA: Original value: "+this.getOriginalTODA()+", Previous value: "+this.getTODA()+", New value: "+newTODA);
         this.setTODA(newTODA);
+        System.out.println("Formula:\n New TODA = New TORA (" + newTORA + ").\n _________________________________________________________________");
         System.out.println("ASDA: Original value: "+this.getOriginalASDA()+", Previous value: "+this.getASDA()+", New value: "+newASDA);
         this.setASDA(newASDA);
+        System.out.println("Formula:\n New ASDA = New TORA (" + newTORA + "). \n _________________________________________________________________");
 
     }
 }
+
