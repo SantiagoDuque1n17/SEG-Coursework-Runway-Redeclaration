@@ -33,4 +33,6 @@ public class PhysicalRunway {
             runway1.landingOverObstacle(dtt1, h);
         }
     }
+
+
 }
