@@ -161,7 +161,7 @@ public class Runway {
         int newLDA = dtt - RESA - stripEnd;
         System.out.println("LDA: Original value: "+  this.getOriginalLDA() +", Previous value: "+this.getLDA()+", New value: "+newLDA);
         this.setLDA(newLDA);
-        System.out.println("Formula:\n New LDA = Distance to threshold");
+        System.out.println("Formula:\n New LDA = Distance to threshold (" + dtt + ") - RESA (" + RESA + ") - strip end (" + stripEnd + ").");
         System.out.println("__________________________________________________________________________");
     }
 
