@@ -1,3 +1,6 @@
+import Exceptions.DontNeedRedeclarationException;
+import Exceptions.NegativeParameterException;
+
 import java.util.*;
 
 public class Interface {
@@ -24,15 +27,10 @@ public class Interface {
          */
         System.out.println("Type 1 to select an obstacle from a predefined list, and 2 to define a custom obstacle");
         obstacle = obstacleSelection();
-/*
-        if (isCustom() == 1) {
-            obstacle = predObstacle();
-        } else if (isCustom() == 2){
-            obstacle = customObstacle();
-        } else {
-            System.err.println("Error");
-        }
-*/
+        System.out.println("Obstacle name: " + obstacle.getName());
+        System.out.println("Obstacle distance to centreline: " + obstacle.getDistToCentreline());
+        System.out.println("Obstacle distance to threshold 1: " + obstacle.getDistToThreshold1());
+        System.out.println("Obstacle distance to threshold 2: " + obstacle.getDistToThreshold2());
 
         /**
          * Selection of runway
@@ -41,7 +39,13 @@ public class Interface {
             System.out.println("Runway " + (i+1) + ": " + runwayList.get(i).getName());
         }
         runway = runwaySelection();
+        System.out.println("Selected runway: " + runway.getName());
 
+        try {
+            runway.addObstacle(obstacle);
+        } catch (DontNeedRedeclarationException | NegativeParameterException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -64,7 +68,7 @@ public class Interface {
         }
 
         for (Map.Entry<PhysicalRunway, String> entry : runwayMap.entrySet()) {
-            if (entry.getValue().equals(runwayMap))
+            if (entry.getValue().equals(runwayName))
                 pr = entry.getKey();
         }
 
@@ -138,11 +142,6 @@ public class Interface {
         obstacle.setDistToCentreline(dtc);
         obstacle.setDistToThreshold1(dttL);
         obstacle.setDistToThreshold2(dttR);
-
-        System.out.println("Obstacle name: " + obstacle.getName());
-        System.out.println("Obstacle distance to centreline: " + obstacle.getDistToCentreline());
-        System.out.println("Obstacle distance to threshold 1: " + obstacle.getDistToThreshold1());
-        System.out.println("Obstacle distance to threshold 2: " + obstacle.getDistToThreshold2());
 
         return obstacle;
     }
