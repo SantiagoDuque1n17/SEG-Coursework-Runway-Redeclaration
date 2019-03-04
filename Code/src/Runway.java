@@ -99,7 +99,10 @@ public class Runway {
     }
 
     public void landingOverObstacle(int dtt, int height) throws NegativeParameterException {
+        System.out.println("***************************************************************");
         System.out.println("Calculating landing over the obstacle for runway "+this.getID());
+        System.out.println("***************************************************************");
+
         int originalLDA = this.getOriginalLDA();
         int slopeCalc = RESA;
         if ((50*height)>RESA)
@@ -115,7 +118,10 @@ public class Runway {
     }
 
     void takeOffAwayObstacle(int dtt) throws NegativeParameterException {
+        System.out.println("***************************************************************");
         System.out.println("Calculating take-off away from the obstacle for runway "+this.getID());
+        System.out.println("***************************************************************");
+
         int originalTORA = this.getOriginalTORA();
         int displacedThreshold = this.getDisplacedThreshold();
         int clearway = this.getClearway();
@@ -136,14 +142,18 @@ public class Runway {
     }
 
     void landingTowardsObstacle(int dtt) {
+        System.out.println("***************************************************************");
         System.out.println("Calculating landing towards the obstacle for runway "+this.getID());
+        System.out.println("***************************************************************");
         int newLDA = dtt - RESA - stripEnd;
         System.out.println("LDA: Original value: "+this.getOriginalLDA()+", Previous value: "+this.getLDA()+", New value: "+newLDA);
         this.setLDA(newLDA);
     }
 
     void takeOffTowardsObstacle(int dtt, int height) throws NegativeParameterException {
+        System.out.println("***************************************************************");
         System.out.println("Calculating take-off towards the obstacle for runway "+this.getID());
+        System.out.println("***************************************************************");
         int displacedThreshold = this.getDisplacedThreshold();
 
         int newTORA;
