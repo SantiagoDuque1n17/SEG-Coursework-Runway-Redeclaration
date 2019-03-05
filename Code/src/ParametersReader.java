@@ -12,7 +12,16 @@ public class ParametersReader {
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                obstacleList.add(readObstacle(scanner.nextLine()));
+                
+                Obstacle obstacle = readObstacle(scanner.nextLine());
+
+                for (Obstacle o : obstacleList) {
+                    if (obstacle.getName().equals(o.getName())) {
+                        obstacle.setName(obstacle.getName()+"'");
+                    }
+                }
+
+                obstacleList.add(obstacle);
             }
             scanner.close();
         } catch (FileNotFoundException e) {
