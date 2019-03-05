@@ -1,10 +1,12 @@
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import java.util.*;
 
 public class Interface {
-
 
     private static final Scanner scanner = new Scanner(System.in);
     private List<PhysicalRunway> runwayList;
@@ -174,6 +176,6 @@ public class Interface {
         System.out.println("Introduce obstacle distance to centreline:");
         int dtc = scannerValidation();
 
-        return new Obstacle(height, name, dttL, dttR, dtc);
+        return new Obstacle(name, height, dttL, dttR, dtc);
     }
 }
