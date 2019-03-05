@@ -3,7 +3,7 @@ public class Obstacle {
     private String name;
     private int distToThreshold1, distToThreshold2, distToCentreline;
 
-    public Obstacle(int height, String name, int distToThreshold1, int distToThreshold2, int distToCentreline) {
+    public Obstacle(String name, int height, int distToThreshold1, int distToThreshold2, int distToCentreline) {
         this.height = height;
         this.name = name;
         this.distToThreshold1 = distToThreshold1;
