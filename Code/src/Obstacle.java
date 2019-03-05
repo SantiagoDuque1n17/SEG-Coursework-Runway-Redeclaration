@@ -42,5 +42,9 @@ public class Obstacle {
     public void setDistToCentreline(int distToCentreline) {
         this.distToCentreline = distToCentreline;
     }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 
