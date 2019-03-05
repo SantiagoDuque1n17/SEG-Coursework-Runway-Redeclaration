@@ -15,5 +15,28 @@ public class Airport {
     public void addRunway(PhysicalRunway runway) {
         runways.add(runway);
     }
-    //TODO: Possibly a list of Runways as variable as well?
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<PhysicalRunway> getRunways() {
+        return runways;
+    }
+
+    public void setRunways(List<PhysicalRunway> runways) {
+        this.runways = runways;
+    }
 }
