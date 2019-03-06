@@ -165,8 +165,8 @@ public class Interface {
      */
     private Obstacle customObstacle() {
         System.out.println("Introduce obstacle name:");
+        scanner.nextLine();
         String name = scanner.nextLine();
-        scanner.next();
         System.out.println("Introduce obstacle height:");
         int height = scannerValidation();
         System.out.println("Introduce obstacle distance to left threshold:");
