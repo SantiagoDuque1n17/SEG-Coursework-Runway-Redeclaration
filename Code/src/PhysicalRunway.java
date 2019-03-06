@@ -9,12 +9,32 @@ public class PhysicalRunway {
     private static final int stripEnd = 60;
     private static final int sideSpace = 75;
 
+    /**
+     * Constructor
+     *
+     * A physical runway can be used in both directions,
+     * creating two logical runways with a difference of 18 points
+     * (180 degrees)
+     *
+     * @param runway1  first logical runway - clock-wise
+     * @param runway2  second logical runway
+     */
     public PhysicalRunway(Runway runway1, Runway runway2) {
         this.runway1 = runway1;
         this.runway2 = runway2;
         name = runway1.getID()+"/"+runway2.getID();
     }
 
+    /**
+     *
+     * Adds an obstacle to the physical runway and depending on the
+     * distances to thresholds performs landing and takeoff in
+     * the right direction
+     *
+     * @param o obstacled added to the runway
+     * @throws DontNeedRedeclarationException
+     * @throws NegativeParameterException
+     */
     public void addObstacle(Obstacle o) throws DontNeedRedeclarationException, NegativeParameterException {
 
         int dtt1 = o.getDistToThreshold1();
@@ -33,7 +53,7 @@ public class PhysicalRunway {
             runway1.landingOverObstacle(dtt1, h);
         }
     }
-    
+
     public String getName()
     {
         return name;

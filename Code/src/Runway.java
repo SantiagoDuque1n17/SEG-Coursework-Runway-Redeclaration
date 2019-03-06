@@ -12,6 +12,7 @@ public class Runway {
     private final int displacedThreshold;
     private int LDA, TORA, TODA, ASDA;
     private String ID;
+    private String status = "NORMAL";
 
     private static final int blastProtection = 300;
     private static final int RESA = 240;
@@ -32,6 +33,10 @@ public class Runway {
         this.displacedThreshold = displacedThreshold;
     }
 
+    /**
+     * Getters and setters
+     *
+     */
     public int getOriginalLDA() {
         return originalLDA;
     }
@@ -96,6 +101,26 @@ public class Runway {
         return ID;
     }
 
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
+    /**
+     * Simulates landing over an obstacle. A new LDA is calculated
+     * and depending on its value a commercial decision is made
+     * whether the runway should close or restricted operations
+     * should be enabled
+     *
+     * @param dtt distance from threshold
+     * @param height height of obstacle
+     * @throws NegativeParameterException
+     */
     public void landingOverObstacle(int dtt, int height) throws NegativeParameterException {
         System.out.println("\n");
         System.out.println("***************************************************************");
@@ -115,12 +140,36 @@ public class Runway {
         System.out.println("LDA: Original value: "+originalLDA+", Previous value: "+this.getLDA()+", New value: "+newLDA);
         System.out.println
                 ("Formula: \n New LDA = Original LDA (" + originalLDA + ") " +
-                        "+ Distance from threshold (" + dtt + ") - Strip end (" + stripEnd +") - Slope calculation (50*" + height + " = " + slopeCalc + ")." +
+                        "- Distance from threshold (" + dtt + ") - Strip end (" + stripEnd +") - Slope calculation (50*" + height + " = " + slopeCalc + ")." +
                         "\n_________________________________________________________________" );
 
         this.setLDA(newLDA);
+
+        System.out.println("The threshold value of the runway: " + displacedThreshold);
+
+        if(newLDA<=1600)
+        {
+            status = "CLOSED";
+        }
+        else
+        {
+            status = "RESTRICTED OPERATIONS";
+        }
+
+        System.out.println("Runway status: " + status);
     }
 
+    /**
+     * Simulates taking off away from an obstacle. New values
+     * for TORA, TODA and ASDA are  calculated
+     * and depending on those value a commercial decision is made
+     * whether the runway should close or restricted operations
+     * should be enabled
+     *
+     * @param dtt distance from threshold
+     *
+     * @throws NegativeParameterException
+     */
     void takeOffAwayObstacle(int dtt) throws NegativeParameterException {
         System.out.println("\n");
         System.out.println("***************************************************************");
@@ -151,20 +200,73 @@ public class Runway {
         this.setASDA(newASDA);
         System.out.println("Formula:\n New ASDA = New TORA (" + newTORA + ") + Stopway (" + stopway + ")." +
                             "\n__________________________________________________________________________");
+
+        System.out.println("The threshold value of the runway: " + displacedThreshold);
+
+        if(newTORA<=1900)
+        {
+            status = "CLOSED";
+        }
+        else
+        {
+            status = "RESTRICTED OPERATIONS";
+        }
+
+        System.out.println("Runway status: " + status);
     }
 
-    void landingTowardsObstacle(int dtt) {
+    /**
+     * Simulates landing towards an obstacle. A new LDA is calculated
+     * and depending on its value a commercial decision is made
+     * whether the runway should close or restricted operations
+     * should be enabled
+     *
+     * @param dtt distance from threshold
+     */
+    void landingTowardsObstacle(int dtt) throws NegativeParameterException
+    {
         System.out.println("\n");
         System.out.println("***************************************************************");
         System.out.println("Calculating landing towards the obstacle for runway "+this.getID());
         System.out.println("***************************************************************");
         int newLDA = dtt - RESA - stripEnd;
+
+        if(newLDA <= 0)
+        {
+            throw new NegativeParameterException();
+        }
+
         System.out.println("LDA: Original value: "+  this.getOriginalLDA() +", Previous value: "+this.getLDA()+", New value: "+newLDA);
         this.setLDA(newLDA);
         System.out.println("Formula:\n New LDA = Distance to threshold (" + dtt + ") - RESA (" + RESA + ") - strip end (" + stripEnd + ").");
         System.out.println("__________________________________________________________________________");
+
+        System.out.println("The threshold value of the runway: " + displacedThreshold);
+
+        if(newLDA<=1600)
+        {
+            status = "CLOSED";
+        }
+        else
+        {
+            status = "RESTRICTED OPERATIONS";
+        }
+
+        System.out.println("Runway status: " + status);
     }
 
+    /**
+     * Simulates taking off towards an obstacle. New values
+     * for TORA, TODA and ASDA are  calculated
+     * and depending on those value a commercial decision is made
+     * whether the runway should close or restricted operations
+     * should be enabled
+     *
+     * @param dtt distance from threshold
+     * @param height height of obstacle
+     *
+     * @throws NegativeParameterException
+     */
     void takeOffTowardsObstacle(int dtt, int height) throws NegativeParameterException {
         System.out.println("\n***************************************************************");
         System.out.println("Calculating take-off towards the obstacle for runway "+this.getID());
@@ -201,6 +303,18 @@ public class Runway {
         this.setASDA(newASDA);
         System.out.println("Formula:\n New ASDA = New TORA (" + newTORA + "). \n _________________________________________________________________");
 
+        System.out.println("The threshold value of the runway: " + displacedThreshold);
+
+        if(newTORA<=1900)
+        {
+            status = "CLOSED";
+        }
+        else
+        {
+            status = "RESTRICTED OPERATIONS";
+        }
+
+        System.out.println("Runway status: " + status);
     }
 }
 

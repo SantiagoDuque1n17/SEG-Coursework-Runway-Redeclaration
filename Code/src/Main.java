@@ -13,10 +13,9 @@ public class Main {
         ParametersReader pr = new ParametersReader();
 
         try {
-            obstacleList = pr.getObstaclesFromFile(new File(
-                    "/* FILE PATH IN HERE */"));
+            obstacleList = pr.getObstaclesFromFile(new File("C:\\Users\\Stefan\\Desktop\\SEG-Coursework-Runway-Redeclaration\\Code\\src\\obstacles.txt"));
             runwayList = pr.getRunwaysFromFile(new File(
-                    "/* FILE PATH IN HERE */"));
+                    "C:\\Users\\Stefan\\Desktop\\SEG-Coursework-Runway-Redeclaration\\Code\\src\\runways.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
