@@ -6,8 +6,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import javax.swing.border.TitledBorder;
 
 public class GUI extends Application {
     @Override
@@ -68,17 +71,21 @@ public class GUI extends Application {
         right.add(recalcValues, 0,5);
 
         BorderPane centre = new BorderPane();
+        Label topViewLabel = new Label("Top-Down view");
 
-        GridPane sideView = new GridPane();
+
+        BorderPane sideView = new BorderPane();
         sideView.setPadding(new Insets(3, 10, 3, 10));
         sideView.setMinSize(1100, 300);
-        sideView.setVgap(5);
-        sideView.setHgap(5);
-        sideView.setAlignment(Pos.CENTER);
+
+        Label sideViewLabel = new Label("Side view");
+        sideViewLabel.setFont(new Font("Arial", 20));
 
         sideView.setStyle("-fx-background-color: CYAN;");
+        sideView.setTop(sideViewLabel);
 
         centre.setBottom(sideView);
+        centre.setTop(topViewLabel);
 
         bpane.setRight(right);
         bpane.setCenter(centre);
