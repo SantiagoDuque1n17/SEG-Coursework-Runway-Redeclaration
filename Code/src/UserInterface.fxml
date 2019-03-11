@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface">
+   <children>
+      <BorderPane prefHeight="800.0" prefWidth="1280.0">
+         <right>
+            <GridPane prefHeight="800.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="481.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="429.0" minHeight="0.0" prefHeight="98.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="573.0" minHeight="0.0" prefHeight="138.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="530.0" minHeight="10.0" prefHeight="518.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2px;">
+                     <children>
+                        <Button layoutX="252.0" layoutY="12.0" maxWidth="-Infinity" minHeight="12.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" text="?">
+                           <tooltip>
+                              <Tooltip text="Help" />
+                           </tooltip>
+                        </Button>
+                        <Button layoutX="284.0" layoutY="11.0" mnemonicParsing="false" text="Reset">
+                           <tooltip>
+                              <Tooltip text="Clear settings" />
+                           </tooltip>
+                        </Button>
+                        <Button layoutX="336.0" layoutY="11.0" mnemonicParsing="false" text="Export">
+                           <tooltip>
+                              <Tooltip text="Export current simulation" />
+                           </tooltip>
+                        </Button>
+                        <Label layoutX="14.0" layoutY="10.0" prefHeight="27.0" prefWidth="219.0" text="Airport Name">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Pane>
+                  <Pane prefHeight="178.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="1">
+                     <children>
+                        <Label layoutX="18.0" layoutY="13.0" prefHeight="27.0" prefWidth="110.0" text="Select Runway">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="18.0" layoutY="57.0" prefHeight="27.0" prefWidth="121.0" text="Select Obstacle">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="176.0" layoutY="14.0" prefWidth="150.0" promptText="Runway List" />
+                        <ComboBox layoutX="176.0" layoutY="58.0" prefWidth="150.0" promptText="Obstacle List" />
+                        <Button layoutX="348.0" layoutY="58.0" mnemonicParsing="false" text="+">
+                           <tooltip>
+                              <Tooltip text="Add an obstacle" />
+                           </tooltip>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="146.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="2">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="101.0" text="Control Panel">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="22.0" layoutY="38.0" text="Rotation">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="64.0" text="Zoom">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Slider layoutX="81.0" layoutY="41.0" prefHeight="14.0" prefWidth="116.0" />
+                        <Slider layoutX="81.0" layoutY="67.0" prefHeight="14.0" prefWidth="116.0" />
+                        <ToggleButton layoutX="33.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Left" />
+                        <ToggleButton layoutX="97.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Right" />
+                        <Button layoutX="210.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Over Obstacle" />
+                        <Button layoutX="210.0" layoutY="69.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Towards Obstacle" />
+                        <Button layoutX="210.0" layoutY="46.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Away From Obstacle" />
+                        <Button layoutX="210.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Towards Obstacle" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="3">
+                     <children>
+                        <VBox layoutX="1.0" prefHeight="524.0" prefWidth="397.0">
+                           <children>
+                              <Pane prefHeight="215.0" prefWidth="397.0" style="-fx-border-color: black;">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="115.0" text="Original Value">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="165.0" prefHeight="24.0" prefWidth="172.0" text="Displaced Threshold">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="140.0" prefHeight="24.0" prefWidth="58.0" text="Stopway">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="210.0" layoutY="140.0" prefHeight="24.0" prefWidth="60.0" text="Clearway">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="153.0" prefWidth="397.0" style="-fx-border-color: black;">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="123.0" text="Previous Value">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="152.0" prefWidth="397.0" style="-fx-border-color: black;">
+                                 <children>
+                                    <Button layoutX="277.0" layoutY="14.0" mnemonicParsing="false" text="Show Breakdown">
+                                       <tooltip>
+                                          <Tooltip text="Show breakdown of the calculation" />
+                                       </tooltip>
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Button>
+                                    <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="156.0" text="Re-calculated Value">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </GridPane>
+         </right>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="501.0" minHeight="10.0" prefHeight="411.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="533.0" minHeight="10.0" prefHeight="271.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="371.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: grey;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Top-down view" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black; -fx-border-color: green;" GridPane.rowIndex="2">
+                     <children>
+                        <Label layoutX="14.0" layoutY="11.0" style="-fx-text-fill: yellow;" text="System Log" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Side-on view" />
+                     </children>
+                  </Pane>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
