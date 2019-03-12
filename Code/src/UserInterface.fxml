@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -12,10 +14,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface">
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="1280.0">
          <right>
@@ -25,9 +26,9 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="481.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="429.0" minHeight="0.0" prefHeight="98.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="573.0" minHeight="0.0" prefHeight="138.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="530.0" minHeight="10.0" prefHeight="518.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="429.0" minHeight="0.0" prefHeight="148.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="573.0" minHeight="0.0" prefHeight="223.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="534.0" minHeight="10.0" prefHeight="383.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2px;">
@@ -57,192 +58,217 @@
                         <Insets />
                      </GridPane.margin>
                   </Pane>
-                  <Pane prefHeight="178.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="1">
+                  <Pane prefHeight="146.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="1">
                      <children>
-                        <Label layoutX="18.0" layoutY="13.0" prefHeight="27.0" prefWidth="110.0" text="Select Runway">
+                        <Label layoutX="38.0" layoutY="20.0" prefHeight="27.0" prefWidth="95.0" text="Select Runway">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="18.0" layoutY="57.0" prefHeight="27.0" prefWidth="121.0" text="Select Obstacle">
+                        <Label layoutX="38.0" layoutY="60.0" prefHeight="27.0" prefWidth="100.0" text="Select Obstacle">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="176.0" layoutY="14.0" prefWidth="150.0" promptText="Runway List" />
-                        <ComboBox layoutX="176.0" layoutY="58.0" prefWidth="150.0" promptText="Obstacle List" />
-                        <Button layoutX="348.0" layoutY="58.0" mnemonicParsing="false" text="+">
+                        <ComboBox layoutX="176.0" layoutY="20.0" prefWidth="150.0" promptText="Runway List" />
+                        <ComboBox layoutX="176.0" layoutY="60.0" prefWidth="150.0" promptText="Obstacle List" />
+                        <Button layoutX="348.0" layoutY="60.0" mnemonicParsing="false" text="+">
                            <tooltip>
                               <Tooltip text="Add an obstacle" />
                            </tooltip>
                         </Button>
+                        <Button layoutX="35.0" layoutY="97.0" mnemonicParsing="false" text="Import Obstacles" />
                      </children>
                   </Pane>
-                  <Pane prefHeight="146.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="2">
+                  <Pane prefHeight="214.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="2">
                      <children>
                         <Label layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="101.0" text="Control Panel">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="22.0" layoutY="35.0" text="Rotation">
+                        <Label layoutX="23.0" layoutY="55.0" text="Rotation">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="220.0" layoutY="35.0" text="Zoom">
+                        <Label layoutX="210.0" layoutY="55.0" text="Zoom">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Slider layoutX="84.0" layoutY="37.0" prefHeight="14.0" prefWidth="116.0" />
-                        <Slider layoutX="268.0" layoutY="37.0" prefHeight="14.0" prefWidth="116.0" />
-                        <Button layoutX="14.0" layoutY="58.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Over Obstacle" />
-                        <Button layoutX="210.0" layoutY="58.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Towards Obstacle" />
-                        <Button layoutX="210.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Away From Obstacle" />
-                        <Button layoutX="14.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Towards Obstacle" />
+                        <Slider layoutX="84.0" layoutY="58.0" prefHeight="14.0" prefWidth="116.0" />
+                        <Slider layoutX="259.0" layoutY="58.0" prefHeight="14.0" prefWidth="116.0" />
+                        <Button layoutX="14.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Over Obstacle" />
+                        <Button layoutX="210.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Towards Obstacle" />
+                        <Button layoutX="210.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Away From Obstacle" />
+                        <Button layoutX="14.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Towards Obstacle" />
+                        <Button layoutX="275.0" layoutY="180.0" mnemonicParsing="false" text="Show Breakdown">
+                           <tooltip>
+                              <Tooltip text="Show breakdown of the calculation" />
+                           </tooltip>
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="3">
+                  <Pane prefHeight="536.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="3">
                      <children>
-                        <VBox layoutX="1.0" prefHeight="524.0" prefWidth="397.0">
-                           <children>
-                              <Pane prefHeight="215.0" prefWidth="397.0" style="-fx-border-color: black;">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="115.0" text="Original Value">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="64.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="88.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="112.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="136.0" prefHeight="24.0" prefWidth="172.0" text="Displaced Threshold">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="160.0" prefHeight="24.0" prefWidth="58.0" text="Stopway">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="184.0" prefHeight="24.0" prefWidth="60.0" text="Clearway">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="222.0" layoutY="15.0" text="Runway 1" />
-                                    <Label layoutX="318.0" layoutY="15.0" text="Runway 2" />
-                                    <Label id="LDA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="40.0" text="1000" />
-                                    <Label id="LDA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="40.0" text="1000" />
-                                    <Label id="TORA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="64.0" text="1000" />
-                                    <Label id="TORA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="64.0" text="1000" />
-                                    <Label id="TODA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="88.0" text="1000" />
-                                    <Label id="TODA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="88.0" text="1000" />
-                                    <Label id="ASDA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="112.0" text="1000" />
-                                    <Label id="ASDA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="112.0" text="1000" />
-                                    <Label id="Stopway" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="160.0" text="1000" />
-                                    <Label id="Clearway" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="184.0" text="1000" />
-                                    <Label id="DT1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="136.0" text="1000" />
-                                    <Label id="DT2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="136.0" text="1000" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="153.0" prefWidth="397.0" style="-fx-border-color: black;">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="123.0" text="Previous Value">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="222.0" layoutY="15.0" text="Runway 1" />
-                                    <Label layoutX="318.0" layoutY="15.0" text="Runway 2" />
-                                    <Label id="PrLDA1" layoutX="240.0" layoutY="40.0" text="1000" />
-                                    <Label id="PrLDA2" layoutX="336.0" layoutY="40.0" text="1000" />
-                                    <Label id="PrTORA1" layoutX="240.0" layoutY="65.0" text="1000" />
-                                    <Label id="PrTORA2" layoutX="336.0" layoutY="65.0" text="1000" />
-                                    <Label id="PrTODA1" layoutX="240.0" layoutY="90.0" text="1000" />
-                                    <Label id="PrTODA2" layoutX="336.0" layoutY="90.0" text="1000" />
-                                    <Label id="PrASDA1" layoutX="240.0" layoutY="115.0" text="1000" />
-                                    <Label id="PrASDA1" layoutX="336.0" layoutY="115.0" text="1000" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="152.0" prefWidth="397.0" style="-fx-border-color: black;">
-                                 <children>
-                                    <Button layoutX="277.0" layoutY="14.0" mnemonicParsing="false" text="Show Breakdown">
-                                       <tooltip>
-                                          <Tooltip text="Show breakdown of the calculation" />
-                                       </tooltip>
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
-                                    </Button>
-                                    <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="156.0" text="Re-calculated Value">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </VBox>
+                        <TabPane prefHeight="382.0" prefWidth="399.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Original Value">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="453.0">
+                                       <children>
+                                          <Pane prefHeight="370.0" prefWidth="399.0" style="-fx-border-color: black;">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="115.0" text="Original Value">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="140.0" prefHeight="24.0" prefWidth="172.0" text="Displaced Threshold">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="165.0" prefHeight="24.0" prefWidth="58.0" text="Stopway">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="190.0" prefHeight="24.0" prefWidth="60.0" text="Clearway">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="222.0" layoutY="15.0" text="Runway 1" />
+                                                <Label layoutX="318.0" layoutY="15.0" text="Runway 2" />
+                                                <Label id="LDA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="40.0" text="1000" />
+                                                <Label id="LDA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="40.0" text="1000" />
+                                                <Label id="TORA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="65.0" text="1000" />
+                                                <Label id="TORA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="65.0" text="1000" />
+                                                <Label id="TODA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="90.0" text="1000" />
+                                                <Label id="TODA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="90.0" text="1000" />
+                                                <Label id="ASDA1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="115.0" text="1000" />
+                                                <Label id="ASDA2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="115.0" text="1000" />
+                                                <Label id="Stopway" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="165.0" text="1000" />
+                                                <Label id="Clearway" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="190.0" text="1000" />
+                                                <Label id="DT1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="240.0" layoutY="140.0" text="1000" />
+                                                <Label id="DT2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="336.0" layoutY="140.0" text="1000" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Previous Value">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Pane prefHeight="368.0" prefWidth="400.0" style="-fx-border-color: black;">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="123.0" text="Previous Value">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="222.0" layoutY="15.0" text="Runway 1" />
+                                                <Label layoutX="318.0" layoutY="15.0" text="Runway 2" />
+                                                <Label id="PrLDA1" layoutX="240.0" layoutY="40.0" text="1000" />
+                                                <Label id="PrLDA2" layoutX="336.0" layoutY="40.0" text="1000" />
+                                                <Label id="PrTORA1" layoutX="240.0" layoutY="65.0" text="1000" />
+                                                <Label id="PrTORA2" layoutX="336.0" layoutY="65.0" text="1000" />
+                                                <Label id="PrTODA1" layoutX="240.0" layoutY="90.0" text="1000" />
+                                                <Label id="PrTODA2" layoutX="336.0" layoutY="90.0" text="1000" />
+                                                <Label id="PrASDA1" layoutX="240.0" layoutY="115.0" text="1000" />
+                                                <Label id="PrASDA1" layoutX="336.0" layoutY="115.0" text="1000" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Re-calculated Value">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="380.0">
+                                       <children>
+                                          <Pane prefHeight="352.0" prefWidth="399.0" style="-fx-border-color: black;">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="156.0" text="Re-calculated Value">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="40.0" prefHeight="24.0" prefWidth="172.0" text="Landing Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="65.0" prefHeight="24.0" prefWidth="146.0" text="Take Off Run Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="90.0" prefHeight="24.0" prefWidth="179.0" text="Take Off Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="115.0" prefHeight="24.0" prefWidth="225.0" text="Accelerate-Stop Distance Available">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
                      </children>
                   </Pane>
                </children>
