@@ -1,3 +1,6 @@
+package Interface;
+
+import Data.*;
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
 import java.io.File;
