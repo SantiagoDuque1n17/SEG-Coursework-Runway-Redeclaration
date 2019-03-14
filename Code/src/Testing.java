@@ -1,5 +1,7 @@
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
+import Interface.PhysicalRunway;
+import Data.Runway;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;

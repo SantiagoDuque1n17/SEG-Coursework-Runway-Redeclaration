@@ -1,3 +1,5 @@
+package Data;
+
 public class Obstacle {
     private int height;
     private String name;

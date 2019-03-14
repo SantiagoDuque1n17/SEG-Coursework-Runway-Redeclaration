@@ -1,3 +1,6 @@
+import Data.Obstacle;
+import Interface.PhysicalRunway;
+import Data.Runway;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

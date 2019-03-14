@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ObstacleList>
+  <Obstacle>
+    <Name>Bus</Name>
+    <Height>12</Height>
+  </Obstacle>
+  <Obstacle>
+    <Name>Plane</Name>
+    <Height>25</Height>
+  </Obstacle>
+  <Obstacle>
+    <Name>Crashed plane</Name>
+    <Height>20</Height>
+  </Obstacle>
+</ObstacleList>

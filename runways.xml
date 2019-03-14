@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunwayList>
+  <PhysicalRunway>
+    <LogicalRunway>
+      <ID>09R</ID>
+      <LDA>3353</LDA>
+      <TORA>3660</TORA>
+      <TODA>3660</TODA>
+      <ASDA>3660</ASDA>
+      <Displaced_Threshold>307</Displaced_Threshold>
+    </LogicalRunway>
+    <LogicalRunway>
+      <ID>27L</ID>
+      <LDA>3660</LDA>
+      <TORA>3660</TORA>
+      <TODA>3660</TODA>
+      <ASDA>3660</ASDA>
+      <Displaced_Threshold>0</Displaced_Threshold>
+    </LogicalRunway>
+  </PhysicalRunway>
+  <PhysicalRunway>
+    <LogicalRunway>
+      <ID>09L</ID>
+      <LDA>3595</LDA>
+      <TORA>3902</TORA>
+      <TODA>3902</TODA>
+      <ASDA>3902</ASDA>
+      <Displaced_Threshold>306</Displaced_Threshold>
+    </LogicalRunway>
+    <LogicalRunway>
+      <ID>27R</ID>
+      <LDA>3884</LDA>
+      <TORA>3884</TORA>
+      <TODA>3962</TODA>
+      <ASDA>3884</ASDA>
+      <Displaced_Threshold>0</Displaced_Threshold>
+    </LogicalRunway>
+  </PhysicalRunway>
+</RunwayList>

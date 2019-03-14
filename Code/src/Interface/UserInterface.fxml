@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -16,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface">
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.InterfaceController">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="1280.0">
          <right>
@@ -70,8 +74,8 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="176.0" layoutY="20.0" prefWidth="150.0" promptText="Runway List" />
-                        <ComboBox layoutX="176.0" layoutY="60.0" prefWidth="150.0" promptText="Obstacle List" />
+                        <ComboBox fx:id="runwaySelection" layoutX="176.0" layoutY="20.0" prefWidth="150.0" promptText="Runway List" />
+                        <ComboBox fx:id="obstacleSelection" layoutX="176.0" layoutY="60.0" prefWidth="150.0" promptText="Obstacle List" />
                         <Button layoutX="348.0" layoutY="60.0" mnemonicParsing="false" text="+">
                            <tooltip>
                               <Tooltip text="Add an obstacle" />
