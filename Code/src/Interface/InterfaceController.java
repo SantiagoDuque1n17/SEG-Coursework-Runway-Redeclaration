@@ -2,9 +2,18 @@ package Interface;
 import Data.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,17 +24,23 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InterfaceController {
 
-    private ObservableList<String> runways = FXCollections.observableArrayList();
-    private ObservableList<String> obstacles = FXCollections.observableArrayList();
+
+
+    private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
+    private ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
 
 
     @FXML
-    private ComboBox runwaySelection = new ComboBox();
+    public ComboBox runwaySelection;
     @FXML
-    private ComboBox obstacleSelection = new ComboBox();
+    public ComboBox obstacleSelection;
+
+
 
     private void loadRunways(){
         runways.removeAll(runways);
@@ -48,7 +63,6 @@ public class InterfaceController {
         loadObstacles();
         obstacleSelection.getItems().addAll(obstacles);
         obstacleSelection.getSelectionModel().select(obstacles.get(0));
-
     }
 
     public void createRunwaysList(){
@@ -84,14 +98,10 @@ public class InterfaceController {
             Runway runway2 = new Runway(ID, LDA, TORA, TODA, ASDA, displacedThreshold);
 
             PhysicalRunway runway = new PhysicalRunway(runway1, runway2);
-            runways.add(runway.getName());
+            runways.add(runway);
 
         }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
 
@@ -101,7 +111,7 @@ public class InterfaceController {
         File file = new File("obstacles.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
-        DocumentBuilder documentBuilder = null;
+        DocumentBuilder documentBuilder;
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(file);
@@ -112,18 +122,38 @@ public class InterfaceController {
                 String name = obstacle.getElementsByTagName("Name").item(0).getTextContent();
                 int height = Integer.parseInt(obstacle.getElementsByTagName("Height").item(0).getTextContent());
                 Obstacle obstacle1 = new Obstacle(name,height,0,0,0);
-                obstacles.add(obstacle1.getName());
+                obstacles.add(obstacle1);
 
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
 
 
     }
 
+
+    @FXML
+    public Pane sideOnPane;
+
+    public void runwaySelected(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    public Slider rotationSlider;
+
+    public void rotate(MouseEvent mouseEvent) {
+        runwayGroup.setRotate(rotationSlider.getValue());
+    }
+
+    @FXML
+    public Group runwayGroup;
+    @FXML
+    public Slider zoomSlider;
+
+    public void zoom(MouseEvent mouseEvent) {
+        runwayGroup.setScaleX(zoomSlider.getValue()/50);
+        runwayGroup.setScaleY(zoomSlider.getValue()/50);
+    }
 }
