@@ -23,7 +23,7 @@
 
 <BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.InterfaceController">
    <right>
-      <GridPane prefHeight="800.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="800.0" prefWidth="400.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -34,7 +34,7 @@
             <RowConstraints maxHeight="534.0" minHeight="10.0" prefHeight="383.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2px;">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-background-color: white;">
                <children>
                   <Button layoutX="252.0" layoutY="12.0" maxWidth="-Infinity" minHeight="12.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" text="?">
                      <tooltip>
@@ -60,8 +60,8 @@
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
-            </Pane>
-            <Pane prefHeight="146.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="1">
+            </AnchorPane>
+            <AnchorPane prefHeight="146.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-background-color: white;" GridPane.rowIndex="1">
                <children>
                   <Label layoutX="38.0" layoutY="20.0" prefHeight="27.0" prefWidth="95.0" text="Select Runway">
                      <font>
@@ -82,8 +82,8 @@
                   </Button>
                   <Button layoutX="35.0" layoutY="97.0" mnemonicParsing="false" text="Import Obstacles" />
                </children>
-            </Pane>
-            <Pane prefHeight="214.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="2">
+            </AnchorPane>
+            <AnchorPane prefHeight="214.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-background-color: white;" GridPane.rowIndex="2">
                <children>
                   <Label layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="101.0" text="Control Panel">
                      <font>
@@ -100,8 +100,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" max="360.0" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" value="180.0" />
-                  <Slider fx:id="zoomSlider" layoutX="259.0" layoutY="58.0" max="200.0" min="50.0" onMouseDragged="#zoom" prefHeight="14.0" prefWidth="116.0" value="50.0" />
+                  <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="30.0" max="360.0" minorTickCount="5" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                  <Slider fx:id="zoomSlider" layoutX="259.0" layoutY="58.0" max="200.0" min="50.0" onMouseClicked="#zoom" onMouseDragged="#zoom" prefHeight="14.0" prefWidth="116.0" value="50.0" />
                   <Button layoutX="14.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Over Obstacle" />
                   <Button layoutX="210.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Towards Obstacle" />
                   <Button layoutX="210.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Away From Obstacle" />
@@ -115,8 +115,8 @@
                      </font>
                   </Button>
                </children>
-            </Pane>
-            <Pane prefHeight="536.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="3">
+            </AnchorPane>
+            <AnchorPane prefHeight="536.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="3">
                <children>
                   <TabPane prefHeight="382.0" prefWidth="399.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -237,7 +237,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="380.0">
                                  <children>
-                                    <Pane prefHeight="352.0" prefWidth="399.0" style="-fx-border-color: black;">
+                                    <AnchorPane prefHeight="352.0" prefWidth="399.0" style="-fx-border-color: black;">
                                        <children>
                                           <Label layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="156.0" text="Re-calculated Value">
                                              <font>
@@ -265,7 +265,7 @@
                                              </font>
                                           </Label>
                                        </children>
-                                    </Pane>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                           </content>
@@ -273,22 +273,22 @@
                     </tabs>
                   </TabPane>
                </children>
-            </Pane>
+            </AnchorPane>
          </children>
       </GridPane>
    </right>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane gridLinesVisible="true" prefHeight="741.0" prefWidth="880.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="501.0" minHeight="10.0" prefHeight="422.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="533.0" minHeight="10.0" prefHeight="339.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="371.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="437.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="533.0" minHeight="10.0" prefHeight="334.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="371.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane prefHeight="400.0" prefWidth="880.0">
+            <AnchorPane onMouseDragged="#move" onMousePressed="#getPos">
                <children>
                   <Label layoutX="14.0" layoutY="14.0" text="Top-down view" />
                   <Group fx:id="runwayGroup" layoutX="25.0" layoutY="45.0">
@@ -338,13 +338,13 @@
                   </Group>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.rowIndex="1">
+            <AnchorPane style="-fx-background-color: white;" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="360.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="880.0" />
                   <Label layoutX="14.0" layoutY="14.0" text="Side-on view" />
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.rowIndex="2">
+            <AnchorPane style="-fx-background-color: black;" GridPane.rowIndex="2">
                <children>
                   <Label layoutX="14.0" layoutY="11.0" style="-fx-text-fill: yellow;" text="System Log" />
                </children>

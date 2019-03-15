@@ -132,10 +132,6 @@ public class InterfaceController {
 
     }
 
-
-    @FXML
-    public Pane sideOnPane;
-
     public void runwaySelected(ActionEvent actionEvent) {
 
     }
@@ -155,5 +151,17 @@ public class InterfaceController {
     public void zoom(MouseEvent mouseEvent) {
         runwayGroup.setScaleX(zoomSlider.getValue()/50);
         runwayGroup.setScaleY(zoomSlider.getValue()/50);
+    }
+
+    private double x,y;
+
+    public void move(MouseEvent mouseEvent) {
+        runwayGroup.setTranslateX(mouseEvent.getX()-x);
+        runwayGroup.setTranslateY(mouseEvent.getY()-y);
+    }
+
+    public void getPos(MouseEvent mouseEvent) {
+        x = mouseEvent.getX()-runwayGroup.getTranslateX();
+        y = mouseEvent.getY()-runwayGroup.getTranslateY();
     }
 }
