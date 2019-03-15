@@ -1,8 +1,7 @@
 package Data;
-
+import Interface.*;
 import java.util.ArrayList;
 import java.util.List;
-import Interface.*;
 
 public class Airport {
     private String name;

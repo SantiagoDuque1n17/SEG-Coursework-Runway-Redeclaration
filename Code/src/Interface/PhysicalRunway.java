@@ -1,7 +1,6 @@
 package Interface;
-
+import  Data.*;
 import Exceptions.*;
-import Data.*;
 
 public class PhysicalRunway {
 

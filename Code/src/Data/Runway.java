@@ -1,5 +1,4 @@
-package Data;
-
+package  Data;
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
 
@@ -172,7 +171,7 @@ public class Runway {
      *
      * @throws NegativeParameterException
      */
-    public void takeOffAwayObstacle(int dtt) throws NegativeParameterException {
+    void takeOffAwayObstacle(int dtt) throws NegativeParameterException {
         System.out.println("\n");
         System.out.println("***************************************************************");
         System.out.println("Calculating take-off away from the obstacle for runway "+this.getID());
@@ -225,7 +224,7 @@ public class Runway {
      *
      * @param dtt distance from threshold
      */
-    public void landingTowardsObstacle(int dtt) throws NegativeParameterException
+    void landingTowardsObstacle(int dtt) throws NegativeParameterException
     {
         System.out.println("\n");
         System.out.println("***************************************************************");
@@ -269,7 +268,7 @@ public class Runway {
      *
      * @throws NegativeParameterException
      */
-    public void takeOffTowardsObstacle(int dtt, int height) throws NegativeParameterException {
+    void takeOffTowardsObstacle(int dtt, int height) throws NegativeParameterException {
         System.out.println("\n***************************************************************");
         System.out.println("Calculating take-off towards the obstacle for runway "+this.getID());
         System.out.println("***************************************************************");

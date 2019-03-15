@@ -1,5 +1,4 @@
 package Interface;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,5 +18,7 @@ public class UserInterface extends Application {
         primaryStage.setScene(new Scene(root, 1280, 800));
         primaryStage.setResizable(false);
         primaryStage.show();
+        InterfaceController controller = new InterfaceController();
+        controller.createRunwaysList();
     }
 }
