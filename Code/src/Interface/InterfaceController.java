@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -156,5 +157,10 @@ public class InterfaceController {
     public void getPos(MouseEvent mouseEvent) {
         x = mouseEvent.getX()-runwayGroup.getTranslateX();
         y = mouseEvent.getY()-runwayGroup.getTranslateY();
+    }
+
+    public void scroll(ScrollEvent scrollEvent) {
+        zoomSlider.setValue(zoomSlider.getValue()+(scrollEvent.getDeltaY()/10));
+        zoom();
     }
 }
