@@ -41,12 +41,12 @@ public class InterfaceController {
     public ComboBox<Obstacle> obstacleSelection = new ComboBox();
 
     private void loadRunways(){
-        runways.removeAll(runways);
+        runways.removeAll();
         createRunwaysList();
     }
 
     private void loadObstacles(){
-        obstacles.removeAll(obstacles);
+        obstacles.removeAll();
         loadObstaclesList();
     }
 
@@ -102,6 +102,7 @@ public class InterfaceController {
         runwayLabel1.setText(runwayNames[0]);
         runwayLabel2.setText(runwayNames[1]);
 
+        runwaySelected();
     }
 
     public void createRunwaysList(){
@@ -143,13 +144,14 @@ public class InterfaceController {
         } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
+
     }
 
-    public void loadObstaclesList(){
+    private void loadObstaclesList(){
         File file = new File("obstacles.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
-        DocumentBuilder documentBuilder = null;
+        DocumentBuilder documentBuilder;
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(file);
