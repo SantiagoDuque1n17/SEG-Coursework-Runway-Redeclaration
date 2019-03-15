@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.text.Text;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -22,8 +23,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class InterfaceController {
-
-
 
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
     private ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
@@ -57,6 +56,11 @@ public class InterfaceController {
         loadObstacles();
         obstacleSelection.getItems().addAll(obstacles);
         obstacleSelection.getSelectionModel().select(obstacles.get(0));
+
+        PhysicalRunway runway = runways.get(0);
+        String[] runwayNames = runway.getName().split("/");
+        runwayLabel1.setText(runwayNames[0]);
+        runwayLabel2.setText(runwayNames[1]);
     }
 
     void createRunwaysList(){
@@ -127,8 +131,16 @@ public class InterfaceController {
     }
 
     public void runwaySelected(ActionEvent actionEvent) {
-
+        PhysicalRunway runway = runwaySelection.getValue();
+        String[] runwayNames = runway.getName().split("/");
+        runwayLabel1.setText(runwayNames[0]);
+        runwayLabel2.setText(runwayNames[1]);
     }
+
+    @FXML
+    public Text runwayLabel1;
+    @FXML
+    public Text runwayLabel2;
 
     @FXML
     public Slider rotationSlider;

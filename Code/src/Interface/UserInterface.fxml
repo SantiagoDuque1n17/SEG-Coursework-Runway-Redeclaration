@@ -35,31 +35,29 @@
                <RowConstraints maxHeight="534.0" minHeight="10.0" prefHeight="383.0" vgrow="SOMETIMES" />
            </rowConstraints>
            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-background-color: white;">
-              <children>
-                  <Button layoutX="252.0" layoutY="12.0" maxWidth="-Infinity" minHeight="12.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" text="?">
-                      <tooltip>
-                          <Tooltip text="Help" />
-                      </tooltip>
-                  </Button>
-                  <Button layoutX="284.0" layoutY="11.0" mnemonicParsing="false" text="Reset">
-                      <tooltip>
-                          <Tooltip text="Clear settings" />
-                      </tooltip>
-                  </Button>
-                  <Button layoutX="336.0" layoutY="11.0" mnemonicParsing="false" text="Export">
-                      <tooltip>
-                          <Tooltip text="Export current simulation" />
-                      </tooltip>
-                  </Button>
-                  <Label layoutX="14.0" layoutY="10.0" prefHeight="27.0" prefWidth="219.0" text="Airport Name">
-                      <font>
-                          <Font size="18.0" />
-                      </font>
-                  </Label>
-              </children>
-              <GridPane.margin>
-                  <Insets />
-              </GridPane.margin>
+               <GridPane.margin>
+                   <Insets />
+               </GridPane.margin>
+               <Button layoutX="252.0" layoutY="12.0" maxWidth="-Infinity" minHeight="12.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" text="?">
+                   <tooltip>
+                       <Tooltip text="Help" />
+                   </tooltip>
+               </Button>
+               <Button layoutX="284.0" layoutY="11.0" mnemonicParsing="false" text="Reset">
+                   <tooltip>
+                       <Tooltip text="Clear settings" />
+                   </tooltip>
+               </Button>
+               <Button layoutX="336.0" layoutY="11.0" mnemonicParsing="false" text="Export">
+                   <tooltip>
+                       <Tooltip text="Export current simulation" />
+                   </tooltip>
+               </Button>
+               <Label layoutX="14.0" layoutY="10.0" prefHeight="27.0" prefWidth="219.0" text="Airport Name">
+                   <font>
+                       <Font size="18.0" />
+                   </font>
+               </Label>
            </AnchorPane>
            <AnchorPane prefHeight="146.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-background-color: white;" GridPane.rowIndex="1">
                <Label layoutX="38.0" layoutY="20.0" prefHeight="27.0" prefWidth="95.0" text="Select Runway">
@@ -97,7 +95,7 @@
                        <Font size="14.0" />
                    </font>
                </Label>
-               <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="30.0" max="360.0" minorTickCount="5" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+               <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="90.0" max="360.0" minorTickCount="30" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                <Slider fx:id="zoomSlider" layoutX="259.0" layoutY="58.0" max="200.0" min="50.0" onMouseClicked="#zoom" onMouseDragged="#zoom" prefHeight="14.0" prefWidth="116.0" value="50.0" />
                <Button layoutX="14.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Over Obstacle" />
                <Button layoutX="210.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Towards Obstacle" />
@@ -256,8 +254,8 @@
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
            </columnConstraints>
            <rowConstraints>
-               <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="419.0" vgrow="SOMETIMES" />
-               <RowConstraints maxHeight="533.0" minHeight="10.0" prefHeight="344.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="602.0" minHeight="10.0" prefHeight="529.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="533.0" minHeight="10.0" prefHeight="234.0" vgrow="SOMETIMES" />
                <RowConstraints maxHeight="371.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
            </rowConstraints>
            <AnchorPane onMouseDragged="#move" onMousePressed="#getPos" onScroll="#scroll" prefHeight="464.0" prefWidth="880.0">
@@ -296,53 +294,49 @@
                        </Polygon>
                        <Group layoutX="50.0" layoutY="140.0">
                            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#838383" height="50.0" stroke="BLACK" strokeType="INSIDE" width="580.0" />
-                     <Text fill="WHITE" layoutX="64.0" layoutY="36.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="27">
+                     <Text fx:id="runwayLabel1" fill="WHITE" layoutX="56.0" layoutY="36.0" rotate="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="09R">
                         <font>
                            <Font size="24.0" />
                         </font>
                      </Text>
-                     <Text fill="WHITE" layoutX="492.0" layoutY="36.0" rotate="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="09">
+                     <Text fx:id="runwayLabel2" fill="WHITE" layoutX="484.0" layoutY="36.0" rotate="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="27L">
                         <font>
                            <Font size="24.0" />
                         </font>
                      </Text>
-                     <Group layoutX="20.0" layoutY="5.0">
-                        <children>
-                           <Line endX="36.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="4.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="8.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="12.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="16.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="20.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="24.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="28.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="32.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="36.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="40.0" stroke="WHITE" />
-                        </children>
-                     </Group>
+                           <Group layoutX="20.0" layoutY="5.0">
+                               <Line endX="36.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="4.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="8.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="12.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="16.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="20.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="24.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="28.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="32.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="36.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="40.0" stroke="WHITE" />
+                           </Group>
                            <Line endX="480.0" fill="WHITE" layoutY="25.0" startX="100.0" stroke="WHITE" strokeDashOffset="200.0" style="-fx-stroke-dash-array: 3;" />
                            <Line endX="480.0" fill="WHITE" layoutY="25.0" startX="100.0" stroke="WHITE" style="-fx-stroke-dash-array: 12;" />
-                     <Group layoutX="524.0" layoutY="5.0">
-                        <children>
-                           <Line endX="36.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="4.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="8.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="12.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="16.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="20.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="24.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="28.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="32.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="36.0" stroke="WHITE" />
-                           <Line endX="36.0" layoutY="40.0" stroke="WHITE" />
-                        </children>
-                     </Group>
+                           <Group layoutX="524.0" layoutY="5.0">
+                               <Line endX="36.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="4.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="8.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="12.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="16.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="20.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="24.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="28.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="32.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="36.0" stroke="WHITE" />
+                               <Line endX="36.0" layoutY="40.0" stroke="WHITE" />
+                           </Group>
                        </Group>
                    </Group>
                </Group>
            </AnchorPane>
-           <AnchorPane maxHeight="350.0" minHeight="300.0" prefHeight="278.0" prefWidth="880.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
+           <AnchorPane maxHeight="250.0" minHeight="200.0" prefHeight="250.0" prefWidth="880.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="360.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="880.0" />
                <Label layoutX="14.0" layoutY="14.0" text="Side-on view" />
            </AnchorPane>
