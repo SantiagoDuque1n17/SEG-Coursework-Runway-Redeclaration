@@ -1,31 +1,24 @@
 package Interface;
-import Data.*;
+import Data.Obstacle;
+import Data.Runway;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InterfaceController {
 
@@ -36,19 +29,19 @@ public class InterfaceController {
 
 
     @FXML
-    public ComboBox runwaySelection;
+    public ComboBox<PhysicalRunway> runwaySelection;
     @FXML
-    public ComboBox obstacleSelection;
+    public ComboBox<Obstacle> obstacleSelection;
 
 
 
     private void loadRunways(){
-        runways.removeAll(runways);
+        runways.removeAll();
         createRunwaysList();
     }
 
     private void loadObstacles(){
-        obstacles.removeAll(obstacles);
+        obstacles.removeAll();
         loadObstaclesList();
     }
 
@@ -65,7 +58,7 @@ public class InterfaceController {
         obstacleSelection.getSelectionModel().select(obstacles.get(0));
     }
 
-    public void createRunwaysList(){
+    void createRunwaysList(){
         File file = new File("runways.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
@@ -107,7 +100,7 @@ public class InterfaceController {
 
     }
 
-    public void loadObstaclesList(){
+    private void loadObstaclesList(){
         File file = new File("obstacles.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
@@ -139,7 +132,7 @@ public class InterfaceController {
     @FXML
     public Slider rotationSlider;
 
-    public void rotate(MouseEvent mouseEvent) {
+    public void rotate() {
         runwayGroup.setRotate(rotationSlider.getValue());
     }
 
@@ -148,7 +141,7 @@ public class InterfaceController {
     @FXML
     public Slider zoomSlider;
 
-    public void zoom(MouseEvent mouseEvent) {
+    public void zoom() {
         runwayGroup.setScaleX(zoomSlider.getValue()/50);
         runwayGroup.setScaleY(zoomSlider.getValue()/50);
     }
