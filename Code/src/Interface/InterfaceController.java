@@ -24,6 +24,7 @@ import java.io.IOException;
 
 public class InterfaceController {
 
+
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
     private ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
 
@@ -57,10 +58,7 @@ public class InterfaceController {
         obstacleSelection.getItems().addAll(obstacles);
         obstacleSelection.getSelectionModel().select(obstacles.get(0));
 
-        PhysicalRunway runway = runways.get(0);
-        String[] runwayNames = runway.getName().split("/");
-        runwayLabel1.setText(runwayNames[0]);
-        runwayLabel2.setText(runwayNames[1]);
+        runwaySelected();
     }
 
     void createRunwaysList(){
@@ -130,18 +128,20 @@ public class InterfaceController {
 
     }
 
-    public void runwaySelected(ActionEvent actionEvent) {
+    public void runwaySelected() {
         PhysicalRunway runway = runwaySelection.getValue();
         String[] runwayNames = runway.getName().split("/");
         runwayLabel1.setText(runwayNames[0]);
         runwayLabel2.setText(runwayNames[1]);
+        runwayG.setScaleX(runway.getWidth()/3800.0);
     }
 
     @FXML
     public Text runwayLabel1;
     @FXML
     public Text runwayLabel2;
-
+    @FXML
+    public Group runwayG;
     @FXML
     public Slider rotationSlider;
 
