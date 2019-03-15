@@ -3,20 +3,22 @@ import Data.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javafx.scene.text.Text;
 import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,16 +27,18 @@ import javafx.stage.Stage;
 
 public class InterfaceController {
 
-    private ObservableList<String> runways = FXCollections.observableArrayList();
-    private ObservableList<String> obstacles = FXCollections.observableArrayList();
+    private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
+    private ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
 
     @FXML
-    private Button myButton;
+    private Button plusButton;
+    @FXML
+    private Button addObsButton;
 
     @FXML
-    private ComboBox runwaySelection = new ComboBox();
+    public ComboBox<PhysicalRunway> runwaySelection = new ComboBox();
     @FXML
-    private ComboBox obstacleSelection = new ComboBox();
+    public ComboBox<Obstacle> obstacleSelection = new ComboBox();
 
     private void loadRunways(){
         runways.removeAll(runways);
@@ -46,10 +50,28 @@ public class InterfaceController {
         loadObstaclesList();
     }
 
-    public void handleButtonAction(ActionEvent event)
+
+    public void handlePlusButtonAction(ActionEvent event)
     {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddObstacle.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Add obstacle");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Cant load new window");
+        }
+    }
+
+    public void handleAddObsButtonAction(ActionEvent event)
+    {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader((getClass().getResource("AddObstacleOnRunway.fxml")));
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Add obstacle");
@@ -67,14 +89,18 @@ public class InterfaceController {
         runwaySelection.getItems().removeAll(runwaySelection.getItems());
         loadRunways();
         runwaySelection.getItems().addAll(runways);
-        runwaySelection.getSelectionModel().select(runways.get(0));
 
         obstacleSelection.getItems().removeAll(obstacleSelection.getItems());
         loadObstacles();
         obstacleSelection.getItems().addAll(obstacles);
-        obstacleSelection.getSelectionModel().select(obstacles.get(0));
 
-        myButton.setOnAction(this::handleButtonAction);
+        plusButton.setOnAction(this::handlePlusButtonAction);
+        addObsButton.setOnAction(this::handleAddObsButtonAction);
+
+        PhysicalRunway runway = runways.get(0);
+        String[] runwayNames = runway.getName().split("/");
+        runwayLabel1.setText(runwayNames[0]);
+        runwayLabel2.setText(runwayNames[1]);
 
     }
 
@@ -111,17 +137,12 @@ public class InterfaceController {
             Runway runway2 = new Runway(ID, LDA, TORA, TODA, ASDA, displacedThreshold);
 
             PhysicalRunway runway = new PhysicalRunway(runway1, runway2);
-            runways.add(runway.getName());
+            runways.add(runway);
 
         }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadObstaclesList(){
@@ -139,18 +160,60 @@ public class InterfaceController {
                 String name = obstacle.getElementsByTagName("Name").item(0).getTextContent();
                 int height = Integer.parseInt(obstacle.getElementsByTagName("Height").item(0).getTextContent());
                 Obstacle obstacle1 = new Obstacle(name,height,0,0,0);
-                obstacles.add(obstacle1.getName());
+                obstacles.add(obstacle1);
 
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
 
-
     }
 
+    public void runwaySelected(ActionEvent actionEvent) {
+        PhysicalRunway runway = runwaySelection.getValue();
+        String[] runwayNames = runway.getName().split("/");
+        runwayLabel1.setText(runwayNames[0]);
+        runwayLabel2.setText(runwayNames[1]);
+        runwayG.setScaleX(runway.getWidth()/3800.0);
+    }
+
+    @FXML
+    public Text runwayLabel1;
+    @FXML
+    public Text runwayLabel2;
+    @FXML
+    public Group runwayG;
+    @FXML
+    public Slider rotationSlider;
+
+    public void rotate() {
+        runwayGroup.setRotate(rotationSlider.getValue());
+    }
+
+    @FXML
+    public Group runwayGroup;
+    @FXML
+    public Slider zoomSlider;
+
+    public void zoom() {
+        runwayGroup.setScaleX(zoomSlider.getValue()/50);
+        runwayGroup.setScaleY(zoomSlider.getValue()/50);
+    }
+
+    private double x,y;
+
+    public void move(MouseEvent mouseEvent) {
+        runwayGroup.setTranslateX(mouseEvent.getX()-x);
+        runwayGroup.setTranslateY(mouseEvent.getY()-y);
+    }
+
+    public void getPos(MouseEvent mouseEvent) {
+        x = mouseEvent.getX()-runwayGroup.getTranslateX();
+        y = mouseEvent.getY()-runwayGroup.getTranslateY();
+    }
+
+    public void scroll(ScrollEvent scrollEvent) {
+        zoomSlider.setValue(zoomSlider.getValue()+(scrollEvent.getDeltaY()/10));
+        zoom();
+    }
 }

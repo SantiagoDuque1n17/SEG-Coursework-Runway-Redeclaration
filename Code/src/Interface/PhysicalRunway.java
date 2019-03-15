@@ -1,5 +1,5 @@
 package Interface;
-import  Data.*;
+import Data.*;
 import Exceptions.*;
 
 public class PhysicalRunway {
@@ -59,5 +59,18 @@ public class PhysicalRunway {
     public String getName()
     {
         return name;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
+
+    public int getWidth() {
+        int length1 = runway1.getLength();
+        int length2 = runway2.getLength();
+        if (length1>length2) return length1+120;
+        return length2+120;
     }
 }
