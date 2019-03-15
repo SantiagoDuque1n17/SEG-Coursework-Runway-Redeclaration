@@ -89,18 +89,15 @@ public class InterfaceController {
         runwaySelection.getItems().removeAll(runwaySelection.getItems());
         loadRunways();
         runwaySelection.getItems().addAll(runways);
+        runwaySelection.getSelectionModel().select(runways.get(0));
 
         obstacleSelection.getItems().removeAll(obstacleSelection.getItems());
         loadObstacles();
         obstacleSelection.getItems().addAll(obstacles);
+        obstacleSelection.getSelectionModel().select(obstacles.get(0));
 
         plusButton.setOnAction(this::handlePlusButtonAction);
         addObsButton.setOnAction(this::handleAddObsButtonAction);
-
-        PhysicalRunway runway = runways.get(0);
-        String[] runwayNames = runway.getName().split("/");
-        runwayLabel1.setText(runwayNames[0]);
-        runwayLabel2.setText(runwayNames[1]);
 
         runwaySelected();
     }
@@ -171,7 +168,7 @@ public class InterfaceController {
 
     }
 
-    public void runwaySelected(ActionEvent actionEvent) {
+    public void runwaySelected() {
         PhysicalRunway runway = runwaySelection.getValue();
         String[] runwayNames = runway.getName().split("/");
         runwayLabel1.setText(runwayNames[0]);
