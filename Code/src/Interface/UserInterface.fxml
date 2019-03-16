@@ -189,7 +189,7 @@
                   <Button fx:id="addObsButton" layoutX="183.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleAddObsButtonAction" text="Add Obstacle On Runway" />
                   </children>
                </AnchorPane>
-               <AnchorPane prefHeight="214.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-background-color: white;" GridPane.rowIndex="2">
+               <AnchorPane prefHeight="245.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px; -fx-background-color: white;" GridPane.rowIndex="2">
                   <children>
                       <Label layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="101.0" text="Control Panel">
                           <font>
@@ -212,9 +212,9 @@
                       <Button layoutX="210.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Landing Towards Obstacle" />
                       <Button layoutX="210.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Away From Obstacle" />
                       <Button layoutX="14.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Take Off Towards Obstacle" />
-                      <Button layoutX="275.0" layoutY="180.0" mnemonicParsing="false" text="Show Breakdown">
+                      <Button layoutX="306.0" layoutY="183.0" mnemonicParsing="false" text="Reset view">
                           <tooltip>
-                              <Tooltip text="Show breakdown of the calculation" />
+                              <Tooltip text="Reset the view back to default" />
                           </tooltip>
                           <font>
                               <Font size="11.0" />
@@ -224,7 +224,7 @@
                </AnchorPane>
                <AnchorPane prefHeight="536.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="3">
                   <children>
-                      <TabPane prefHeight="382.0" prefWidth="399.0" tabClosingPolicy="UNAVAILABLE">
+                      <TabPane prefHeight="254.0" prefWidth="399.0" tabClosingPolicy="UNAVAILABLE">
                          <tabs>
                              <Tab text="Original Value">
                                 <content>
@@ -375,6 +375,11 @@
                                        </children>
                                     </AnchorPane>
                                 </content>
+                             </Tab>
+                             <Tab text="Calculations">
+                                 <content>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="267.0" prefWidth="399.0" />
+                                 </content>
                              </Tab>
                          </tabs>
                       </TabPane>

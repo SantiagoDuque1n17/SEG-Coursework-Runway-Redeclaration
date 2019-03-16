@@ -18,6 +18,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javafx.scene.text.Text;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,9 +38,9 @@ public class InterfaceController {
     private Button addObsButton;
 
     @FXML
-    public ComboBox<PhysicalRunway> runwaySelection = new ComboBox();
+    public ComboBox<PhysicalRunway> runwaySelection;
     @FXML
-    public ComboBox<Obstacle> obstacleSelection = new ComboBox();
+    public ComboBox<Obstacle> obstacleSelection;
 
     private void loadRunways(){
         runways.removeAll();
@@ -59,6 +61,10 @@ public class InterfaceController {
             Stage stage = new Stage();
             stage.setTitle("Add obstacle");
             stage.setScene(new Scene(root));
+
+            AddObstacleController controller = (AddObstacleController) fxmlLoader.getController();
+            controller.setController(this);
+
             stage.show();
         }
         catch(Exception e)
@@ -76,6 +82,10 @@ public class InterfaceController {
             Stage stage = new Stage();
             stage.setTitle("Add obstacle");
             stage.setScene(new Scene(root));
+
+            AddObstacleOnRunwayController controller = (AddObstacleOnRunwayController) fxmlLoader.getController();
+            controller.setController(this);
+
             stage.show();
         }
         catch(Exception e)
@@ -97,6 +107,7 @@ public class InterfaceController {
         obstacleSelection.getSelectionModel().select(obstacles.get(0));
 
         plusButton.setOnAction(this::handlePlusButtonAction);
+        plusButton.requestLayout();
         addObsButton.setOnAction(this::handleAddObsButtonAction);
 
         runwaySelected();
@@ -144,7 +155,7 @@ public class InterfaceController {
 
     }
 
-    private void loadObstaclesList(){
+    public void loadObstaclesList(){
         File file = new File("obstacles.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
@@ -214,5 +225,15 @@ public class InterfaceController {
     public void scroll(ScrollEvent scrollEvent) {
         zoomSlider.setValue(zoomSlider.getValue()+(scrollEvent.getDeltaY()/10));
         zoom();
+    }
+
+    public void addObs(Obstacle obs){
+        obstacles.add(obs);
+        obstacleSelection.getItems().add(obs);
+    }
+
+    public Obstacle getObstacleFromComboBox()
+    {
+        return obstacleSelection.getValue();
     }
 }
