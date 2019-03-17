@@ -12,6 +12,7 @@ public class Runway {
     private final int clearway;
     private final int displacedThreshold;
     private int LDA, TORA, TODA, ASDA;
+    private int slopeCalc;
     private String ID;
     private String status = "NORMAL";
 
@@ -98,6 +99,8 @@ public class Runway {
         this.ASDA = ASDA;
     }
 
+    public int getSlopeCalc() { return slopeCalc; }
+
     public String getID() {
         return ID;
     }
@@ -110,6 +113,14 @@ public class Runway {
     public void setStatus(String status)
     {
         this.status = status;
+    }
+
+    public int setSlopeCalc(int height) {
+        int slopeCalc = RESA;
+        if ((50*height)>RESA)
+            slopeCalc = 50*height;
+        this.slopeCalc = slopeCalc;
+        return slopeCalc;
     }
 
     /**
@@ -129,9 +140,7 @@ public class Runway {
         System.out.println("***************************************************************");
 
         int originalLDA = this.getOriginalLDA();
-        int slopeCalc = RESA;
-        if ((50*height)>RESA)
-            slopeCalc = 50*height;
+        int slopeCalc = setSlopeCalc(height);
 
         int newLDA = originalLDA - dtt - slopeCalc - stripEnd;
 
@@ -278,9 +287,7 @@ public class Runway {
         int newTODA;
         int newASDA;
 
-        int slopeCalc = RESA;
-        if ((50*height)>RESA)
-            slopeCalc = 50*height;
+        int slopeCalc = setSlopeCalc(height);
 
         newTORA = dtt + displacedThreshold - slopeCalc - stripEnd;
         newTODA = newTORA;
@@ -321,6 +328,18 @@ public class Runway {
     public int getLength() {
         if (ASDA>TODA) return ASDA;
         return TODA;
+    }
+
+    public static int getBlastProtection() {
+        return blastProtection;
+    }
+
+    public static int getRESA() {
+        return RESA;
+    }
+
+    public static int getStripEnd() {
+        return stripEnd;
     }
 }
 
