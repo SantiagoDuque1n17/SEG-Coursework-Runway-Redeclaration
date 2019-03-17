@@ -39,11 +39,15 @@ public class InterfaceController {
                     (new Runway("null",0,0,0,0,0)));
     private Obstacle selectedObstacle;
 
+    private String breakdown = "No calculations";
     @FXML
     private Button plusButton;
     @FXML
     private Button addObsButton;
-
+    @FXML
+    private Button resetViewButton;
+    @FXML
+    private Button brekdownButton;
     @FXML
     public ComboBox<PhysicalRunway> runwaySelection;
     @FXML
@@ -146,6 +150,23 @@ public class InterfaceController {
             //TODO: Make these pop-ups as well?
         }
 
+        originalLDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalLDA()));
+        originalTORA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTORA()));
+        originalTODA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTODA()));
+        originalASDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalASDA()));
+        originalDT1.setText(String.valueOf(selectedRunway.getRunway1().getDisplacedThreshold()));
+        originalStopway1.setText(String.valueOf(selectedRunway.getRunway1().getStopway()));
+        originalClearway1.setText(String.valueOf(selectedRunway.getRunway1().getClearway()));
+
+        originalLDA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalLDA()));
+        originalTORA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalTORA()));
+        originalTODA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalTODA()));
+        originalASDA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalASDA()));
+        originalDT2.setText(String.valueOf(selectedRunway.getRunway2().getDisplacedThreshold()));
+        originalStopway2.setText(String.valueOf(selectedRunway.getRunway2().getStopway()));
+        originalClearway2.setText(String.valueOf(selectedRunway.getRunway2().getClearway()));
+
+
         recalcLDA1.setText(String.valueOf(selectedRunway.getRunway1().getLDA()));
         recalcTORA1.setText(String.valueOf(selectedRunway.getRunway1().getTORA()));
         recalcTODA1.setText(String.valueOf(selectedRunway.getRunway1().getTODA()));
@@ -156,10 +177,10 @@ public class InterfaceController {
         recalcTODA2.setText(String.valueOf(selectedRunway.getRunway2().getTODA()));
         recalcASDA2.setText(String.valueOf(selectedRunway.getRunway2().getASDA()));
 
-        //TODO: Make the calculations breakdown a pop up
+
 
         if (whichRunway == 1) {
-            calculationsLabel.setText("Runway 1 (" + selectedRunway.getRunway1().getID() + "): \n " +
+            breakdown = "Runway 1 (" + selectedRunway.getRunway1().getID() + "): \n " +
                     "Take Off Towards: \n" +
                     "TORA = Distance from threshold " + selectedObstacle.getDistToThreshold1() +
                     "- Slope calculation (" + selectedRunway.getRunway1().getSlopeCalc() + ") " +
@@ -176,7 +197,7 @@ public class InterfaceController {
                     " - RESA (" + Runway.getRESA() + ") - Strip End (" + Runway.getStripEnd() + "). \n +" +
 
 
-                                "Runway 2 (" + selectedRunway.getRunway2().getID() + "): \n " +
+                    "Runway 2 (" + selectedRunway.getRunway2().getID() + "): \n " +
                     "Take Off Away: \n" +
                     "TORA = Original TORA (" + selectedRunway.getRunway2().getOriginalTORA() + ") \n" +
                     "- Blast protection (" + Runway.getBlastProtection() + ") - Distance from threshold (" +
@@ -187,38 +208,41 @@ public class InterfaceController {
                     "Landing Over: \n +" +
                     "LDA = Original LDA (" + selectedRunway.getRunway2().getOriginalLDA() + ") - Distance from threshold (" +
                     selectedObstacle.getDistToThreshold2() + ") - Strip end (" + Runway.getStripEnd() + ") \n" +
-                    "- Slope calculation (" + selectedRunway.getRunway2().getSlopeCalc() + ").");
+                    "- Slope calculation (" + selectedRunway.getRunway2().getSlopeCalc() + ").";
         } else if (whichRunway == 2) {
-            calculationsLabel.setText("Runway 1 (" + selectedRunway.getRunway1().getID() + "): \n " +
+            breakdown =  "Runway 1 (" + selectedRunway.getRunway1().getID() + "): \n " +
                     "Take Off Away: \n" +
-                    "TORA = Original TORA (" + selectedRunway.getRunway1().getOriginalTORA() + ") \n" +
+                    "TORA = Original TORA (" + selectedRunway.getRunway1().getOriginalTORA() + ") " +
                     "- Blast protection (" + Runway.getBlastProtection() + ") - Distance from threshold (" +
-                    selectedObstacle.getDistToThreshold1() + ") - Displaced threshold (" + selectedRunway.getRunway1().getDisplacedThreshold() + ") \n" +
-                    "ASDA = TORA (" + selectedRunway.getRunway1().getTORA() + ") + Clearway (" + selectedRunway.getRunway1().getClearway() + ") \n" +
-                    "TODA = TORA (" + selectedRunway.getRunway1().getTORA() + ") + Clearway (" + selectedRunway.getRunway1().getClearway() + ") \n" +
+                    selectedObstacle.getDistToThreshold1() + ") \n - Displaced threshold (" + selectedRunway.getRunway1().getDisplacedThreshold() + ") " +
+                    "= " +  selectedRunway.getRunway1().getTORA() + "\n " +
+                    "ASDA = TORA (" + selectedRunway.getRunway1().getTORA() + ") + Clearway (" + selectedRunway.getRunway1().getClearway() + ") = " +  selectedRunway.getRunway1().getASDA() + "\n" +
+                    "TODA = TORA (" + selectedRunway.getRunway1().getTORA() + ") + Clearway (" + selectedRunway.getRunway1().getClearway() + ") = " +  selectedRunway.getRunway1().getASDA() + "\n" +
 
-                    "Landing Over: \n +" +
+                    "Landing Over: \n " +
                     "LDA = Original LDA (" + selectedRunway.getRunway1().getOriginalLDA() + ") - Distance from threshold (" +
-                    selectedObstacle.getDistToThreshold1() + ") - Strip end (" + Runway.getStripEnd() + ") \n" +
-                    "- Slope calculation (" + selectedRunway.getRunway1().getSlopeCalc() + "). \n" +
+                    selectedObstacle.getDistToThreshold1() + ") - Strip end (" + Runway.getStripEnd() + ") " +
+                    "- Slope calculation (" + selectedRunway.getRunway1().getSlopeCalc() + ") = " + selectedRunway.getRunway1().getLDA() + "\n " +
 
 
-                    "Runway 1 (" + selectedRunway.getRunway2().getID() + "): \n " +
+                    "Runway 2 (" + selectedRunway.getRunway2().getID() + "): \n " +
                     "Take Off Towards: \n" +
                     "TORA = Distance from threshold " + selectedObstacle.getDistToThreshold1() +
                     "- Slope calculation (" + selectedRunway.getRunway2().getSlopeCalc() + ") " +
-                    "- Strip end (" + Runway.getStripEnd() + ") = " + selectedRunway.getRunway2().getTORA() +")\n"+
+                    "- Strip end (" + Runway.getStripEnd() + ") = " + selectedRunway.getRunway2().getTORA() +"\n"+
 
-                    "ASDA: TORA (" + selectedRunway.getRunway2().getTORA() + ") " +
-                    " + Clearway (" + selectedRunway.getRunway2().getClearway() + ") \n" +
+                    "ASDA = Recalculated TORA (" + selectedRunway.getRunway2().getTORA() + ") " +
+                    " + Clearway (" + selectedRunway.getRunway2().getClearway() + ") = " + selectedRunway.getRunway2().getASDA() + "\n" +
 
-                    "TODA : TORA (" + selectedRunway.getRunway2().getTORA() + ") " +
-                    " + Clearway (" + selectedRunway.getRunway2().getClearway() + ") \n" +
+                    "TODA = Recalculated TORA (" + selectedRunway.getRunway2().getTORA() + ") " +
+                    " + Clearway (" + selectedRunway.getRunway2().getClearway() + ") = " + selectedRunway.getRunway2().getTODA() + "\n" +
 
-                    "Landing Towards: \n +" +
+                    "Landing Towards: \n " +
                     "LDA = Distance from threshold " + selectedObstacle.getDistToThreshold2() +
-                    " - RESA (" + Runway.getRESA() + ") - Strip End (" + Runway.getStripEnd() + ").");
+                    " - RESA (" + Runway.getRESA() + ") - Strip End (" + Runway.getStripEnd() + ") = " + selectedRunway.getRunway2().getLDA() + "\n";
         }
+
+
 
     }
 
@@ -361,6 +385,26 @@ public class InterfaceController {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    public void seeBreakdown(ActionEvent ae) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CalculationsBreakdown.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Breakdown of calculations");
+            stage.setScene(new Scene(root));
+
+            SeeBreakdownController controller = fxmlLoader.getController();
+            controller.setBreakdownLabel(breakdown);
+
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML
