@@ -78,11 +78,10 @@ public class PhysicalRunway {
         return runway2;
     }
 
-    public int getWidth() {
-        int length1 = runway1.getLength();
-        int length2 = runway2.getLength();
-        if (length1>length2) return length1+120;
-        return length2+120;
+    public void switchRunways() {
+        Runway runway = runway1;
+        runway1 = runway2;
+        runway2 = runway;
     }
 
 

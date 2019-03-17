@@ -1,35 +1,35 @@
 package Interface;
-import Data.*;
+import Data.Obstacle;
+import Data.Runway;
+import Exceptions.DontNeedRedeclarationException;
+import Exceptions.NegativeParameterException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javafx.scene.text.Text;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import Exceptions.*;
 
 public class InterfaceController {
-
-
 
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
     private ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
@@ -145,23 +145,6 @@ public class InterfaceController {
 
             //TODO: Make these pop-ups as well?
         }
-
-        originalLDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalLDA()));
-        originalTORA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTORA()));
-        originalTODA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTODA()));
-        originalASDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalASDA()));
-        originalDT1.setText(String.valueOf(selectedRunway.getRunway1().getDisplacedThreshold()));
-        originalStopway1.setText(String.valueOf(selectedRunway.getRunway1().getStopway()));
-        originalClearway1.setText(String.valueOf(selectedRunway.getRunway1().getClearway()));
-
-        originalLDA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalLDA()));
-        originalTORA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalTORA()));
-        originalTODA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalTODA()));
-        originalASDA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalASDA()));
-        originalDT2.setText(String.valueOf(selectedRunway.getRunway2().getDisplacedThreshold()));
-        originalStopway2.setText(String.valueOf(selectedRunway.getRunway2().getStopway()));
-        originalClearway2.setText(String.valueOf(selectedRunway.getRunway2().getClearway()));
-
 
         recalcLDA1.setText(String.valueOf(selectedRunway.getRunway1().getLDA()));
         recalcTORA1.setText(String.valueOf(selectedRunway.getRunway1().getTORA()));
@@ -378,27 +361,208 @@ public class InterfaceController {
 
     }
 
-    public void runwaySelected() {
-        PhysicalRunway runway = runwaySelection.getValue();
-        String[] runwayNames = runway.getName().split("/");
-        runwayLabel1.setText(runwayNames[0]);
-        runwayLabel2.setText(runwayNames[1]);
-        runwayG.setScaleX(runway.getWidth()/3800.0);
-
-        selectedRunway = runwaySelection.getValue();
-    }
-
     @FXML
     public Text runwayLabel1;
     @FXML
     public Text runwayLabel2;
     @FXML
+    public Text runwayLabel1L;
+    @FXML
+    public Text runwayLabel2L;
+    @FXML
     public Group runwayG;
     @FXML
     public Slider rotationSlider;
+    @FXML
+    public Group compass;
+    public Line thresholdLineLDA11;
+    public Text LDAText1;
+    public Line LDAArr11;
+    public Line LDAArr21;
+    public Line thresholdLineLDA21;
+    public Line LDALine1;
+    public Line thresholdLineLDA12;
+    public Text LDAText2;
+    public Line LDAArr12;
+    public Line LDAArr22;
+    public Line thresholdLineLDA22;
+    public Line LDALine2;
+    public Group disThr1;
+    public Group disThr2;
+    public Rectangle clearway1;
+    public Rectangle clearway2;
+    public Rectangle stopway1;
+    public Rectangle stopway2;
+    public Line thresholdLineTORA11;
+    public Text TORAText1;
+    public Line TORALine1;
+    public Line TORAArr11;
+    public Line TORAArr21;
+    public Line thresholdLineTORA21;
+    public Line thresholdLineTORA12;
+    public Text TORAText2;
+    public Line TORALine2;
+    public Line TORAArr12;
+    public Line TORAArr22;
+    public Line thresholdLineTORA22;
+    public Line thresholdLineASDA11;
+    public Text ASDAText1;
+    public Line ASDALine1;
+    public Line ASDAArr11;
+    public Line ASDAArr21;
+    public Line thresholdLineASDA21;
+    public Line thresholdLineASDA12;
+    public Text ASDAText2;
+    public Line ASDALine2;
+    public Line ASDAArr12;
+    public Line ASDAArr22;
+    public Line thresholdLineASDA22;
+    public Line thresholdLineTODA11;
+    public Text TODAText1;
+    public Line TODALine1;
+    public Line TODAArr11;
+    public Line TODAArr21;
+    public Line thresholdLineTODA21;
+    public Line thresholdLineTODA12;
+    public Text TODAText2;
+    public Line TODALine2;
+    public Line TODAArr12;
+    public Line TODAArr22;
+    public Line thresholdLineTODA22;
+
+    public void runwaySelected() {
+        PhysicalRunway runway = runwaySelection.getValue();
+        Runway runway1 = runway.getRunway1();
+        Runway runway2 = runway.getRunway2();
+        if (runway1.getLDA()>runway2.getLDA()) {
+            runway.switchRunways();
+            Runway temp = runway1;
+            runway1 = runway2;
+            runway2 = temp;
+        }
+
+        if (runway1.getClearway()>0) {
+            clearway2.setVisible(true);
+            TODALine1.setEndX(767);
+            TODAArr11.setLayoutX(767);
+            TODAArr21.setLayoutX(767);
+            thresholdLineTODA21.setLayoutX(767);
+        } else {
+            clearway2.setVisible(false);
+            TODALine1.setEndX(737);
+            TODAArr11.setLayoutX(737);
+            TODAArr21.setLayoutX(737);
+            thresholdLineTODA21.setLayoutX(737);
+        }
+
+        if (runway1.getStopway()>0) {
+            stopway2.setVisible(true);
+            ASDALine1.setEndX(757);
+            ASDAArr11.setLayoutX(757);
+            ASDAArr21.setLayoutX(757);
+            thresholdLineASDA21.setLayoutX(757);
+        } else {
+            stopway2.setVisible(false);
+            ASDALine1.setEndX(737);
+            ASDAArr11.setLayoutX(737);
+            ASDAArr21.setLayoutX(737);
+            thresholdLineASDA21.setLayoutX(737);
+        }
+
+        if (runway2.getClearway()>0) {
+            clearway1.setVisible(true);
+            TODALine2.setStartX(0);
+            TODAArr12.setLayoutX(0);
+            TODAArr22.setLayoutX(0);
+            thresholdLineTODA22.setLayoutX(0);
+        } else {
+            clearway1.setVisible(false);
+            TODALine2.setStartX(30);
+            TODAArr12.setLayoutX(30);
+            TODAArr22.setLayoutX(30);
+            thresholdLineTODA22.setLayoutX(30);
+        }
+
+        if (runway2.getStopway()>0) {
+            stopway1.setVisible(true);
+            ASDALine2.setStartX(0);
+            ASDAArr12.setLayoutX(0);
+            ASDAArr22.setLayoutX(0);
+            thresholdLineASDA22.setLayoutX(0);
+        } else {
+            stopway1.setVisible(false);
+            ASDALine2.setStartX(20);
+            ASDAArr12.setLayoutX(20);
+            ASDAArr22.setLayoutX(20);
+            thresholdLineASDA22.setLayoutX(20);
+        }
+
+        int dt = runway1.getDisplacedThreshold();
+        if (dt > 0) {
+            disThr1.setVisible(true);
+            int x = 740 * dt / runway1.getTORA();
+            disThr1.setTranslateX(x);
+            thresholdLineLDA11.setTranslateX(x);
+            LDAText1.setTranslateX(x);
+            LDALine1.setStartX(32 + x);
+        } else disThr1.setVisible(false);
+
+        dt = runway2.getDisplacedThreshold();
+        if (dt > 0) {
+            disThr2.setVisible(true);
+            int x = 740 * dt / runway2.getTORA();
+            disThr2.setTranslateX(x);
+            thresholdLineLDA12.setTranslateX(x);
+            LDAText2.setTranslateX(x);
+            LDALine2.setStartX(32 + x);
+        } else disThr2.setVisible(false);
+
+
+
+        char[] runwayNames = runway.getName().toCharArray();
+        runwayLabel1.setText(Character.toString(runwayNames[0])+Character.toString(runwayNames[1]));
+        runwayLabel1L.setText(Character.toString(runwayNames[2]));
+        runwayLabel2.setText(Character.toString(runwayNames[4])+Character.toString(runwayNames[5]));
+        runwayLabel2L.setText(Character.toString(runwayNames[6]));
+        int rotation = (Character.getNumericValue(runwayNames[0])*10+Character.getNumericValue(runwayNames[1])-9)*10;
+        if (rotation<0) rotation += 360;
+        rotationSlider.setValue(rotation);
+        rotate();
+
+
+
+        selectedRunway = runwaySelection.getValue();
+        originalLDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalLDA()));
+        originalTORA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTORA()));
+        originalTODA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTODA()));
+        originalASDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalASDA()));
+        originalDT1.setText(String.valueOf(selectedRunway.getRunway1().getDisplacedThreshold()));
+        originalStopway1.setText(String.valueOf(selectedRunway.getRunway1().getStopway()));
+        originalClearway1.setText(String.valueOf(selectedRunway.getRunway1().getClearway()));
+
+        originalLDA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalLDA()));
+        originalTORA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalTORA()));
+        originalTODA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalTODA()));
+        originalASDA2.setText(String.valueOf(selectedRunway.getRunway2().getOriginalASDA()));
+        originalDT2.setText(String.valueOf(selectedRunway.getRunway2().getDisplacedThreshold()));
+        originalStopway2.setText(String.valueOf(selectedRunway.getRunway2().getStopway()));
+        originalClearway2.setText(String.valueOf(selectedRunway.getRunway2().getClearway()));
+
+        recalcLDA1.setText("-");
+        recalcTORA1.setText("-");
+        recalcTODA1.setText("-");
+        recalcASDA1.setText("-");
+
+        recalcLDA2.setText("-");
+        recalcTORA2.setText("-");
+        recalcTODA2.setText("-");
+        recalcASDA2.setText("-");
+    }
 
     public void rotate() {
-        runwayGroup.setRotate(rotationSlider.getValue());
+        double rotation = rotationSlider.getValue();
+        runwayGroup.setRotate(rotation);
+        compass.setRotate(rotation);
     }
 
     @FXML
@@ -436,5 +600,16 @@ public class InterfaceController {
     public Obstacle getObstacleFromComboBox()
     {
         return obstacleSelection.getValue();
+    }
+
+    public void resetView(ActionEvent actionEvent) {
+        runwayGroup.setScaleX(1);
+        runwayGroup.setScaleY(1);
+        runwayGroup.setTranslateX(0);
+        runwayGroup.setTranslateY(0);
+        runwayGroup.setRotate(0);
+        compass.setRotate(0);
+        zoomSlider.setValue(1);
+        rotationSlider.setValue(0);
     }
 }

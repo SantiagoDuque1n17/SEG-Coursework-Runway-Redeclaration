@@ -325,11 +325,6 @@ public class Runway {
         System.out.println("Runway status: " + status);
     }
 
-    public int getLength() {
-        if (ASDA>TODA) return ASDA;
-        return TODA;
-    }
-
     public static int getBlastProtection() {
         return blastProtection;
     }
