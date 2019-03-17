@@ -37,7 +37,7 @@ public class InterfaceController {
     private PhysicalRunway selectedRunway =
             new PhysicalRunway(new Runway("null",0,0,0,0,0),
                     (new Runway("null",0,0,0,0,0)));
-    private Obstacle selectedObstacle = new Obstacle("default", 0,0,0,0);
+    private Obstacle selectedObstacle;
 
     @FXML
     private Button plusButton;
@@ -115,7 +115,7 @@ public class InterfaceController {
 
 
     @FXML
-    public Obstacle setSelectedObstacle(ActionEvent ae) {
+    public Obstacle setSelectedObstacle() {
         Obstacle obstacle = obstacleSelection.getValue();
         selectedObstacle = obstacle;
         System.out.println("Selected obstacle: " + selectedObstacle.getName());
@@ -276,6 +276,7 @@ public class InterfaceController {
         }
     }
 
+
     @FXML
     public void initialize(){
         runwaySelection.getItems().removeAll(runwaySelection.getItems());
@@ -293,6 +294,7 @@ public class InterfaceController {
         addObsButton.setOnAction(this::handleAddObsButtonAction);
 
         runwaySelected();
+        setSelectedObstacle();
     }
 
     public void createRunwaysList(){
@@ -430,6 +432,9 @@ public class InterfaceController {
     public Line TODAArr22;
     public Line thresholdLineTODA22;
 
+    @FXML
+    public Rectangle obstacleTop;
+
     public void runwaySelected() {
         PhysicalRunway runway = runwaySelection.getValue();
         Runway runway1 = runway.getRunway1();
@@ -557,6 +562,8 @@ public class InterfaceController {
         recalcTORA2.setText("-");
         recalcTODA2.setText("-");
         recalcASDA2.setText("-");
+
+        obstacleTop.setVisible(false);
     }
 
     public void rotate() {
@@ -611,5 +618,16 @@ public class InterfaceController {
         compass.setRotate(0);
         zoomSlider.setValue(1);
         rotationSlider.setValue(0);
+    }
+
+    public void showObstacle() {
+        int dtt1 = selectedObstacle.getDistToThreshold1();
+        int dtt2 = selectedObstacle.getDistToThreshold2();
+        int dtc = selectedObstacle.getDistToCentreline();
+        obstacleTop.setVisible(true);
+        int x = dtt1*740/selectedRunway.getRunway1().getTORA();
+        obstacleTop.setTranslateX(x);
+        obstacleTop.setWidth(740 - dtt2*740/selectedRunway.getRunway2().getTORA()-x);
+        obstacleTop.setTranslateY(dtc/3.0+25);
     }
 }

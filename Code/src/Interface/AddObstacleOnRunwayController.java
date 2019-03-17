@@ -27,6 +27,7 @@ public class AddObstacleOnRunwayController
             controller.getObstacleFromComboBox().setDistToCentreline((Integer.parseInt(distToCenter.getText().trim())));
             controller.getObstacleFromComboBox().setDistToThreshold1((Integer.parseInt(distToLeftT.getText().trim())));
             controller.getObstacleFromComboBox().setDistToThreshold2((Integer.parseInt(distToRightT.getText().trim())));
+            controller.showObstacle();
             ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
         }
         else

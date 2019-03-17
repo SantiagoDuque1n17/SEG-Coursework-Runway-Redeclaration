@@ -227,6 +227,7 @@
                      <Line fx:id="thresholdLineTODA21" endY="60.0" layoutX="737.0" startY="-20.0" stroke="WHITE" />
                   </children>
                </Group>
+               <Rectangle fx:id="obstacleTop" fill="#970000" height="20.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="50.0" />
                 </Group>
             <Group layoutX="22.0" layoutY="225.0">
                <children>
