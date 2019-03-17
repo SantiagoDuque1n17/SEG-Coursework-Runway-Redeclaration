@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.InterfaceController">
+<GridPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.InterfaceController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -346,7 +346,7 @@
             </Label>
             <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="90.0" max="360.0" minorTickCount="30" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
             <Slider fx:id="zoomSlider" layoutX="259.0" layoutY="58.0" max="200.0" min="50.0" onMouseClicked="#zoom" onMouseDragged="#zoom" prefHeight="14.0" prefWidth="116.0" value="50.0" />
-            <Button layoutX="236.0" layoutY="122.0" mnemonicParsing="false" onAction="#resetView" prefHeight="37.0" prefWidth="126.0" text="Reset view">
+            <Button layoutX="235.0" layoutY="104.0" mnemonicParsing="false" onAction="#resetView" prefHeight="37.0" prefWidth="126.0" text="Reset view">
                 <tooltip>
                     <Tooltip text="Reset the view back to default" />
                 </tooltip>
@@ -354,12 +354,13 @@
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button layoutX="49.0" layoutY="120.0" mnemonicParsing="false" onAction="#executeCalculation" prefHeight="37.0" prefWidth="164.0" text="Execute calculations">
+            <Button layoutX="46.0" layoutY="105.0" mnemonicParsing="false" onAction="#executeCalculation" prefHeight="37.0" prefWidth="164.0" text="Execute calculations">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
             <TextArea fx:id="warningBox" editable="false" layoutX="44.0" layoutY="199.0" prefHeight="99.0" prefWidth="325.0" />
+         <Button fx:id="brekdownButton" layoutX="76.0" layoutY="156.0" mnemonicParsing="false" onAction="#seeBreakdown" text="See breakdown" />
         </AnchorPane>
         <AnchorPane prefHeight="536.0" prefWidth="400.0" style="-fx-border-color: black; -fx-border-width: 2px;" GridPane.rowIndex="3">
             <TabPane prefHeight="254.0" prefWidth="399.0" tabClosingPolicy="UNAVAILABLE">
@@ -464,16 +465,6 @@
                             <Label fx:id="recalcASDA1" layoutX="247.0" layoutY="116.0" text="0" />
                             <Label fx:id="recalcASDA2" layoutX="323.0" layoutY="117.0" text="0" />
                         </AnchorPane>
-                    </AnchorPane>
-                </Tab>
-                <Tab text="Calculations">
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="267.0" prefWidth="399.0">
-                        <Label fx:id="calculationsLabel" layoutX="33.0" layoutY="50.0" prefHeight="127.0" prefWidth="338.0" />
-                        <Label layoutX="38.0" layoutY="30.0" text="Breakdown of calculations:">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
                     </AnchorPane>
                 </Tab>
             </TabPane>
