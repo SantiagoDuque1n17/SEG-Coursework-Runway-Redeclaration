@@ -53,12 +53,12 @@ public class InterfaceController {
     public ComboBox<PhysicalRunway> runwaySelection;
     @FXML
     public ComboBox<Obstacle> obstacleSelection;
-
     @FXML
     public TextArea warningBox = new TextArea();
-
     @FXML
     public Label calculationsLabel = new Label();
+    @FXML
+    public Button removeObs;
 
     /**
      * Labels in the display panel
@@ -247,8 +247,6 @@ public class InterfaceController {
 
     }
 
-
-
     private void loadRunways(){
         runways.removeAll();
         createRunwaysList();
@@ -258,7 +256,6 @@ public class InterfaceController {
         obstacles.removeAll();
         loadObstaclesList();
     }
-
 
     public void handlePlusButtonAction(ActionEvent event)
     {
@@ -301,6 +298,12 @@ public class InterfaceController {
         }
     }
 
+    public void handleRemoveObsButtonAction(ActionEvent event)
+    {
+        obstacleSelection.getValue().setDistToCentreline(0);
+        obstacleSelection.getValue().setDistToThreshold1(0);
+        obstacleSelection.getValue().setDistToThreshold2(0);
+    }
 
     @FXML
     public void initialize(){
@@ -317,6 +320,7 @@ public class InterfaceController {
         plusButton.setOnAction(this::handlePlusButtonAction);
         plusButton.requestLayout();
         addObsButton.setOnAction(this::handleAddObsButtonAction);
+        removeObs.setOnAction(this::handleRemoveObsButtonAction);
 
         runwaySelected();
         setSelectedObstacle();

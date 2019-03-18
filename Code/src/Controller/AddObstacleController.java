@@ -1,5 +1,5 @@
 package Controller;
-
+import Interface.*;
 import Model.Obstacle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
