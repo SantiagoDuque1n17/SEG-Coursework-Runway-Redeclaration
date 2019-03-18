@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.InterfaceController">
+<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -228,14 +228,14 @@
                      <Line fx:id="thresholdLineTODA21" endY="60.0" layoutX="737.0" startY="-20.0" stroke="WHITE" />
                   </children>
                </Group>
-               <Group fx:id="RESA" layoutY="20.0" visible="false">
+               <Group fx:id="RESA" layoutY="7.0" visible="false">
                   <children>
-                     <Line endX="60.0" />
-                     <Line endX="10.0" endY="5.0" />
-                     <Line endX="10.0" endY="-5.0" />
-                     <Line endX="50.0" endY="5.0" startX="60.0" />
-                     <Line endX="50.0" endY="-5.0" startX="60.0" />
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESA" x="17.0" y="10.0" />
+                     <Line endX="60.0" stroke="WHITE" />
+                     <Line endX="10.0" endY="5.0" stroke="WHITE" />
+                     <Line endX="10.0" endY="-5.0" stroke="WHITE" />
+                     <Line endX="50.0" endY="5.0" startX="60.0" stroke="WHITE" />
+                     <Line endX="50.0" endY="-5.0" startX="60.0" stroke="WHITE" />
+                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="RESA" x="17.0" y="10.0" />
                   </children>
                </Group>
                 </Group>
