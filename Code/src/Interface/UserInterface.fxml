@@ -25,7 +25,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
+<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -141,20 +141,16 @@
                                           <Line fx:id="thresholdLineLDA21" layoutX="737.0" startY="-20.0" stroke="WHITE" />
                                       </children>
                                    </Group>
-                              <Group layoutX="2.0" layoutY="80.0" rotate="180.0">
-                                 <children>
-                                    <Line fx:id="thresholdLineLDA12" endY="-28.0" stroke="WHITE" />
-                                    <Text fx:id="LDAText2" fill="WHITE" layoutY="-15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LDA" x="2.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
-                                    <Line fx:id="LDALine2" endX="737.0" layoutY="-20.0" startX="32.0" stroke="WHITE" />
-                                    <Line fx:id="LDAArr12" endX="-8.0" endY="4.0" layoutX="737.0" layoutY="-20.0" stroke="WHITE" />
-                                    <Line fx:id="LDAArr22" endX="-8.0" endY="-4.0" layoutX="737.0" layoutY="-20.0" stroke="WHITE" />
-                                    <Line fx:id="thresholdLineLDA22" layoutX="737.0" startY="-20.0" stroke="WHITE" />
-                                 </children>
-                              </Group>
+                              <Line fx:id="thresholdLineLDA12" endY="-28.0" layoutY="80.0" stroke="WHITE" translateX="739.0" />
+                              <Text fx:id="LDAText2" fill="WHITE" layoutY="77.0" rotate="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LDA" translateX="710.0" x="2.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Line fx:id="LDALine2" endX="707.0" layoutY="70.0" stroke="WHITE" translateX="2.0" />
+                              <Line fx:id="LDAArr12" endX="8.0" endY="4.0" layoutY="70.0" stroke="WHITE" translateX="2.0" />
+                              <Line fx:id="LDAArr22" endX="8.0" endY="-4.0" layoutY="70.0" stroke="WHITE" translateX="2.0" />
+                              <Line fx:id="thresholdLineLDA22" layoutY="70.0" startY="-20.0" stroke="WHITE" translateX="2.0" />
                                    <Group fx:id="disThr1" visible="false">
                                       <children>
                                           <Line endY="54.0" startY="2.0" strokeWidth="4.0" />

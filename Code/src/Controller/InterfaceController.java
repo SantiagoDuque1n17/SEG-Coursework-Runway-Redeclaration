@@ -241,10 +241,6 @@ public class InterfaceController {
         TORAArr11.setLayoutX(737);
         TORAArr21.setLayoutX(737);
         thresholdLineTORA21.setLayoutX(737);
-        LDALine2.setEndX(737);
-        LDAArr12.setLayoutX(737);
-        LDAArr22.setLayoutX(737);
-        thresholdLineLDA22.setLayoutX(737);
         TORALine2.setEndX(737);
         TORAArr12.setLayoutX(737);
         TORAArr22.setLayoutX(737);
@@ -268,7 +264,6 @@ public class InterfaceController {
         thresholdLineTORA12.setLayoutX(0);
         TORAText2.setLayoutX(0);
         TORALine2.setStartX(40);
-        runwaySelected();
 
         sideLineLDA1.setEndX(720);
         sideArrLDA11.setLayoutX(720);
@@ -315,6 +310,14 @@ public class InterfaceController {
         sideThresholdTORA22.setLayoutX(0);
 
         runwaySelected();
+
+        LDALine2.setStartX(0);
+        LDAArr12.setLayoutX(0);
+        LDAArr22.setLayoutX(0);
+        thresholdLineLDA22.setLayoutX(0);
+        thresholdLineLDA12.setLayoutX(0);
+        LDAText2.setLayoutX(0);
+        LDALine2.setEndX(707);
     }
 
     @FXML
@@ -719,10 +722,10 @@ public class InterfaceController {
             sideArrTODA21.setLayoutX(x);
             sideThresholdTODA21.setLayoutX(x);
 
-            LDALine2.setEndX(x);
-            LDAArr12.setLayoutX(x);
-            LDAArr22.setLayoutX(x);
-            thresholdLineLDA22.setLayoutX(x);
+            thresholdLineLDA12.setLayoutX(x-737);
+            LDAText2.setLayoutX(x-737);
+            LDALine2.setEndX(x-32);
+
             TORALine2.setEndX(x);
             TORAArr12.setLayoutX(x);
             TORAArr22.setLayoutX(x);
@@ -763,9 +766,7 @@ public class InterfaceController {
             thresholdLineTODA11.setLayoutX(x);
             TODAText1.setLayoutX(x);
             TODALine1.setStartX(32 + x);
-            thresholdLineLDA12.setLayoutX(x);
-            LDAText2.setLayoutX(x);
-            LDALine2.setStartX(32 + x);
+
             thresholdLineTORA12.setLayoutX(x);
             TORAText2.setLayoutX(x);
             TORALine2.setStartX(32 + x);
@@ -806,6 +807,11 @@ public class InterfaceController {
             sideArrTODA12.setLayoutX(x+30);
             sideArrTODA22.setLayoutX(x+30);
             sideThresholdTODA22.setLayoutX(x+30);
+
+            LDALine2.setStartX(x);
+            LDAArr12.setLayoutX(x);
+            LDAArr22.setLayoutX(x);
+            thresholdLineLDA22.setLayoutX(x);
         }
     }
 
