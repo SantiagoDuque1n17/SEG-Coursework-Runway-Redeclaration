@@ -481,6 +481,7 @@ public class InterfaceController {
 
     public void runwaySelected() {
         PhysicalRunway runway = runwaySelection.getValue();
+        RESA.setVisible(false);
         Runway runway1 = runway.getRunway1();
         Runway runway2 = runway.getRunway2();
         if (runway1.getLDA()>runway2.getLDA()) {
@@ -520,13 +521,13 @@ public class InterfaceController {
 
         if (runway2.getClearway()>0) {
             clearway1.setVisible(true);
-            TODALine2.setStartX(0);
+            TODALine2.setStartX(12);
             TODAArr12.setLayoutX(0);
             TODAArr22.setLayoutX(0);
             thresholdLineTODA22.setLayoutX(0);
         } else {
             clearway1.setVisible(false);
-            TODALine2.setStartX(30);
+            TODALine2.setStartX(42);
             TODAArr12.setLayoutX(30);
             TODAArr22.setLayoutX(30);
             thresholdLineTODA22.setLayoutX(30);
@@ -534,13 +535,13 @@ public class InterfaceController {
 
         if (runway2.getStopway()>0) {
             stopway1.setVisible(true);
-            ASDALine2.setStartX(0);
+            ASDALine2.setStartX(22);
             ASDAArr12.setLayoutX(0);
             ASDAArr22.setLayoutX(0);
             thresholdLineASDA22.setLayoutX(0);
         } else {
             stopway1.setVisible(false);
-            ASDALine2.setStartX(20);
+            ASDALine2.setStartX(42);
             ASDAArr12.setLayoutX(20);
             ASDAArr22.setLayoutX(20);
             thresholdLineASDA22.setLayoutX(20);
@@ -662,16 +663,152 @@ public class InterfaceController {
         compass.setRotate(0);
         zoomSlider.setValue(1);
         rotationSlider.setValue(0);
+
+        obstacleTop.setVisible(false);
+
+        RESA.setVisible(false);
+        LDALine1.setEndX(737);
+        LDAArr11.setLayoutX(737);
+        LDAArr21.setLayoutX(737);
+        thresholdLineLDA21.setLayoutX(737);
+        TORALine1.setEndX(737);
+        TORAArr11.setLayoutX(737);
+        TORAArr21.setLayoutX(737);
+        thresholdLineTORA21.setLayoutX(737);
+        ASDALine1.setEndX(737);
+        ASDAArr11.setLayoutX(737);
+        ASDAArr21.setLayoutX(737);
+        thresholdLineASDA21.setLayoutX(737);
+        TODALine1.setEndX(737);
+        TODAArr11.setLayoutX(737);
+        TODAArr21.setLayoutX(737);
+        thresholdLineTODA21.setLayoutX(737);
+        LDALine2.setEndX(737);
+        LDAArr12.setLayoutX(737);
+        LDAArr22.setLayoutX(737);
+        thresholdLineLDA22.setLayoutX(737);
+        TORALine2.setEndX(737);
+        TORAArr12.setLayoutX(737);
+        TORAArr22.setLayoutX(737);
+        thresholdLineTORA22.setLayoutX(737);
+        thresholdLineASDA12.setTranslateX(0);
+        ASDAText2.setTranslateX(0);
+        ASDALine2.setEndX(737);
+        thresholdLineTODA12.setTranslateX(0);
+        TODAText2.setTranslateX(0);
+        TODALine2.setEndX(735);
+
+        thresholdLineLDA11.setTranslateX(0);
+        LDAText1.setTranslateX(0);
+        LDALine1.setStartX(32);
+        thresholdLineTORA11.setTranslateX(0);
+        TORAText1.setTranslateX(0);
+        TORALine1.setStartX(40);
+        thresholdLineASDA11.setTranslateX(0);
+        ASDAText1.setTranslateX(0);
+        ASDALine1.setStartX(40);
+        thresholdLineTODA11.setTranslateX(0);
+        TODAText1.setTranslateX(0);
+        TODALine1.setStartX(40);
+        thresholdLineLDA12.setTranslateX(0);
+        LDAText2.setTranslateX(0);
+        LDALine2.setStartX(32);
+        thresholdLineTORA12.setTranslateX(0);
+        TORAText2.setTranslateX(0);
+        TORALine2.setStartX(40);
+        ASDALine2.setStartX(42);
+        ASDAArr12.setLayoutX(20);
+        ASDAArr22.setLayoutX(20);
+        thresholdLineASDA22.setLayoutX(20);
+        TODALine2.setStartX(42);
+        TODAArr12.setLayoutX(30);
+        TODAArr22.setLayoutX(30);
+        thresholdLineTODA22.setLayoutX(30);
+
+        runwaySelected();
     }
+
+    public Group RESA;
 
     public void showObstacle() {
         int dtt1 = selectedObstacle.getDistToThreshold1();
         int dtt2 = selectedObstacle.getDistToThreshold2();
         int dtc = selectedObstacle.getDistToCentreline();
+        Runway runway1 = selectedRunway.getRunway1();
+        Runway runway2 = selectedRunway.getRunway2();
         obstacleTop.setVisible(true);
-        int x = dtt1*740/selectedRunway.getRunway1().getTORA();
-        obstacleTop.setTranslateX(x);
-        obstacleTop.setWidth(740 - dtt2*740/selectedRunway.getRunway2().getTORA()-x);
-        obstacleTop.setTranslateY(dtc/3.0+25);
+        int x1 = dtt1*740/runway1.getTORA();
+        int x2 = dtt2*740/runway2.getTORA();
+        obstacleTop.setTranslateX(x1);
+        obstacleTop.setWidth(740-x2-x1);
+        obstacleTop.setTranslateY(dtc/3.0+15);
+        if (x1>x2) {
+            int x = x1-75;
+            RESA.setVisible(true);
+            RESA.setTranslateX(x+15);
+            LDALine1.setEndX(x);
+            LDAArr11.setLayoutX(x);
+            LDAArr21.setLayoutX(x);
+            thresholdLineLDA21.setLayoutX(x);
+            TORALine1.setEndX(x);
+            TORAArr11.setLayoutX(x);
+            TORAArr21.setLayoutX(x);
+            thresholdLineTORA21.setLayoutX(x);
+            ASDALine1.setEndX(x);
+            ASDAArr11.setLayoutX(x);
+            ASDAArr21.setLayoutX(x);
+            thresholdLineASDA21.setLayoutX(x);
+            TODALine1.setEndX(x);
+            TODAArr11.setLayoutX(x);
+            TODAArr21.setLayoutX(x);
+            thresholdLineTODA21.setLayoutX(x);
+
+            LDALine2.setEndX(x);
+            LDAArr12.setLayoutX(x);
+            LDAArr22.setLayoutX(x);
+            thresholdLineLDA22.setLayoutX(x);
+            TORALine2.setEndX(x);
+            TORAArr12.setLayoutX(x);
+            TORAArr22.setLayoutX(x);
+            thresholdLineTORA22.setLayoutX(x);
+
+            thresholdLineASDA12.setTranslateX(x-737);
+            ASDAText2.setTranslateX(x-737);
+            ASDALine2.setEndX(x);
+            thresholdLineTODA12.setTranslateX(x-737);
+            TODAText2.setTranslateX(x-737);
+            TODALine2.setEndX(x);
+
+        } else {
+            x = 740-x2+75;
+            RESA.setVisible(true);
+            RESA.setTranslateX(x-75);
+            thresholdLineLDA11.setTranslateX(x);
+            LDAText1.setTranslateX(x);
+            LDALine1.setStartX(32 + x);
+            thresholdLineTORA11.setTranslateX(x);
+            TORAText1.setTranslateX(x);
+            TORALine1.setStartX(32 + x);
+            thresholdLineASDA11.setTranslateX(x);
+            ASDAText1.setTranslateX(x);
+            ASDALine1.setStartX(32 + x);
+            thresholdLineTODA11.setTranslateX(x);
+            TODAText1.setTranslateX(x);
+            TODALine1.setStartX(32 + x);
+            thresholdLineLDA12.setTranslateX(x);
+            LDAText2.setTranslateX(x);
+            LDALine2.setStartX(32 + x);
+            thresholdLineTORA12.setTranslateX(x);
+            TORAText2.setTranslateX(x);
+            TORALine2.setStartX(32 + x);
+            ASDALine2.setStartX(x+42);
+            ASDAArr12.setLayoutX(x+20);
+            ASDAArr22.setLayoutX(x+20);
+            thresholdLineASDA22.setLayoutX(x+20);
+            TODALine2.setStartX(x+42);
+            TODAArr12.setLayoutX(x+30);
+            TODAArr22.setLayoutX(x+30);
+            thresholdLineTODA22.setLayoutX(x+30);
+        }
     }
 }
