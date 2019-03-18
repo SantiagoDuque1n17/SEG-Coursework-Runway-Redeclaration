@@ -186,10 +186,10 @@ public class InterfaceController {
                     "- Slope calculation (" + selectedRunway.getRunway1().getSlopeCalc() + ") " +
                     "- Strip end (" + Runway.getStripEnd() + ") = " + selectedRunway.getRunway1().getTORA() +")\n"+
 
-                    "ASDA: TORA (" + selectedRunway.getRunway1().getTORA() + ") " +
+                    "ASDA: Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") " +
                     " + Clearway (" + selectedRunway.getRunway1().getClearway() + ") \n" +
 
-                    "TODA : TORA (" + selectedRunway.getRunway1().getTORA() + ") " +
+                    "TODA : Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") " +
                     " + Clearway (" + selectedRunway.getRunway1().getClearway() + ") \n" +
 
                     "Landing Towards: \n +" +
