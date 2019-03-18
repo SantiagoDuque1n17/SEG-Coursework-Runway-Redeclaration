@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -32,14 +34,14 @@
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     </rowConstraints>
    <children>
-       <GridPane gridLinesVisible="true" prefHeight="741.0" prefWidth="880.0" style="-fx-background-color: white;">
+       <GridPane gridLinesVisible="true" prefHeight="741.0" prefWidth="880.0">
            <columnConstraints>
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
            </columnConstraints>
            <rowConstraints>
                <RowConstraints maxHeight="602.0" minHeight="10.0" prefHeight="495.0" vgrow="SOMETIMES" />
-               <RowConstraints maxHeight="533.0" minHeight="10.0" prefHeight="268.0" vgrow="SOMETIMES" />
-               <RowConstraints maxHeight="371.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="533.0" minHeight="10.0" prefHeight="231.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="371.0" minHeight="0.0" prefHeight="74.0" vgrow="SOMETIMES" />
            </rowConstraints>
           <children>
               <AnchorPane onMouseDragged="#move" onMousePressed="#getPos" onScroll="#scroll" prefHeight="483.0" prefWidth="880.0">
@@ -288,13 +290,136 @@
               <AnchorPane maxHeight="300.0" minHeight="200.0" prefHeight="250.0" prefWidth="880.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
                  <children>
                      <Label layoutX="14.0" layoutY="14.0" text="Side-on view" />
+                  <Rectangle fx:id="obstacleSide" arcHeight="5.0" arcWidth="5.0" fill="#7c0000" height="10.0" stroke="BLACK" strokeType="INSIDE" width="20.0" x="80.0" y="140.0" />
+                  <Line fx:id="sideClearway2" endX="30.0" layoutX="800.0" layoutY="140.0" stroke="RED" />
+                  <Line endX="720.0" layoutX="80.0" layoutY="140.0" strokeWidth="3.0" />
+                  <Line fx:id="sideClearway1" endX="30.0" layoutX="50.0" layoutY="140.0" stroke="RED" />
+                  <Line fx:id="sideStopway1" endX="20.0" layoutX="60.0" layoutY="140.0" stroke="BLUE" />
+                  <Line fx:id="sideStopway2" endX="20.0" layoutX="800.0" layoutY="140.0" stroke="BLUE" />
+                  <Text fx:id="textNum1" layoutX="50.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="09">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="textLet1" layoutX="55.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Group layoutX="80.0" layoutY="120.0">
+                     <children>
+                        <Line fx:id="sideThresholdLDA11" endY="20.0" startY="-6.0" />
+                        <Text fx:id="sideTextLDA1" strokeType="OUTSIDE" strokeWidth="0.0" text="LDA" x="2.0" y="5.0" />
+                        <Line fx:id="sideLineLDA1" endX="720.0" startX="28.0" />
+                        <Line fx:id="sideArrLDA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrLDA21" layoutX="720.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdLDA21" endY="20.0" layoutX="720.0" />
+                     </children>
+                  </Group>
+                  <Group layoutX="80.0" layoutY="100.0">
+                     <children>
+                        <Line fx:id="sideThresholdTORA11" endY="40.0" startY="-6.0" />
+                        <Text fx:id="sideTextTORA1" strokeType="OUTSIDE" strokeWidth="0.0" text="TORA" x="2.0" y="5.0" />
+                        <Line fx:id="sideLineTORA1" endX="720.0" startX="36.0" />
+                        <Line fx:id="sideArrTORA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrTORA21" layoutX="720.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdTORA21" endY="40.0" layoutX="720.0" />
+                     </children>
+                  </Group>
+                  <Group layoutX="80.0" layoutY="80.0">
+                     <children>
+                        <Line fx:id="sideThresholdASDA11" endY="60.0" startY="-6.0" />
+                        <Text fx:id="sideTextASDA1" strokeType="OUTSIDE" strokeWidth="0.0" text="ASDA" x="2.0" y="5.0" />
+                        <Line fx:id="sideLineASDA1" endX="720.0" startX="36.0" />
+                        <Line fx:id="sideArrASDA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrASDA21" layoutX="720.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdASDA21" endY="60.0" layoutX="720.0" />
+                     </children>
+                  </Group>
+                  <Group layoutX="80.0" layoutY="60.0">
+                     <children>
+                        <Line fx:id="sideThresholdTODA11" endY="80.0" startY="-6.0" />
+                        <Text fx:id="sideTextTODA1" strokeType="OUTSIDE" strokeWidth="0.0" text="TODA" x="2.0" y="5.0" />
+                        <Line fx:id="sideLineTODA1" endX="720.0" startX="36.0" />
+                        <Line fx:id="sideArrTODA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrTODA21" layoutX="720.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdTODA21" endY="80.0" layoutX="720.0" />
+                     </children>
+                  </Group>
+                  <Group layoutX="80.0" layoutY="160.0">
+                     <children>
+                        <Line fx:id="sideThresholdLDA22" startY="-20.0" />
+                        <Line fx:id="sideLineLDA2" endX="690.0" />
+                        <Line fx:id="sideArrLDA12" endX="10.0" endY="4.0" />
+                        <Line fx:id="sideArrLDA22" endX="10.0" endY="-4.0" />
+                        <Text fx:id="sideTextLDA2" layoutX="694.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LDA" />
+                        <Line fx:id="sideThresholdLDA12" endY="6.0" layoutX="720.0" startY="-20.0" />
+                     </children>
+                  </Group>
+                     <Group layoutX="80.0" layoutY="180.0">
+                         <children>
+                             <Line fx:id="sideThresholdTORA22" startY="-40.0" />
+                             <Line fx:id="sideLineTORA2" endX="682.0" />
+                             <Line fx:id="sideArrTORA12" endX="10.0" endY="4.0" />
+                             <Line fx:id="sideArrTORA22" endX="10.0" endY="-4.0" />
+                             <Text fx:id="sideTextTORA2" layoutX="686.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORA" />
+                             <Line fx:id="sideThresholdTORA12" endY="6.0" layoutX="720.0" startY="-40.0" />
+                         </children>
+                     </Group>
+                     <Group layoutX="60.0" layoutY="200.0">
+                         <children>
+                             <Line fx:id="sideThresholdASDA22" startY="-60.0" />
+                             <Line fx:id="sideLineASDA2" endX="702.0" />
+                             <Line fx:id="sideArrASDA12" endX="10.0" endY="4.0" />
+                             <Line fx:id="sideArrASDA22" endX="10.0" endY="-4.0" />
+                             <Text fx:id="sideTextASDA2" layoutX="706.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ASDA" />
+                             <Line fx:id="sideThresholdASDA12" endY="6.0" layoutX="740.0" startY="-60.0" />
+                         </children>
+                     </Group>
+                     <Group layoutX="50.0" layoutY="220.0">
+                         <children>
+                             <Line fx:id="sideThresholdTODA22" startY="-80.0" />
+                             <Line fx:id="sideLineTODA2" endX="712.0" />
+                             <Line fx:id="sideArrTODA12" endX="10.0" endY="4.0" />
+                             <Line fx:id="sideArrTODA22" endX="10.0" endY="-4.0" />
+                             <Text fx:id="sideTextTODA2" layoutX="716.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TODA" />
+                             <Line fx:id="sideThresholdTODA12" endY="6.0" layoutX="750.0" startY="-80.0" />
+                         </children>
+                     </Group>
+                  <Group fx:id="sideDT1" layoutX="80.0" layoutY="140.0">
+                     <children>
+                        <Line endY="8.0" strokeWidth="3.0" />
+                        <Text layoutX="2.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Displaced threshold" />
+                     </children>
+                  </Group>
+                  <Text fx:id="textNum2" layoutX="805.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="27">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="textLet2" layoutX="810.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Group fx:id="sideDT2" layoutX="800.0" layoutY="140.0">
+                     <children>
+                        <Line endY="8.0" strokeWidth="3.0" />
+                        <Text layoutX="-108.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Displaced threshold" />
+                     </children>
+                  </Group>
                  </children>
               </AnchorPane>
-              <AnchorPane style="-fx-background-color: black;" GridPane.rowIndex="2">
-                 <children>
-                     <Label layoutX="14.0" layoutY="11.0" style="-fx-text-fill: yellow;" text="System Log" />
-                 </children>
-              </AnchorPane>
+            <ScrollPane style="fx-background-color: black;" vbarPolicy="ALWAYS" GridPane.rowIndex="2">
+               <content>
+                  <AnchorPane style="-fx-background-color: black;">
+                     <children>
+                        <ListView prefHeight="72.0" prefWidth="865.0" style="-fx-background-color: black;" />
+                           <Label style="-fx-text-fill: yellow;" text="System Log" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
           </children>
        </GridPane>
        <GridPane prefHeight="800.0" prefWidth="400.0" style="-fx-background-color: white;" GridPane.columnIndex="1">
