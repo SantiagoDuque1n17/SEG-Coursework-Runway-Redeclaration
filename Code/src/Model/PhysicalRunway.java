@@ -1,5 +1,5 @@
-package Interface;
-import  Data.*;
+package Model;
+import Model.*;
 import Exceptions.*;
 
 

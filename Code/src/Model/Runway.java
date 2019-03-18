@@ -1,5 +1,4 @@
-package  Data;
-import Exceptions.DontNeedRedeclarationException;
+package Model;
 import Exceptions.NegativeParameterException;
 
 public class Runway {

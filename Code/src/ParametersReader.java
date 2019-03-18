@@ -1,13 +1,11 @@
-import Data.Obstacle;
-import Interface.PhysicalRunway;
-import Data.Runway;
+import Model.Obstacle;
+import Model.PhysicalRunway;
+import Model.Runway;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import Data.*;
-import Interface.*;
 
 public class ParametersReader {
 

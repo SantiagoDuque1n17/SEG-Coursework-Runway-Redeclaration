@@ -1,6 +1,6 @@
-package Interface;
+package Controller;
 
-import Data.Obstacle;
+import Model.Obstacle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

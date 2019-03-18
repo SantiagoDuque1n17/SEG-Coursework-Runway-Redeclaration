@@ -1,4 +1,4 @@
-package Data;
+package Model;
 
 public class Obstacle {
     private int height;

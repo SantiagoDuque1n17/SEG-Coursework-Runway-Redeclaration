@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="144.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.AddObstacleController">
+<AnchorPane prefHeight="144.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddObstacleController">
    <children>
       <Label layoutX="7.0" layoutY="23.0" prefHeight="19.0" prefWidth="137.0" text="Add obstacle name:" />
       <TextField fx:id="obsName" layoutX="149.0" layoutY="18.0" />

@@ -1,12 +1,9 @@
-import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
-import Interface.PhysicalRunway;
-import Data.Runway;
+import Model.PhysicalRunway;
+import Model.Runway;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
-import Data.*;
-import Interface.*;
 
 /**
 Used the values from the scenarios to test if the calculations

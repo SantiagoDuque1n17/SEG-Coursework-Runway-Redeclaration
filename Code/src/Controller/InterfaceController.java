@@ -1,6 +1,7 @@
-package Interface;
-import Data.Obstacle;
-import Data.Runway;
+package Controller;
+import Model.PhysicalRunway;
+import Model.Obstacle;
+import Model.Runway;
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
 import javafx.collections.FXCollections;

@@ -1,10 +1,9 @@
 package Interface;
 
-import Data.*;
+import Model.*;
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.util.Scanner;
 
 import java.util.*;

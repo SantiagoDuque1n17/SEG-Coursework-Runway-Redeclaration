@@ -1,5 +1,4 @@
-package Data;
-import Interface.*;
+package Model;
 import java.util.ArrayList;
 import java.util.List;
 
