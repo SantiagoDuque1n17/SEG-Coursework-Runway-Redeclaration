@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,9 +31,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InterfaceController {
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
@@ -266,6 +270,9 @@ public class InterfaceController {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
         setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + selectedObstacle.getName() + "\" removed from runway.");
+
+        statusLabel1.setText("FREE");
+        statusLabel2.setText("FREE");
 
         RESA.setVisible(false);
         LDALine1.setEndX(737);
@@ -860,6 +867,34 @@ public class InterfaceController {
         }
     }
 
+    @FXML
+    public void saveLog(ActionEvent ae)
+        {
+            FileChooser fileChooser = new FileChooser();
+
+            //Set extension filter for text files
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(new Stage());
+
+            if (file != null) {
+                saveTextToFile(systemLog.getText(), file);
+            }
+    }
+
+    private void saveTextToFile(String content, File file) {
+        try {
+            PrintWriter writer;
+            writer = new PrintWriter(file);
+            writer.println(content);
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void setSystemLogText(String message) {
         systemLog.setText(systemLog.getText() + "\n" + message);
     }
@@ -1041,4 +1076,5 @@ public class InterfaceController {
     public Button resetLogButton;
     public ScrollPane logPane;
     public VBox logVBox;
+    public Button saveLogButton;
 }
