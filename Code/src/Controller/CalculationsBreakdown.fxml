@@ -3,9 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SeeBreakdownController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SeeBreakdownController">
     <children>
-        <Label fx:id="breakdownLabel" layoutX="35.0" layoutY="22.0" prefHeight="335.0" prefWidth="775.0" />
+        <Label fx:id="breakdownLabel" layoutX="35.0" layoutY="29.0" prefHeight="464.0" prefWidth="773.0" />
     </children>
 </Pane>
