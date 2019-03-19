@@ -25,7 +25,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
+<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -307,7 +307,7 @@
               <AnchorPane maxHeight="300.0" minHeight="200.0" prefHeight="219.0" prefWidth="880.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
                  <children>
                      <Label layoutX="14.0" layoutY="14.0" text="Side-on view" />
-                  <Rectangle fx:id="obstacleSide" arcHeight="5.0" arcWidth="5.0" fill="#7c0000" height="10.0" stroke="BLACK" strokeType="INSIDE" width="20.0" x="80.0" y="140.0" />
+                  <Rectangle fx:id="obstacleSide" arcHeight="5.0" arcWidth="5.0" fill="#7c0000" height="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="20.0" x="80.0" y="140.0" />
                   <Line fx:id="sideClearway2" endX="30.0" layoutX="800.0" layoutY="140.0" stroke="RED" />
                   <Line endX="720.0" layoutX="80.0" layoutY="140.0" strokeWidth="3.0" />
                   <Line fx:id="sideClearway1" endX="30.0" layoutX="50.0" layoutY="140.0" stroke="RED" />
