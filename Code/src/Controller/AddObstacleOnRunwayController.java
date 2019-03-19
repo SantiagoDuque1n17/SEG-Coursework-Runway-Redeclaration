@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class AddObstacleOnRunwayController
 {
     InterfaceController controller;
@@ -27,6 +30,11 @@ public class AddObstacleOnRunwayController
             controller.getObstacleFromComboBox().setDistToThreshold1((Integer.parseInt(distToLeftT.getText().trim())));
             controller.getObstacleFromComboBox().setDistToThreshold2((Integer.parseInt(distToRightT.getText().trim())));
             controller.showObstacle();
+
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+
+            controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + controller.getObstacleFromComboBox().getName() + "\" added to runway.");
             ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
         }
         else
