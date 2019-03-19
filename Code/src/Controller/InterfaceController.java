@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -29,6 +30,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class InterfaceController {
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
@@ -40,9 +44,6 @@ public class InterfaceController {
     private Obstacle selectedObstacle;
 
     private String breakdown = "No calculations";
-
-
-    
 
     @FXML
     public Obstacle setSelectedObstacle() {
@@ -66,6 +67,11 @@ public class InterfaceController {
         try {
             if (selectedObstacle.getName().equals("default")) { selectedObstacle = obstacleSelection.getValue(); }
             whichRunway = selectedRunway.addObstacle(selectedObstacle);
+
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+            setSystemLogText(sdf.format(cal.getTime()) + " Calculations executed.");
+
         } catch (DontNeedRedeclarationException e) {
             warningBox.setText("Calculation invalid: Redeclaration not needed");
             System.err.println("Calculation invalid: Redeclaration not needed");
@@ -257,6 +263,10 @@ public class InterfaceController {
         obstacleTop.setVisible(false);
         obstacleSide.setVisible(false);
 
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+        setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + selectedObstacle.getName() + "\" removed from runway.");
+
         RESA.setVisible(false);
         LDALine1.setEndX(737);
         LDAArr11.setLayoutX(737);
@@ -347,6 +357,7 @@ public class InterfaceController {
 
     @FXML
     public void initialize(){
+        logPane.vvalueProperty().bind(logVBox.heightProperty());
         runwaySelection.getItems().removeAll(runwaySelection.getItems());
         loadRunways();
         runwaySelection.getItems().addAll(runways);
@@ -457,6 +468,10 @@ public class InterfaceController {
         RESA.setVisible(false);
         Runway runway1 = runway.getRunway1();
         Runway runway2 = runway.getRunway2();
+
+        runway1Label.setText(runway.getRunway1().getID() + " status: ");
+        runway2Label.setText(runway.getRunway2().getID() + " status: ");
+
         if (runway1.getLDA()>runway2.getLDA()) {
             runway.switchRunways();
             Runway temp = runway1;
@@ -681,6 +696,11 @@ public class InterfaceController {
     }
 
     public void resetView(ActionEvent actionEvent) {
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+        setSystemLogText(sdf.format(cal.getTime()) + " View reset.");
+
         runwayGroup.setScaleX(1);
         runwayGroup.setScaleY(1);
         runwayGroup.setLayoutX(0);
@@ -840,6 +860,24 @@ public class InterfaceController {
         }
     }
 
+    public void setSystemLogText(String message) {
+        systemLog.setText(systemLog.getText() + "\n" + message);
+    }
+
+
+    public PhysicalRunway getSelectedRunway() {
+        return selectedRunway;
+    }
+
+    public Obstacle getSelectedObstacle() {
+        return selectedObstacle;
+    }
+
+    @FXML
+    public void resetLog(ActionEvent ae) {
+        systemLog.setText("SYSTEM LOG");
+    }
+
     public Rectangle obstacleSide;
     public Group sideDT1;
     public Group sideDT2;
@@ -997,4 +1035,10 @@ public class InterfaceController {
     public Button removeObs;
     public Label statusLabel1;
     public Label statusLabel2;
+    public Label runway1Label;
+    public Label runway2Label;
+    public Label systemLog;
+    public Button resetLogButton;
+    public ScrollPane logPane;
+    public VBox logVBox;
 }
