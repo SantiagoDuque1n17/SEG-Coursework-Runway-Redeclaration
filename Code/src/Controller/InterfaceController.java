@@ -350,9 +350,6 @@ public class InterfaceController {
         sideArrTORA12.setLayoutX(0);
         sideArrTORA22.setLayoutX(0);
         sideThresholdTORA22.setLayoutX(0);
-
-        runwaySelected();
-
         LDALine2.setStartX(0);
         LDAArr12.setLayoutX(0);
         LDAArr22.setLayoutX(0);
@@ -360,6 +357,8 @@ public class InterfaceController {
         thresholdLineLDA12.setLayoutX(0);
         LDAText2.setLayoutX(0);
         LDALine2.setEndX(707);
+
+        runwaySelected();
     }
 
     @FXML
@@ -479,7 +478,7 @@ public class InterfaceController {
         runway1Label.setText(runway.getRunway1().getID() + " status: ");
         runway2Label.setText(runway.getRunway2().getID() + " status: ");
 
-        if (runway1.getLDA()>runway2.getLDA()) {
+        if (runway1.getOriginalLDA()>runway2.getOriginalLDA()) {
             runway.switchRunways();
             Runway temp = runway1;
             runway1 = runway2;
@@ -586,7 +585,7 @@ public class InterfaceController {
         if (dt > 0) {
             disThr1.setVisible(true);
             sideDT1.setVisible(true);
-            int x = 740 * dt / runway1.getTORA();
+            int x = 740 * dt / runway1.getOriginalTORA();
             disThr1.setLayoutX(x);
             sideDT1.setLayoutX(80+x);
             thresholdLineLDA11.setLayoutX(x);
@@ -603,7 +602,7 @@ public class InterfaceController {
         if (dt > 0) {
             disThr2.setVisible(true);
             sideDT2.setVisible(true);
-            int x = 740 * dt / runway2.getTORA();
+            int x = 740 * dt / runway2.getOriginalTORA();
             disThr2.setLayoutX(-x);
             sideDT2.setLayoutX(-x);
             thresholdLineLDA12.setLayoutX(x);
@@ -726,8 +725,8 @@ public class InterfaceController {
         Runway runway2 = selectedRunway.getRunway2();
         obstacleTop.setVisible(true);
         obstacleSide.setVisible(true);
-        int x1 = dtt1*740/runway1.getTORA();
-        int x2 = dtt2*740/runway2.getTORA();
+        int x1 = dtt1*740/runway1.getOriginalTORA();
+        int x2 = dtt2*740/runway2.getOriginalTORA();
         obstacleTop.setLayoutX(x1);
         obstacleTop.setWidth(740-x2-x1);
         obstacleTop.setLayoutY(dtc/3.0+15);
