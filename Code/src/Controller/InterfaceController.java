@@ -709,8 +709,8 @@ public class InterfaceController {
 
         runwayGroup.setScaleX(1);
         runwayGroup.setScaleY(1);
-        runwayGroup.setLayoutX(0);
-        runwayGroup.setLayoutY(0);
+        runwayGroup.setLayoutX(30);
+        runwayGroup.setLayoutY(80);
         runwayGroup.setRotate(0);
         compass.setRotate(0);
         zoomSlider.setValue(1);
