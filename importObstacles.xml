@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ObstacleList>
+  <Obstacle>
+    <Name>Boeing747</Name>
+    <Height>15</Height>
+  </Obstacle>
+  <Obstacle>
+    <Name>Boeing 777</Name>
+    <Height>22</Height>
+  </Obstacle>
+  <Obstacle>
+    <Name>Boeing 767</Name>
+    <Height>28</Height>
+  </Obstacle>
+</ObstacleList>
