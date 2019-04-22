@@ -432,6 +432,8 @@ public class InterfaceController {
         obstacleSelection.getValue().setDistToThreshold1(0);
         obstacleSelection.getValue().setDistToThreshold2(0);
 
+        runwaySelection.getValue().setObstacle(null);
+
         obstacleTop.setVisible(false);
         obstacleSide.setVisible(false);
 
