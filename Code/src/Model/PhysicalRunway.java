@@ -8,6 +8,7 @@ public class PhysicalRunway {
     private Runway runway1;
     private Runway runway2;
     private String name;
+    private Obstacle obstacle = null;
 
     private static final int stripEnd = 60;
     private static final int sideSpace = 75;
@@ -44,6 +45,7 @@ public class PhysicalRunway {
         int dtt2 = o.getDistToThreshold2();
         if (o.getDistToCentreline()>sideSpace||dtt1<-stripEnd||dtt2<-stripEnd) throw new DontNeedRedeclarationException();
         int h = o.getHeight();
+        obstacle = o;
         if (dtt1>dtt2) {
             runway1.takeOffTowardsObstacle(dtt1, h);
             runway1.landingTowardsObstacle(dtt1);
@@ -62,6 +64,14 @@ public class PhysicalRunway {
     public String getName()
     {
         return name;
+    }
+
+    public void setObstacle(Obstacle obstacle){
+        this.obstacle = obstacle;
+
+    }
+    public Obstacle getObstacle(){
+        return obstacle;
     }
 
     @Override
