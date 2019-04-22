@@ -39,6 +39,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InterfaceController {
+    private SelectAirportController controller;
+
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
     private ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
 
@@ -48,6 +50,9 @@ public class InterfaceController {
     private Obstacle selectedObstacle;
 
     private String breakdown = "No calculations";
+
+    @FXML
+    private Label airportName;
 
     @FXML
     public Obstacle setSelectedObstacle() {
@@ -912,6 +917,16 @@ public class InterfaceController {
     @FXML
     public void resetLog(ActionEvent ae) {
         systemLog.setText("SYSTEM LOG");
+    }
+
+    public void setController(SelectAirportController controller)
+    {
+        this.controller = controller;
+    }
+
+    public void setAirportName(Label name)
+    {
+        this.airportName.setText(name.getText());
     }
 
     public Rectangle obstacleSide;
