@@ -814,7 +814,6 @@ public class InterfaceController {
         runwayLabel2L.setText(Character.toString(runwayNames[6]));
         textLet2.setText(Character.toString(runwayNames[6]));
         this.rotationDiff = (Character.getNumericValue(runwayNames[0])*10+Character.getNumericValue(runwayNames[1])-9)*10;
-        if (rotationDiff<0) rotationDiff += 360;
         rotate();
 
 
@@ -1113,6 +1112,11 @@ public class InterfaceController {
         this.airportName.setText(name.getText());
     }
 
+    public void compassClicked(MouseEvent mouseEvent) {
+        rotationSlider.setValue(rotationDiff);
+        rotate();
+    }
+
     public Rectangle obstacleSide;
     public Group sideDT1;
     public Group sideDT2;
@@ -1279,4 +1283,5 @@ public class InterfaceController {
     public ScrollPane logPane;
     public VBox logVBox;
     public Button saveLogButton;
+
 }

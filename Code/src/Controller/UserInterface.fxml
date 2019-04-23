@@ -275,7 +275,7 @@
                      </Group>
                      <Group fx:id="compass" layoutX="839.0" layoutY="41.0">
                         <children>
-                            <Circle fill="WHITE" radius="36.0" stroke="BLACK" strokeType="INSIDE" />
+                            <Circle fill="WHITE" onMouseClicked="#compassClicked" radius="36.0" stroke="BLACK" strokeType="INSIDE" />
                             <Text layoutX="-5.0" layoutY="-25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N" />
                             <Line startY="-22.0" stroke="RED" strokeWidth="3.0" />
                         </children>
