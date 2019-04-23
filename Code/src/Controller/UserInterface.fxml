@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.Double?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
@@ -32,7 +25,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
+<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -526,7 +519,7 @@
                              <Font size="14.0" />
                          </font>
                      </Label>
-                     <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="90.0" max="360.0" minorTickCount="30" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                     <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="90.0" max="180.0" min="-180.0" minorTickCount="30" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                      <Slider fx:id="zoomSlider" layoutX="259.0" layoutY="58.0" max="200.0" min="50.0" onMouseClicked="#zoom" onMouseDragged="#zoom" prefHeight="14.0" prefWidth="116.0" value="50.0" />
                      <Button layoutX="232.0" layoutY="108.0" mnemonicParsing="false" onAction="#resetView" prefHeight="30.0" prefWidth="137.0" text="Reset view">
                          <tooltip>

@@ -77,7 +77,7 @@ public class InterfaceController {
             runwaySelection.getSelectionModel().select(airport.getRunways().get(0));
             runways = runwaySelection.getItems();
             obstacleSelection.getItems().removeAll(obstacleSelection.getItems());
-
+            runwaySelected();
         }
     }
     public void importButtonAction (ActionEvent event){
@@ -813,9 +813,8 @@ public class InterfaceController {
         textNum2.setText(Character.toString(runwayNames[4])+Character.toString(runwayNames[5]));
         runwayLabel2L.setText(Character.toString(runwayNames[6]));
         textLet2.setText(Character.toString(runwayNames[6]));
-        int rotation = (Character.getNumericValue(runwayNames[0])*10+Character.getNumericValue(runwayNames[1])-9)*10;
-        if (rotation<0) rotation += 360;
-        rotationSlider.setValue(rotation);
+        this.rotationDiff = (Character.getNumericValue(runwayNames[0])*10+Character.getNumericValue(runwayNames[1])-9)*10;
+        if (rotationDiff<0) rotationDiff += 360;
         rotate();
 
 
@@ -850,10 +849,12 @@ public class InterfaceController {
         obstacleTop.setVisible(false);
     }
 
+    private int rotationDiff;
+
     public void rotate() {
         double rotation = rotationSlider.getValue();
         runwayGroup.setRotate(rotation);
-        compass.setRotate(rotation);
+        compass.setRotate(rotation-rotationDiff);
     }
 
     public void zoom() {
@@ -899,7 +900,7 @@ public class InterfaceController {
         runwayGroup.setLayoutX(30);
         runwayGroup.setLayoutY(80);
         runwayGroup.setRotate(0);
-        compass.setRotate(0);
+        compass.setRotate(-rotationDiff);
         zoomSlider.setValue(1);
         rotationSlider.setValue(0);
     }
