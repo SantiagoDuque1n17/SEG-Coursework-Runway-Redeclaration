@@ -242,7 +242,11 @@ public class InterfaceController {
 
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
-            setSystemLogText(sdf.format(cal.getTime()) + " Calculations executed.");
+            setSystemLogText(sdf.format(cal.getTime()) + " Calculations executed");
+            setSystemLogText(sdf.format(cal.getTime()) + " Runway 1 status: " + selectedRunway.getRunway1().getStatus());
+            setSystemLogText(sdf.format(cal.getTime()) + " Runway 2 status: " + selectedRunway.getRunway2().getStatus());
+            //setSystemLogText(sdf.format(cal.getTime()) + " Obstacle: " + selectedObstacle);
+
 
         } catch (DontNeedRedeclarationException e) {
             warningBox.setText("Calculation invalid: Redeclaration not needed");
