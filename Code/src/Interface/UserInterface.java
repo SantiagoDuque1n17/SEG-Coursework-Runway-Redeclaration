@@ -14,9 +14,9 @@ public class UserInterface extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("UserInterface.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("SelectAirport.fxml"));
         primaryStage.setTitle("Runway Re-declaration tool");
-        primaryStage.setScene(new Scene(root, 1280, 800));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

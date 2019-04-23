@@ -26,20 +26,29 @@ public class AddObstacleController
     {
         if (!obsName.getText().trim().isEmpty() && !obsHeight.getText().trim().isEmpty())
         {
-            obstacle = new Obstacle(obsName.getText().trim(), Integer.parseInt(obsHeight.getText().trim()), 0, 0, 0);
-            controller.addObs(obstacle);
+            try
+            {
+                obstacle = new Obstacle(obsName.getText().trim(), Integer.parseInt(obsHeight.getText().trim()), 0, 0, 0);
+                controller.addObs(obstacle);
 
-            Calendar cal = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
-            controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + obstacle.getName() + "\" added to list.");
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+                controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + obstacle.getName() + "\" added to list.");
 
-            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+                ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+            }
+            catch(NumberFormatException e)
+            {
+                Alert warningAlert1 = new Alert(Alert.AlertType.WARNING);
+                warningAlert1.setContentText("Introduce the height as a number. Please try again.");
+                warningAlert1.showAndWait();
+            }
         }
         else
             {
-            Alert warningAlert = new Alert(Alert.AlertType.WARNING);
-            warningAlert.setContentText("No name/height was introduced. Please try again.");
-            warningAlert.showAndWait();
+            Alert warningAlert2 = new Alert(Alert.AlertType.WARNING);
+            warningAlert2.setContentText("No name/height was introduced. Please try again.");
+            warningAlert2.showAndWait();
         }
     }
 

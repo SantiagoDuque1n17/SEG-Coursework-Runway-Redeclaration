@@ -24,18 +24,25 @@ public class AddObstacleOnRunwayController
 
     public void handleCloseButtonAction(ActionEvent event)
     {
-        if(!distToCenter.getText().trim().isEmpty() && !distToLeftT.getText().trim().isEmpty() && !distToRightT.getText().trim().isEmpty())
-        {
-            controller.getObstacleFromComboBox().setDistToCentreline((Integer.parseInt(distToCenter.getText().trim())));
-            controller.getObstacleFromComboBox().setDistToThreshold1((Integer.parseInt(distToLeftT.getText().trim())));
-            controller.getObstacleFromComboBox().setDistToThreshold2((Integer.parseInt(distToRightT.getText().trim())));
-            controller.showObstacle();
+        if(!distToCenter.getText().trim().isEmpty() && !distToLeftT.getText().trim().isEmpty() && !distToRightT.getText().trim().isEmpty()) {
+            try {
+                controller.getObstacleFromComboBox().setDistToCentreline((Integer.parseInt(distToCenter.getText().trim())));
+                controller.getObstacleFromComboBox().setDistToThreshold1((Integer.parseInt(distToLeftT.getText().trim())));
+                controller.getObstacleFromComboBox().setDistToThreshold2((Integer.parseInt(distToRightT.getText().trim())));
+                controller.showObstacle();
 
-            Calendar cal = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
 
-            controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + controller.getObstacleFromComboBox().getName() + "\" added to runway.");
-            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+                controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + controller.getObstacleFromComboBox().getName() + "\" added to runway.");
+                ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+            }
+            catch(NumberFormatException e)
+            {
+                Alert warningAlert1 = new Alert(Alert.AlertType.WARNING);
+                warningAlert1.setContentText("Introduce the parameters as a number. Please try again.");
+                warningAlert1.showAndWait();
+            }
         }
         else
         {

@@ -21,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -29,7 +30,11 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -39,6 +44,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InterfaceController {
+    private SelectAirportController controller;
+
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
     private ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
 
@@ -50,12 +57,173 @@ public class InterfaceController {
     private String breakdown = "No calculations";
 
     @FXML
+    private Label airportName;
+
+    @FXML
     public Obstacle setSelectedObstacle() {
         Obstacle obstacle = obstacleSelection.getValue();
         selectedObstacle = obstacle;
         System.out.println("Selected obstacle: " + selectedObstacle.getName());
         return obstacle;
     }
+
+    public void importButtonAction (ActionEvent event){
+        FileChooser fc = new FileChooser();
+        File selectedFile = fc.showOpenDialog(null);
+
+        if(selectedFile != null){
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+                    .newInstance();
+            DocumentBuilder documentBuilder;
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+                Document document = documentBuilder.parse(selectedFile);
+                NodeList obstaclesList = document.getElementsByTagName("Obstacle");
+
+                for(int i = 0; i<obstaclesList.getLength(); i ++){
+                    Element obstacle = (Element)obstaclesList.item(i);
+                    String name = obstacle.getElementsByTagName("Name").item(0).getTextContent();
+                    int height = Integer.parseInt(obstacle.getElementsByTagName("Height").item(0).getTextContent());
+                    Obstacle obstacle1 = new Obstacle(name,height,0,0,0);
+                    obstacles.add(obstacle1);
+                    obstacleSelection.getItems().add(obstacle1);
+
+                }
+            } catch (ParserConfigurationException | SAXException | IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+
+        }
+    }
+
+    public Integer counter = 1;
+    public void exportButtonAction(ActionEvent event){
+        try {
+
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+
+            Document document = documentBuilder.newDocument();
+
+            Element root = document.createElement("Airport");
+            document.appendChild(root);
+
+            Attr airportName = document.createAttribute("Name");
+            airportName.setValue("Heathrow");
+            root.setAttributeNode(airportName);
+
+            Element runwayList = document.createElement("RunwayList");
+
+            root.appendChild(runwayList);
+
+
+            for(PhysicalRunway runwayIt : runways) {
+
+                Element physicalRunway = document.createElement("PhysicalRunway");
+                runwayList.appendChild(physicalRunway);
+
+                Element logicalRunway = document.createElement("LogicalRunway");
+                physicalRunway.appendChild(logicalRunway);
+
+                Element id = document.createElement("ID");
+                id.appendChild(document.createTextNode(runwayIt.getRunway1().getID()));
+                logicalRunway.appendChild(id);
+
+                Element lda = document.createElement("LDA");
+                lda.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway1().getLDA())));
+                logicalRunway.appendChild(lda);
+
+                Element tora = document.createElement("TORA");
+                tora.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway1().getTORA())));
+                logicalRunway.appendChild(tora);
+
+                Element toda = document.createElement("TODA");
+                toda.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway1().getTODA())));
+                logicalRunway.appendChild(toda);
+
+                Element asda = document.createElement("ASDA");
+                asda.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway1().getASDA())));
+                logicalRunway.appendChild(asda);
+
+                Element displacedThreshold = document.createElement("Displaced_Threshold");
+                displacedThreshold.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway1().getDisplacedThreshold())));
+                logicalRunway.appendChild(displacedThreshold);
+
+                logicalRunway = document.createElement("LogicalRunway");
+                physicalRunway.appendChild(logicalRunway);
+
+                id = document.createElement("ID");
+                id.appendChild(document.createTextNode(runwayIt.getRunway2().getID()));
+                logicalRunway.appendChild(id);
+
+                lda = document.createElement("LDA");
+                lda.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway2().getLDA())));
+                logicalRunway.appendChild(lda);
+
+                tora = document.createElement("TORA");
+                tora.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway2().getTORA())));
+                logicalRunway.appendChild(tora);
+
+                toda = document.createElement("TODA");
+                toda.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway2().getTODA())));
+                logicalRunway.appendChild(toda);
+
+                asda = document.createElement("ASDA");
+                asda.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway2().getASDA())));
+                logicalRunway.appendChild(asda);
+
+                displacedThreshold = document.createElement("Displaced_Threshold");
+                displacedThreshold.appendChild(document.createTextNode(Integer.toString(runwayIt.getRunway2().getDisplacedThreshold())));
+                logicalRunway.appendChild(displacedThreshold);
+
+                if(runwayIt.getObstacle() != null){
+                    Element obstacleOnRunway = document.createElement("Obstacle_on_Runway");
+                    physicalRunway.appendChild(obstacleOnRunway);
+
+                    Element obsName = document.createElement("Name");
+                    obsName.appendChild(document.createTextNode(runwayIt.getObstacle().getName()));
+                    obstacleOnRunway.appendChild(obsName);
+
+                    Element obsHeight = document.createElement("Height");
+                    obsHeight.appendChild(document.createTextNode(Integer.toString(runwayIt.getObstacle().getHeight())));
+                    obstacleOnRunway.appendChild(obsHeight);
+
+                    Element obsDistToCentreline = document.createElement("Distance_to_centreline");
+                    obsDistToCentreline.appendChild(document.createTextNode(Integer.toString(runwayIt.getObstacle().getDistToCentreline())));
+                    obstacleOnRunway.appendChild(obsDistToCentreline);
+
+                    Element obsDistToLeftThreshold = document.createElement("Distance_to_left_threshold");
+                    obsDistToLeftThreshold.appendChild(document.createTextNode(Integer.toString(runwayIt.getObstacle().getDistToThreshold1())));
+                    obstacleOnRunway.appendChild(obsDistToLeftThreshold);
+
+                    Element obsDistToRightThreshold = document.createElement("Distance_to_right_threshold");
+                    obsDistToRightThreshold.appendChild(document.createTextNode(Integer.toString(runwayIt.getObstacle().getDistToThreshold2())));
+                    obstacleOnRunway.appendChild(obsDistToRightThreshold);
+                }
+            }
+
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer tr = transformerFactory.newTransformer();
+            tr.setOutputProperty(OutputKeys.INDENT, "yes");
+            tr.setOutputProperty(OutputKeys.METHOD, "xml");
+            tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File("System_" + counter + ".xml"));
+            counter++;
+
+            tr.transform(domSource, streamResult);
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        }
+    }
+
 
     public void executeCalculation(ActionEvent ae) {
         if (selectedRunway.equals(null) || selectedObstacle.equals(null)) {
@@ -263,6 +431,8 @@ public class InterfaceController {
         obstacleSelection.getValue().setDistToCentreline(0);
         obstacleSelection.getValue().setDistToThreshold1(0);
         obstacleSelection.getValue().setDistToThreshold2(0);
+
+        runwaySelection.getValue().setObstacle(null);
 
         obstacleTop.setVisible(false);
         obstacleSide.setVisible(false);
@@ -722,6 +892,7 @@ public class InterfaceController {
         int dtt2 = selectedObstacle.getDistToThreshold2();
         int dtc = selectedObstacle.getDistToCentreline();
         if (dtt1>-100 && dtt2>-100 && -150<dtc && dtc<150) {
+            selectedRunway.setObstacle(selectedObstacle);
             Runway runway1 = selectedRunway.getRunway1();
             Runway runway2 = selectedRunway.getRunway2();
             obstacleTop.setVisible(true);
@@ -914,6 +1085,16 @@ public class InterfaceController {
         systemLog.setText("SYSTEM LOG");
     }
 
+    public void setController(SelectAirportController controller)
+    {
+        this.controller = controller;
+    }
+
+    public void setAirportName(Label name)
+    {
+        this.airportName.setText(name.getText());
+    }
+
     public Rectangle obstacleSide;
     public Group sideDT1;
     public Group sideDT2;
@@ -1062,6 +1243,8 @@ public class InterfaceController {
     public Rectangle obstacleTop;
     public Button plusButton;
     public Button addObsButton;
+    public Button importObsButton;
+    public Button exportButton;
     public Button resetViewButton;
     public Button brekdownButton;
     public ComboBox<PhysicalRunway> runwaySelection;
