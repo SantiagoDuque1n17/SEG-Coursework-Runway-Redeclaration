@@ -2,6 +2,7 @@ package Controller;
 import Model.PhysicalRunway;
 import Model.Obstacle;
 import Model.Runway;
+import Model.Airport;
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
 import javafx.collections.FXCollections;
@@ -44,6 +45,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InterfaceController {
+    private Airport airport = null;
     private SelectAirportController controller;
 
     private ObservableList<PhysicalRunway> runways = FXCollections.observableArrayList();
@@ -67,6 +69,17 @@ public class InterfaceController {
         return obstacle;
     }
 
+    public void setAirport (Airport airport){
+        this.airport = airport;
+        if(!airport.getId().equals("0")){
+            runwaySelection.getItems().removeAll(runwaySelection.getItems());
+            runwaySelection.getItems().addAll(airport.getRunways());
+            runwaySelection.getSelectionModel().select(airport.getRunways().get(0));
+            runways = runwaySelection.getItems();
+            obstacleSelection.getItems().removeAll(obstacleSelection.getItems());
+
+        }
+    }
     public void importButtonAction (ActionEvent event){
         FileChooser fc = new FileChooser();
         File selectedFile = fc.showOpenDialog(null);
@@ -89,6 +102,7 @@ public class InterfaceController {
                     obstacleSelection.getItems().add(obstacle1);
 
                 }
+                obstacleSelection.getSelectionModel().select(obstacleSelection.getItems().get(0));
             } catch (ParserConfigurationException | SAXException | IOException e) {
                 e.printStackTrace();
             }
@@ -111,7 +125,7 @@ public class InterfaceController {
             document.appendChild(root);
 
             Attr airportName = document.createAttribute("Name");
-            airportName.setValue("Heathrow");
+            airportName.setValue(airport.getName());
             root.setAttributeNode(airportName);
 
             Element runwayList = document.createElement("RunwayList");
@@ -119,7 +133,7 @@ public class InterfaceController {
             root.appendChild(runwayList);
 
 
-            for(PhysicalRunway runwayIt : runways) {
+            for(PhysicalRunway runwayIt : runwaySelection.getItems()) {
 
                 Element physicalRunway = document.createElement("PhysicalRunway");
                 runwayList.appendChild(physicalRunway);
@@ -376,6 +390,7 @@ public class InterfaceController {
     }
 
     private void loadRunways(){
+
         runways.removeAll();
         createRunwaysList();
     }
@@ -534,6 +549,7 @@ public class InterfaceController {
     @FXML
     public void initialize(){
         logPane.vvalueProperty().bind(logVBox.heightProperty());
+
         runwaySelection.getItems().removeAll(runwaySelection.getItems());
         loadRunways();
         runwaySelection.getItems().addAll(runways);
@@ -554,6 +570,7 @@ public class InterfaceController {
     }
 
     private void createRunwaysList(){
+
         File file = new File("runways.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
