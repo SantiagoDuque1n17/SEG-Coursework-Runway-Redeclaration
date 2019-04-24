@@ -149,8 +149,8 @@ public class Runway {
         System.out.println("LDA: Original value: "+originalLDA+", Previous value: "+this.getLDA()+", New value: "+newLDA);
         System.out.println
                 ("Formula: \n New LDA = Original LDA (" + originalLDA + ") " +
-                        "- Distance from threshold (" + dtt + ") - Strip end (" + stripEnd +") - Slope calculation (50*" + height + " = " + slopeCalc + ")." +
-                        "\n_________________________________________________________________" );
+                        "- Distance from threshold (" + dtt +") - Strip end (" + stripEnd + ") - Max ( Slope calculation (50*" + height + " = " + (50*height) + "),(RESA = " + RESA + ") = " + slopeCalc + ")." +
+                        "\n_________________________________________________________________");
 
         this.setLDA(newLDA);
 
@@ -334,6 +334,14 @@ public class Runway {
 
     public static int getStripEnd() {
         return stripEnd;
+    }
+
+    public void reset() {
+        LDA = originalLDA;
+        TORA = originalTORA;
+        ASDA = originalASDA;
+        TODA = originalTODA;
+        status = "NORMAL";
     }
 }
 

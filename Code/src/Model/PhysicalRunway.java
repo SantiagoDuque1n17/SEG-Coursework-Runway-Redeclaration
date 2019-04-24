@@ -29,23 +29,32 @@ public class PhysicalRunway {
         name = runway1.getID()+"/"+runway2.getID();
     }
 
+    public String getName()
+    {
+        return name;
+    }
+
     /**
      *
      * Adds an obstacle to the physical runway and depending on the
      * distances to thresholds performs landing and takeoff in
      * the right direction
      *
-     * @param o obstacle added to the runway
+     * @param obstacle obstacle added to the runway
      * @throws DontNeedRedeclarationException
      * @throws NegativeParameterException
      */
-    public int addObstacle(Obstacle o) throws DontNeedRedeclarationException, NegativeParameterException {
-
-        int dtt1 = o.getDistToThreshold1();
-        int dtt2 = o.getDistToThreshold2();
-        if (o.getDistToCentreline()>sideSpace||dtt1<-stripEnd||dtt2<-stripEnd) throw new DontNeedRedeclarationException();
-        int h = o.getHeight();
-        obstacle = o;
+    public int setObstacle(Obstacle obstacle) throws DontNeedRedeclarationException, NegativeParameterException {
+        this.obstacle = obstacle;
+        if(obstacle == null) {
+            runway1.reset();
+            runway2.reset();
+            return 0;
+        }
+        int dtt1 = obstacle.getDistToThreshold1();
+        int dtt2 = obstacle.getDistToThreshold2();
+        if (obstacle.getDistToCentreline()>sideSpace||dtt1<-stripEnd||dtt2<-stripEnd) throw new DontNeedRedeclarationException();
+        int h = obstacle.getHeight();
         if (dtt1>dtt2) {
             runway1.takeOffTowardsObstacle(dtt1, h);
             runway1.landingTowardsObstacle(dtt1);
@@ -61,15 +70,6 @@ public class PhysicalRunway {
         }
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setObstacle(Obstacle obstacle){
-        this.obstacle = obstacle;
-
-    }
     public Obstacle getObstacle(){
         return obstacle;
     }

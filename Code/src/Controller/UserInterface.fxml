@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.Double?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
@@ -32,7 +25,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
+<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -133,7 +126,7 @@
                                     <Line endX="50.0" layoutX="20.0" layoutY="2.0" startX="-0.0" stroke="WHITE" />
                                  </children>
                               </Group>
-                              <Rectangle fx:id="obstacleTop" fill="#970000" height="20.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="50.0" />
+                              <Rectangle fx:id="obstacleTop" fill="#970000" height="20.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="38.0" y="15.0" />
                                    <Group layoutX="2.0">
                                       <children>
                                           <Line fx:id="thresholdLineLDA11" endY="-28.0" stroke="WHITE" />
@@ -246,14 +239,27 @@
                                     <Line fx:id="thresholdLineTODA21" endY="60.0" layoutX="737.0" startY="-20.0" stroke="WHITE" />
                                  </children>
                               </Group>
-                              <Group fx:id="RESA" layoutY="7.0" visible="false">
+                              <Group fx:id="RESATop" layoutY="7.0" visible="false">
                                  <children>
-                                    <Line endX="60.0" stroke="WHITE" />
+                                    <Line endX="48.0" stroke="WHITE" />
+                                    <Line endX="10.0" endY="3.0" stroke="WHITE" />
+                                    <Line endX="10.0" endY="-3.0" stroke="WHITE" />
+                                    <Line endX="-10.0" endY="3.0" layoutX="48.0" stroke="WHITE" />
+                                    <Line endX="-10.0" endY="-3.0" layoutX="48.0" stroke="WHITE" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="RESA" x="11.0" y="10.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font></Text>
+                                 </children>
+                              </Group>
+                              <Group fx:id="slopeTop" layoutX="10.0" layoutY="38.0" visible="false">
+                                 <children>
+                                    <Line fx:id="slopeTopLine" endX="60.0" stroke="WHITE" />
                                     <Line endX="10.0" endY="5.0" stroke="WHITE" />
                                     <Line endX="10.0" endY="-5.0" stroke="WHITE" />
-                                    <Line endX="50.0" endY="5.0" startX="60.0" stroke="WHITE" />
-                                    <Line endX="50.0" endY="-5.0" startX="60.0" stroke="WHITE" />
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="RESA" x="17.0" y="10.0" />
+                                    <Line fx:id="slopeTopArr1" endX="-10.0" endY="5.0" layoutX="60.0" stroke="WHITE" />
+                                    <Line fx:id="slopeTopArr2" endX="-10.0" endY="-5.0" layoutX="60.0" stroke="WHITE" />
+                                    <Text fx:id="slopeTopText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="slope" x="13.0" y="10.0" />
                                  </children>
                               </Group>
                                </children>
@@ -282,7 +288,7 @@
                      </Group>
                      <Group fx:id="compass" layoutX="839.0" layoutY="41.0">
                         <children>
-                            <Circle fill="WHITE" radius="36.0" stroke="BLACK" strokeType="INSIDE" />
+                            <Circle fill="WHITE" onMouseClicked="#compassClicked" radius="36.0" stroke="BLACK" strokeType="INSIDE" />
                             <Text layoutX="-5.0" layoutY="-25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N" />
                             <Line startY="-22.0" stroke="RED" strokeWidth="3.0" />
                         </children>
@@ -314,119 +320,120 @@
               <AnchorPane maxHeight="300.0" minHeight="200.0" prefHeight="219.0" prefWidth="880.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
                  <children>
                      <Label layoutX="14.0" layoutY="14.0" text="Side-on view" />
-                  <Rectangle fx:id="obstacleSide" arcHeight="5.0" arcWidth="5.0" fill="#7c0000" height="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="20.0" x="80.0" y="140.0" />
-                  <Line fx:id="sideClearway2" endX="30.0" layoutX="800.0" layoutY="140.0" stroke="RED" />
-                  <Line endX="720.0" layoutX="80.0" layoutY="140.0" strokeWidth="3.0" />
-                  <Line fx:id="sideClearway1" endX="30.0" layoutX="50.0" layoutY="140.0" stroke="RED" />
-                  <Line fx:id="sideStopway1" endX="20.0" layoutX="60.0" layoutY="140.0" stroke="BLUE" />
-                  <Line fx:id="sideStopway2" endX="20.0" layoutX="800.0" layoutY="140.0" stroke="BLUE" />
-                  <Text fx:id="textNum1" layoutX="50.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="09">
+                  <Rectangle fx:id="obstacleSide" arcHeight="5.0" arcWidth="5.0" fill="#7c0000" height="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="38.0" x="70.0" y="140.0" />
+                  <Line fx:id="slope" translateX="70.0" translateY="140.0" />
+                  <Line fx:id="sideClearway2" endX="30.0" layoutX="810.0" layoutY="140.0" stroke="RED" />
+                  <Line endX="740.0" layoutY="140.0" strokeWidth="3.0" translateX="70.0" />
+                  <Line fx:id="sideClearway1" endX="30.0" layoutX="40.0" layoutY="140.0" stroke="RED" />
+                  <Line fx:id="sideStopway1" endX="20.0" layoutX="50.0" layoutY="140.0" stroke="BLUE" />
+                  <Line fx:id="sideStopway2" endX="20.0" layoutX="810.0" layoutY="140.0" stroke="BLUE" />
+                  <Text fx:id="textNum1" layoutX="40.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="09">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="textLet1" layoutX="55.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
+                  <Text fx:id="textLet1" layoutX="45.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Group layoutX="80.0" layoutY="120.0">
+                  <Group layoutX="70.0" layoutY="120.0">
                      <children>
                         <Line fx:id="sideThresholdLDA11" endY="20.0" startY="-6.0" />
                         <Text fx:id="sideTextLDA1" strokeType="OUTSIDE" strokeWidth="0.0" text="LDA" x="2.0" y="5.0" />
-                        <Line fx:id="sideLineLDA1" endX="720.0" startX="28.0" />
-                        <Line fx:id="sideArrLDA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
-                        <Line fx:id="sideArrLDA21" layoutX="720.0" startX="-8.0" startY="4.0" />
-                        <Line fx:id="sideThresholdLDA21" endY="20.0" layoutX="720.0" />
+                        <Line fx:id="sideLineLDA1" endX="740.0" startX="28.0" />
+                        <Line fx:id="sideArrLDA11" layoutX="740.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrLDA21" layoutX="740.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdLDA21" endY="20.0" layoutX="740.0" />
                      </children>
                   </Group>
-                  <Group layoutX="80.0" layoutY="100.0">
+                  <Group layoutX="70.0" layoutY="100.0">
                      <children>
                         <Line fx:id="sideThresholdTORA11" endY="40.0" startY="-6.0" />
                         <Text fx:id="sideTextTORA1" strokeType="OUTSIDE" strokeWidth="0.0" text="TORA" x="2.0" y="5.0" />
-                        <Line fx:id="sideLineTORA1" endX="720.0" startX="36.0" />
-                        <Line fx:id="sideArrTORA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
-                        <Line fx:id="sideArrTORA21" layoutX="720.0" startX="-8.0" startY="4.0" />
-                        <Line fx:id="sideThresholdTORA21" endY="40.0" layoutX="720.0" />
+                        <Line fx:id="sideLineTORA1" endX="740.0" startX="36.0" />
+                        <Line fx:id="sideArrTORA11" layoutX="740.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrTORA21" layoutX="740.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdTORA21" endY="40.0" layoutX="740.0" />
                      </children>
                   </Group>
-                  <Group layoutX="80.0" layoutY="80.0">
+                  <Group layoutX="70.0" layoutY="80.0">
                      <children>
                         <Line fx:id="sideThresholdASDA11" endY="60.0" startY="-6.0" />
                         <Text fx:id="sideTextASDA1" strokeType="OUTSIDE" strokeWidth="0.0" text="ASDA" x="2.0" y="5.0" />
-                        <Line fx:id="sideLineASDA1" endX="720.0" startX="36.0" />
-                        <Line fx:id="sideArrASDA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
-                        <Line fx:id="sideArrASDA21" layoutX="720.0" startX="-8.0" startY="4.0" />
-                        <Line fx:id="sideThresholdASDA21" endY="60.0" layoutX="720.0" />
+                        <Line fx:id="sideLineASDA1" endX="740.0" startX="36.0" />
+                        <Line fx:id="sideArrASDA11" layoutX="740.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrASDA21" layoutX="740.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdASDA21" endY="60.0" layoutX="740.0" />
                      </children>
                   </Group>
-                  <Group layoutX="80.0" layoutY="60.0">
+                  <Group layoutX="70.0" layoutY="60.0">
                      <children>
                         <Line fx:id="sideThresholdTODA11" endY="80.0" startY="-6.0" />
                         <Text fx:id="sideTextTODA1" strokeType="OUTSIDE" strokeWidth="0.0" text="TODA" x="2.0" y="5.0" />
-                        <Line fx:id="sideLineTODA1" endX="720.0" startX="36.0" />
-                        <Line fx:id="sideArrTODA11" layoutX="720.0" startX="-8.0" startY="-4.0" />
-                        <Line fx:id="sideArrTODA21" layoutX="720.0" startX="-8.0" startY="4.0" />
-                        <Line fx:id="sideThresholdTODA21" endY="80.0" layoutX="720.0" />
+                        <Line fx:id="sideLineTODA1" endX="740.0" startX="36.0" />
+                        <Line fx:id="sideArrTODA11" layoutX="740.0" startX="-8.0" startY="-4.0" />
+                        <Line fx:id="sideArrTODA21" layoutX="740.0" startX="-8.0" startY="4.0" />
+                        <Line fx:id="sideThresholdTODA21" endY="80.0" layoutX="740.0" />
                      </children>
                   </Group>
-                  <Group layoutX="80.0" layoutY="160.0">
+                  <Group layoutX="70.0" layoutY="160.0">
                      <children>
                         <Line fx:id="sideThresholdLDA22" startY="-20.0" />
-                        <Line fx:id="sideLineLDA2" endX="690.0" />
+                        <Line fx:id="sideLineLDA2" endX="710.0" />
                         <Line fx:id="sideArrLDA12" endX="10.0" endY="4.0" />
                         <Line fx:id="sideArrLDA22" endX="10.0" endY="-4.0" />
-                        <Text fx:id="sideTextLDA2" layoutX="694.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LDA" />
-                        <Line fx:id="sideThresholdLDA12" endY="6.0" layoutX="720.0" startY="-20.0" />
+                        <Text fx:id="sideTextLDA2" layoutX="714.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LDA" />
+                        <Line fx:id="sideThresholdLDA12" endY="6.0" layoutX="740.0" startY="-20.0" />
                      </children>
                   </Group>
-                     <Group layoutX="80.0" layoutY="180.0">
+                     <Group layoutX="70.0" layoutY="180.0">
                          <children>
                              <Line fx:id="sideThresholdTORA22" startY="-40.0" />
-                             <Line fx:id="sideLineTORA2" endX="682.0" />
+                             <Line fx:id="sideLineTORA2" endX="702.0" />
                              <Line fx:id="sideArrTORA12" endX="10.0" endY="4.0" />
                              <Line fx:id="sideArrTORA22" endX="10.0" endY="-4.0" />
-                             <Text fx:id="sideTextTORA2" layoutX="686.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORA" />
-                             <Line fx:id="sideThresholdTORA12" endY="6.0" layoutX="720.0" startY="-40.0" />
+                             <Text fx:id="sideTextTORA2" layoutX="706.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORA" />
+                             <Line fx:id="sideThresholdTORA12" endY="6.0" layoutX="740.0" startY="-40.0" />
                          </children>
                      </Group>
-                     <Group layoutX="60.0" layoutY="200.0">
+                     <Group layoutX="50.0" layoutY="200.0">
                          <children>
                              <Line fx:id="sideThresholdASDA22" startY="-60.0" />
-                             <Line fx:id="sideLineASDA2" endX="702.0" />
+                             <Line fx:id="sideLineASDA2" endX="722.0" />
                              <Line fx:id="sideArrASDA12" endX="10.0" endY="4.0" />
                              <Line fx:id="sideArrASDA22" endX="10.0" endY="-4.0" />
-                             <Text fx:id="sideTextASDA2" layoutX="706.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ASDA" />
-                             <Line fx:id="sideThresholdASDA12" endY="6.0" layoutX="740.0" startY="-60.0" />
+                             <Text fx:id="sideTextASDA2" layoutX="726.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ASDA" />
+                             <Line fx:id="sideThresholdASDA12" endY="6.0" layoutX="760.0" startY="-60.0" />
                          </children>
                      </Group>
-                     <Group layoutX="50.0" layoutY="220.0">
+                     <Group layoutX="40.0" layoutY="220.0">
                          <children>
                              <Line fx:id="sideThresholdTODA22" startY="-80.0" />
-                             <Line fx:id="sideLineTODA2" endX="712.0" />
+                             <Line fx:id="sideLineTODA2" endX="732.0" />
                              <Line fx:id="sideArrTODA12" endX="10.0" endY="4.0" />
                              <Line fx:id="sideArrTODA22" endX="10.0" endY="-4.0" />
-                             <Text fx:id="sideTextTODA2" layoutX="716.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TODA" />
-                             <Line fx:id="sideThresholdTODA12" endY="6.0" layoutX="750.0" startY="-80.0" />
+                             <Text fx:id="sideTextTODA2" layoutX="736.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TODA" />
+                             <Line fx:id="sideThresholdTODA12" endY="6.0" layoutX="770.0" startY="-80.0" />
                          </children>
                      </Group>
-                  <Group fx:id="sideDT1" layoutX="80.0" layoutY="140.0">
+                  <Group fx:id="sideDT1" layoutX="70.0" layoutY="140.0">
                      <children>
                         <Line endY="8.0" strokeWidth="3.0" />
                         <Text layoutX="2.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Displaced threshold" />
                      </children>
                   </Group>
-                  <Text fx:id="textNum2" layoutX="805.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="27">
+                  <Text fx:id="textNum2" layoutX="815.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="27">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="textLet2" layoutX="810.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
+                  <Text fx:id="textLet2" layoutX="820.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Group fx:id="sideDT2" layoutX="800.0" layoutY="140.0">
+                  <Group fx:id="sideDT2" layoutX="820.0" layoutY="140.0">
                      <children>
                         <Line endY="8.0" strokeWidth="3.0" />
                         <Text layoutX="-108.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Displaced threshold" />
@@ -434,6 +441,30 @@
                   </Group>
                   <Button fx:id="resetLogButton" layoutX="656.0" layoutY="232.0" mnemonicParsing="false" onAction="#resetLog" prefHeight="26.0" prefWidth="87.0" text="Reset Log" />
                   <Button fx:id="saveLogButton" layoutX="754.0" layoutY="233.0" mnemonicParsing="false" onAction="#saveLog" prefHeight="26.0" prefWidth="87.0" text="Save log" />
+                  <Group fx:id="RESASide" translateX="70.0" translateY="168.0" visible="false">
+                     <children>
+                        <Line endX="48.0" />
+                        <Line endX="10.0" endY="3.0" />
+                        <Line endX="10.0" endY="-3.0" />
+                        <Line endX="-10.0" endY="3.0" layoutX="48.0" />
+                        <Line endX="-10.0" endY="-3.0" layoutX="48.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESA" x="11.0" y="10.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Group>
+                  <Group fx:id="slopeSide" layoutY="187.0" translateX="70.0" visible="false">
+                     <children>
+                        <Line fx:id="slopeSideLine" endX="60.0" />
+                        <Line endX="10.0" endY="5.0" />
+                        <Line endX="10.0" endY="-5.0" />
+                        <Line fx:id="slopeSideArr1" endX="-10.0" endY="5.0" layoutX="60.0" />
+                        <Line fx:id="slopeSideArr2" endX="-10.0" endY="-5.0" layoutX="60.0" />
+                        <Text fx:id="slopeSideText" strokeType="OUTSIDE" strokeWidth="0.0" text="slope" x="13.0" y="10.0" />
+                     </children>
+                  </Group>
                  </children>
               </AnchorPane>
             <ScrollPane fx:id="logPane" style="fx-background-color: black;" vbarPolicy="ALWAYS" GridPane.rowIndex="2">
@@ -526,7 +557,7 @@
                              <Font size="14.0" />
                          </font>
                      </Label>
-                     <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="90.0" max="360.0" minorTickCount="30" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                     <Slider fx:id="rotationSlider" layoutX="84.0" layoutY="58.0" majorTickUnit="90.0" max="180.0" min="-180.0" minorTickCount="30" onMouseClicked="#rotate" onMouseDragged="#rotate" prefHeight="14.0" prefWidth="116.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                      <Slider fx:id="zoomSlider" layoutX="259.0" layoutY="58.0" max="200.0" min="50.0" onMouseClicked="#zoom" onMouseDragged="#zoom" prefHeight="14.0" prefWidth="116.0" value="50.0" />
                      <Button layoutX="232.0" layoutY="108.0" mnemonicParsing="false" onAction="#resetView" prefHeight="30.0" prefWidth="137.0" text="Reset view">
                          <tooltip>
@@ -536,13 +567,8 @@
                              <Font size="14.0" />
                          </font>
                      </Button>
-                     <Button layoutX="38.0" layoutY="108.0" mnemonicParsing="false" onAction="#executeCalculation" prefHeight="30.0" prefWidth="164.0" text="Execute calculations">
-                         <font>
-                             <Font size="14.0" />
-                         </font>
-                     </Button>
                      <TextArea fx:id="warningBox" editable="false" layoutX="25.0" layoutY="199.0" prefHeight="99.0" prefWidth="354.0" />
-                  <Button fx:id="brekdownButton" layoutX="38.0" layoutY="156.0" mnemonicParsing="false" onAction="#seeBreakdown" prefHeight="30.0" prefWidth="164.0" text="Show Breakdown">
+                  <Button fx:id="brekdownButton" layoutX="38.0" layoutY="108.0" mnemonicParsing="false" onAction="#seeBreakdown" prefHeight="30.0" prefWidth="164.0" text="Show Breakdown">
                      <font>
                         <Font size="14.0" />
                      </font>
