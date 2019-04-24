@@ -231,20 +231,13 @@ public class InterfaceController {
 
             tr.transform(domSource, streamResult);
 
-        } catch (ParserConfigurationException pce) {
+        } catch (ParserConfigurationException | TransformerException pce) {
             pce.printStackTrace();
-        } catch (TransformerException tfe) {
-            tfe.printStackTrace();
         }
     }
 
 
-    public void executeCalculation(ActionEvent ae) {
-        if (selectedRunway.equals(null) || selectedObstacle.equals(null)) {
-            System.out.println("Please select an obstacle and a runway from the list");
-            // TODO : Make this a pop up possibly
-        }
-
+    public void executeCalculation() {
         System.out.println("Selected runway: " + selectedRunway.getName());
         System.out.println("Selected obstacle: " + selectedObstacle.getName());
 
@@ -252,12 +245,15 @@ public class InterfaceController {
 
         try {
             if (selectedObstacle.getName().equals("default")) { selectedObstacle = obstacleSelection.getValue(); }
-            whichRunway = selectedRunway.addObstacle(selectedObstacle);
+            whichRunway = selectedRunway.setObstacle(selectedObstacle);
 
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
-            setSystemLogText(sdf.format(cal.getTime()) + " Calculations executed.");
-
+            setSystemLogText(sdf.format(cal.getTime()) + " Calculations executed");
+            setSystemLogText(sdf.format(cal.getTime()) + " Runway 1 status: " + selectedRunway.getRunway1().getStatus());
+            setSystemLogText(sdf.format(cal.getTime()) + " Runway 2 status: " + selectedRunway.getRunway2().getStatus());
+            //setSystemLogText(sdf.format(cal.getTime()) + " Obstacle: " + selectedObstacle);
+            showObstacle();
         } catch (DontNeedRedeclarationException e) {
             warningBox.setText("Calculation invalid: Redeclaration not needed");
             System.err.println("Calculation invalid: Redeclaration not needed");
@@ -326,14 +322,13 @@ public class InterfaceController {
             breakdown = "RUNWAY 1 (" + selectedRunway.getRunway1().getID() + "): \n " +
                     "Take Off Towards: \n" +
                     "• TORA = Distance from threshold " + selectedObstacle.getDistToThreshold1() +
-                    " - Slope calculation (" + selectedRunway.getRunway1().getSlopeCalc() + ") " +
+                    " - Displaced threshold (" + selectedRunway.getRunway1().getDisplacedThreshold() + ") " +
+                    "- Slope calculation (" + selectedRunway.getRunway1().getSlopeCalc() + ") " +
                     "- Strip end (" + Runway.getStripEnd() + ") = " + selectedRunway.getRunway1().getTORA() +"\n"+
 
-                    "• ASDA: Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") " +
-                    " + Clearway (" + selectedRunway.getRunway1().getClearway() + ") = " + selectedRunway.getRunway1().getASDA() + "\n" +
+                    "• ASDA = Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") = " + selectedRunway.getRunway1().getASDA() + "\n" +
 
-                    "• TODA : Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") " +
-                    " + Clearway (" + selectedRunway.getRunway1().getClearway() + ") = " + selectedRunway.getRunway1().getTODA() + "\n" +
+                    "• TODA = Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") = " + selectedRunway.getRunway1().getTODA() + "\n" +
 
                     "Landing Towards: \n" +
                     "• LDA = Distance from threshold " + selectedObstacle.getDistToThreshold1() +
@@ -345,7 +340,7 @@ public class InterfaceController {
                     "• TORA = Original TORA (" + selectedRunway.getRunway2().getOriginalTORA() + ") " +
                     "- Blast protection (" + Runway.getBlastProtection() + ") - Distance from threshold (" +
                     selectedObstacle.getDistToThreshold2() + ") - Displaced threshold (" + selectedRunway.getRunway2().getDisplacedThreshold() + ") = " + selectedRunway.getRunway2().getTORA() + "\n" +
-                    "• ASDA = TORA (" + selectedRunway.getRunway2().getTORA() + ") + Clearway (" + selectedRunway.getRunway2().getClearway() + ") = " + selectedRunway.getRunway2().getASDA() + "\n" +
+                    "• ASDA = TORA (" + selectedRunway.getRunway2().getTORA() + ") + Stopway (" + selectedRunway.getRunway2().getStopway() + ") = " + selectedRunway.getRunway2().getASDA() + "\n" +
                     "• TODA = TORA (" + selectedRunway.getRunway2().getTORA() + ") + Clearway (" + selectedRunway.getRunway2().getClearway() + ") = " + selectedRunway.getRunway2().getTODA() + "\n" +
 
                     "Landing Over: \n" +
@@ -359,7 +354,7 @@ public class InterfaceController {
                     "- Blast protection (" + Runway.getBlastProtection() + ") - Distance from threshold (" +
                     selectedObstacle.getDistToThreshold1() + ") \n - Displaced threshold (" + selectedRunway.getRunway1().getDisplacedThreshold() + ") " +
                     "= " +  selectedRunway.getRunway1().getTORA() + "\n " +
-                    "• ASDA = Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") + Clearway (" + selectedRunway.getRunway1().getClearway() + ") = " +  selectedRunway.getRunway1().getASDA() + "\n" +
+                    "• ASDA = Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") + Stopway (" + selectedRunway.getRunway1().getStopway() + ") = " +  selectedRunway.getRunway1().getASDA() + "\n" +
                     "• TODA = Recalculated TORA (" + selectedRunway.getRunway1().getTORA() + ") + Clearway (" + selectedRunway.getRunway1().getClearway() + ") = " +  selectedRunway.getRunway1().getASDA() + "\n" +
 
                     "Landing Over: \n " +
@@ -370,15 +365,14 @@ public class InterfaceController {
 
                     "\nRUNWAY 2 (" + selectedRunway.getRunway2().getID() + "): \n" +
                     "Take Off Towards: \n" +
-                    "• TORA = Distance from threshold " + selectedObstacle.getDistToThreshold1() +
+                    "• TORA = Distance from threshold " + selectedObstacle.getDistToThreshold2() +
+                    " - Displaced threshold (" + selectedRunway.getRunway2().getDisplacedThreshold() + ") " +
                     "- Slope calculation (" + selectedRunway.getRunway2().getSlopeCalc() + ") " +
                     "- Strip end (" + Runway.getStripEnd() + ") = " + selectedRunway.getRunway2().getTORA() +"\n"+
 
-                    "• ASDA = Recalculated TORA (" + selectedRunway.getRunway2().getTORA() + ") " +
-                    " + Clearway (" + selectedRunway.getRunway2().getClearway() + ") = " + selectedRunway.getRunway2().getASDA() + "\n" +
+                    "• ASDA = Recalculated TORA (" + selectedRunway.getRunway2().getTORA() + ") = " + selectedRunway.getRunway2().getASDA() + "\n" +
 
-                    "• TODA = Recalculated TORA (" + selectedRunway.getRunway2().getTORA() + ") " +
-                    " + Clearway (" + selectedRunway.getRunway2().getClearway() + ") = " + selectedRunway.getRunway2().getTODA() + "\n" +
+                    "• TODA = Recalculated TORA (" + selectedRunway.getRunway2().getTORA() + ") = " + selectedRunway.getRunway2().getTODA() + "\n" +
 
                     "Landing Towards: \n" +
                     "• LDA = Distance from threshold " + selectedObstacle.getDistToThreshold2() +
@@ -447,7 +441,11 @@ public class InterfaceController {
         obstacleSelection.getValue().setDistToThreshold1(0);
         obstacleSelection.getValue().setDistToThreshold2(0);
 
-        runwaySelection.getValue().setObstacle(null);
+        try {
+            runwaySelection.getValue().setObstacle(null);
+        } catch (DontNeedRedeclarationException | NegativeParameterException e) {
+            e.printStackTrace();
+        }
 
         obstacleTop.setVisible(false);
         obstacleSide.setVisible(false);
@@ -459,7 +457,8 @@ public class InterfaceController {
         statusLabel1.setText("FREE");
         statusLabel2.setText("FREE");
 
-        RESA.setVisible(false);
+        RESATop.setVisible(false);
+        slopeTop.setVisible(false);
         LDALine1.setEndX(737);
         LDAArr11.setLayoutX(737);
         LDAArr21.setLayoutX(737);
@@ -492,27 +491,27 @@ public class InterfaceController {
         TORAText2.setLayoutX(0);
         TORALine2.setStartX(40);
 
-        sideLineLDA1.setEndX(720);
-        sideArrLDA11.setLayoutX(720);
-        sideArrLDA21.setLayoutX(720);
-        sideThresholdLDA21.setLayoutX(720);
-        sideLineTORA1.setEndX(720);
-        sideArrTORA11.setLayoutX(720);
-        sideArrTORA21.setLayoutX(720);
-        sideThresholdTORA21.setLayoutX(720);
+        sideLineLDA1.setEndX(740);
+        sideArrLDA11.setLayoutX(740);
+        sideArrLDA21.setLayoutX(740);
+        sideThresholdLDA21.setLayoutX(740);
+        sideLineTORA1.setEndX(740);
+        sideArrTORA11.setLayoutX(740);
+        sideArrTORA21.setLayoutX(740);
+        sideThresholdTORA21.setLayoutX(740);
 
-        sideThresholdLDA12.setLayoutX(720);
-        sideTextLDA2.setLayoutX(694);
-        sideLineLDA2.setEndX(690);
-        sideThresholdTORA12.setLayoutX(720);
-        sideTextTORA2.setLayoutX(686);
-        sideLineTORA2.setEndX(682);
-        sideThresholdASDA12.setLayoutX(740);
-        sideTextASDA2.setLayoutX(706);
-        sideLineASDA2.setEndX(702);
-        sideThresholdTODA12.setLayoutX(750);
-        sideTextTODA2.setLayoutX(716);
-        sideLineTODA2.setEndX(712);
+        sideThresholdLDA12.setLayoutX(740);
+        sideTextLDA2.setLayoutX(714);
+        sideLineLDA2.setEndX(710);
+        sideThresholdTORA12.setLayoutX(740);
+        sideTextTORA2.setLayoutX(706);
+        sideLineTORA2.setEndX(702);
+        sideThresholdASDA12.setLayoutX(760);
+        sideTextASDA2.setLayoutX(726);
+        sideLineASDA2.setEndX(722);
+        sideThresholdTODA12.setLayoutX(770);
+        sideTextTODA2.setLayoutX(736);
+        sideLineTODA2.setEndX(732);
 
         sideThresholdLDA11.setLayoutX(0);
         sideTextLDA1.setLayoutX(0);
@@ -658,7 +657,7 @@ public class InterfaceController {
     
     public void runwaySelected() {
         PhysicalRunway runway = runwaySelection.getValue();
-        RESA.setVisible(false);
+        RESATop.setVisible(false);
         Runway runway1 = runway.getRunway1();
         Runway runway2 = runway.getRunway2();
 
@@ -679,10 +678,10 @@ public class InterfaceController {
             TODAArr11.setLayoutX(767);
             TODAArr21.setLayoutX(767);
             thresholdLineTODA21.setLayoutX(767);
-            sideLineTODA1.setEndX(750);
-            sideArrTODA11.setLayoutX(750);
-            sideArrTODA21.setLayoutX(750);
-            sideThresholdTODA21.setLayoutX(750);
+            sideLineTODA1.setEndX(770);
+            sideArrTODA11.setLayoutX(770);
+            sideArrTODA21.setLayoutX(770);
+            sideThresholdTODA21.setLayoutX(770);
         } else {
             clearway2.setVisible(false);
             sideClearway2.setVisible(false);
@@ -690,10 +689,10 @@ public class InterfaceController {
             TODAArr11.setLayoutX(737);
             TODAArr21.setLayoutX(737);
             thresholdLineTODA21.setLayoutX(737);
-            sideLineTODA1.setEndX(720);
-            sideArrTODA11.setLayoutX(720);
-            sideArrTODA21.setLayoutX(720);
-            sideThresholdTODA21.setLayoutX(720);
+            sideLineTODA1.setEndX(740);
+            sideArrTODA11.setLayoutX(740);
+            sideArrTODA21.setLayoutX(740);
+            sideThresholdTODA21.setLayoutX(740);
         }
 
         if (runway1.getStopway()>0) {
@@ -703,10 +702,10 @@ public class InterfaceController {
             ASDAArr11.setLayoutX(757);
             ASDAArr21.setLayoutX(757);
             thresholdLineASDA21.setLayoutX(757);
-            sideLineASDA1.setEndX(740);
-            sideArrASDA11.setLayoutX(740);
-            sideArrASDA21.setLayoutX(740);
-            sideThresholdASDA21.setLayoutX(740);
+            sideLineASDA1.setEndX(760);
+            sideArrASDA11.setLayoutX(760);
+            sideArrASDA21.setLayoutX(760);
+            sideThresholdASDA21.setLayoutX(760);
         } else {
             stopway2.setVisible(false);
             sideStopway2.setVisible(false);
@@ -714,10 +713,10 @@ public class InterfaceController {
             ASDAArr11.setLayoutX(737);
             ASDAArr21.setLayoutX(737);
             thresholdLineASDA21.setLayoutX(737);
-            sideLineASDA1.setEndX(720);
-            sideArrASDA11.setLayoutX(720);
-            sideArrASDA21.setLayoutX(720);
-            sideThresholdASDA21.setLayoutX(720);
+            sideLineASDA1.setEndX(740);
+            sideArrASDA11.setLayoutX(740);
+            sideArrASDA21.setLayoutX(740);
+            sideThresholdASDA21.setLayoutX(740);
         }
 
         if (runway2.getClearway()>0) {
@@ -774,7 +773,7 @@ public class InterfaceController {
             sideDT1.setVisible(true);
             int x = 740 * dt / runway1.getOriginalTORA();
             disThr1.setLayoutX(x);
-            sideDT1.setLayoutX(80+x);
+            sideDT1.setLayoutX(70+x);
             thresholdLineLDA11.setLayoutX(x);
             sideThresholdLDA11.setLayoutX(x);
             LDAText1.setLayoutX(x);
@@ -846,6 +845,7 @@ public class InterfaceController {
         recalcASDA2.setText("-");
 
         obstacleTop.setVisible(false);
+        slope.setVisible(false);
     }
 
     private int rotationDiff;
@@ -905,154 +905,167 @@ public class InterfaceController {
     }
 
     void showObstacle() {
-        int dtt1 = selectedObstacle.getDistToThreshold1();
-        int dtt2 = selectedObstacle.getDistToThreshold2();
-        int dtc = selectedObstacle.getDistToCentreline();
-        if (dtt1>-100 && dtt2>-100 && -150<dtc && dtc<150) {
-            selectedRunway.setObstacle(selectedObstacle);
-            Runway runway1 = selectedRunway.getRunway1();
-            Runway runway2 = selectedRunway.getRunway2();
-            obstacleTop.setVisible(true);
-            obstacleSide.setVisible(true);
-            int x1 = dtt1 * 740 / runway1.getOriginalTORA();
-            int x2 = dtt2 * 740 / runway2.getOriginalTORA();
-            obstacleTop.setLayoutX(x1);
-            obstacleTop.setWidth(740 - x2 - x1);
-            obstacleTop.setLayoutY(dtc / 3.0 + 15);
+        PhysicalRunway runway = runwaySelection.getValue();
+        obstacleTop.setVisible(true);
+        obstacleSide.setVisible(true);
+        slope.setVisible(true);
+        slopeTop.setVisible(true);
+        RESATop.setVisible(true);
+        double x1 = 740.0/runway.getRunway1().getOriginalTORA()*(runway.getObstacle().getDistToThreshold1()+runway.getRunway1().getDisplacedThreshold());
+        double x2 = 740.0/runway.getRunway2().getOriginalTORA()*(runway.getObstacle().getDistToThreshold2()+runway.getRunway2().getDisplacedThreshold());
+        obstacleTop.setLayoutY(-runway.getObstacle().getDistToCentreline() / 3.0 - Integer.signum(runway.getObstacle().getDistToCentreline())*10);
+        double h = selectedObstacle.getHeight() / 1.5;
+        obstacleSide.setHeight(h);
+        obstacleSide.setLayoutY(-h);
+        slope.setStartY(-h);
+        double diff = h*15;
+        if (x1 > x2) {
             obstacleSide.setLayoutX(x1);
-            obstacleSide.setWidth(740 - x2 - x1);
-            double h = selectedObstacle.getHeight() / 1.5;
-            obstacleSide.setHeight(h);
-            obstacleSide.setLayoutY(-h);
-            if (x1 > x2) {
-                int x = x1 - 75;
-                RESA.setVisible(true);
-                RESA.setLayoutX(x + 15);
-                LDALine1.setEndX(x);
-                LDAArr11.setLayoutX(x);
-                LDAArr21.setLayoutX(x);
-                thresholdLineLDA21.setLayoutX(x);
-                TORALine1.setEndX(x);
-                TORAArr11.setLayoutX(x);
-                TORAArr21.setLayoutX(x);
-                thresholdLineTORA21.setLayoutX(x);
-                ASDALine1.setEndX(x);
-                ASDAArr11.setLayoutX(x);
-                ASDAArr21.setLayoutX(x);
-                thresholdLineASDA21.setLayoutX(x);
-                TODALine1.setEndX(x);
-                TODAArr11.setLayoutX(x);
-                TODAArr21.setLayoutX(x);
-                thresholdLineTODA21.setLayoutX(x);
+            obstacleTop.setLayoutX(x1);
+            slope.setStartX(x1);
+            slope.setEndX(x1-diff);
+            slopeTop.setLayoutX(x1 - diff);
+            slopeTopLine.setEndX(diff);
+            slopeTopArr1.setLayoutX(diff);
+            slopeTopArr2.setLayoutX(diff);
+            slopeTopText.setLayoutX(diff/2-20);
+            RESATop.setLayoutX(x1 - 48);
+            double x = x1 - 60;
+            LDALine1.setEndX(x);
+            LDAArr11.setLayoutX(x);
+            LDAArr21.setLayoutX(x);
+            thresholdLineLDA21.setLayoutX(x);
+            sideLineLDA1.setEndX(x);
+            sideArrLDA11.setLayoutX(x);
+            sideArrLDA21.setLayoutX(x);
+            sideThresholdLDA21.setLayoutX(x);
 
-                sideLineLDA1.setEndX(x);
-                sideArrLDA11.setLayoutX(x);
-                sideArrLDA21.setLayoutX(x);
-                sideThresholdLDA21.setLayoutX(x);
-                sideLineTORA1.setEndX(x);
-                sideArrTORA11.setLayoutX(x);
-                sideArrTORA21.setLayoutX(x);
-                sideThresholdTORA21.setLayoutX(x);
-                sideLineASDA1.setEndX(x);
-                sideArrASDA11.setLayoutX(x);
-                sideArrASDA21.setLayoutX(x);
-                sideThresholdASDA21.setLayoutX(x);
-                sideLineTODA1.setEndX(x);
-                sideArrTODA11.setLayoutX(x);
-                sideArrTODA21.setLayoutX(x);
-                sideThresholdTODA21.setLayoutX(x);
+            TORALine2.setEndX(x);
+            TORAArr12.setLayoutX(x);
+            TORAArr22.setLayoutX(x);
+            thresholdLineTORA22.setLayoutX(x);
+            thresholdLineASDA12.setLayoutX(x - 737);
+            ASDAText2.setLayoutX(x - 737);
+            ASDALine2.setEndX(x);
+            thresholdLineTODA12.setLayoutX(x - 737);
+            TODAText2.setLayoutX(x - 737);
+            TODALine2.setEndX(x);
+            sideThresholdTORA12.setLayoutX(x);
+            sideTextTORA2.setLayoutX(x - 34);
+            sideLineTORA2.setEndX(x - 38);
+            sideThresholdASDA12.setLayoutX(x + 20);
+            sideTextASDA2.setLayoutX(x - 14);
+            sideLineASDA2.setEndX(x - 18);
+            sideThresholdTODA12.setLayoutX(x + 30);
+            sideTextTODA2.setLayoutX(x - 4);
+            sideLineTODA2.setEndX(x - 8);
+            if(diff>48)
+                x = x1 - diff - 12;
+            TORALine1.setEndX(x);
+            TORAArr11.setLayoutX(x);
+            TORAArr21.setLayoutX(x);
+            thresholdLineTORA21.setLayoutX(x);
+            ASDALine1.setEndX(x);
+            ASDAArr11.setLayoutX(x);
+            ASDAArr21.setLayoutX(x);
+            thresholdLineASDA21.setLayoutX(x);
+            TODALine1.setEndX(x);
+            TODAArr11.setLayoutX(x);
+            TODAArr21.setLayoutX(x);
+            thresholdLineTODA21.setLayoutX(x);
 
-                thresholdLineLDA12.setLayoutX(x - 737);
-                LDAText2.setLayoutX(x - 737);
-                LDALine2.setEndX(x - 32);
+            sideLineTORA1.setEndX(x);
+            sideArrTORA11.setLayoutX(x);
+            sideArrTORA21.setLayoutX(x);
+            sideThresholdTORA21.setLayoutX(x);
+            sideLineASDA1.setEndX(x);
+            sideArrASDA11.setLayoutX(x);
+            sideArrASDA21.setLayoutX(x);
+            sideThresholdASDA21.setLayoutX(x);
+            sideLineTODA1.setEndX(x);
+            sideArrTODA11.setLayoutX(x);
+            sideArrTODA21.setLayoutX(x);
+            sideThresholdTODA21.setLayoutX(x);
 
-                TORALine2.setEndX(x);
-                TORAArr12.setLayoutX(x);
-                TORAArr22.setLayoutX(x);
-                thresholdLineTORA22.setLayoutX(x);
+            thresholdLineLDA12.setLayoutX(x - 737);
+            LDAText2.setLayoutX(x - 737);
+            LDALine2.setEndX(x - 32);
+            sideThresholdLDA12.setLayoutX(x);
+            sideTextLDA2.setLayoutX(x - 26);
+            sideLineLDA2.setEndX(x - 30);
 
-                thresholdLineASDA12.setLayoutX(x - 737);
-                ASDAText2.setLayoutX(x - 737);
-                ASDALine2.setEndX(x);
-                thresholdLineTODA12.setLayoutX(x - 737);
-                TODAText2.setLayoutX(x - 737);
-                TODALine2.setEndX(x);
+        } else {
+            obstacleSide.setLayoutX(x1-40);
+            obstacleTop.setLayoutX(x1-40);
+            slope.setStartX(x1);
+            slope.setEndX(x1+diff);
+            slopeTop.setLayoutX(x1);
+            slopeTopLine.setEndX(diff);
+            slopeTopArr1.setLayoutX(diff);
+            slopeTopArr2.setLayoutX(diff);
+            slopeTopText.setLayoutX(diff/2-20);
+            RESATop.setLayoutX(x1);
+            double x = x1 + diff + 12;
+            if(diff<48)
+                x = x1 +60;
+            thresholdLineLDA11.setLayoutX(x);
+            LDAText1.setLayoutX(x);
+            LDALine1.setStartX(32 + x);
+            sideThresholdLDA11.setLayoutX(x);
+            sideTextLDA1.setLayoutX(x);
+            sideLineLDA1.setStartX(32 + x);
 
-                sideThresholdLDA12.setLayoutX(x);
-                sideTextLDA2.setLayoutX(x - 26);
-                sideLineLDA2.setEndX(x - 30);
-                sideThresholdTORA12.setLayoutX(x);
-                sideTextTORA2.setLayoutX(x - 34);
-                sideLineTORA2.setEndX(x - 38);
-                sideThresholdASDA12.setLayoutX(x + 20);
-                sideTextASDA2.setLayoutX(x - 14);
-                sideLineASDA2.setEndX(x - 18);
-                sideThresholdTODA12.setLayoutX(x + 30);
-                sideTextTODA2.setLayoutX(x - 4);
-                sideLineTODA2.setEndX(x - 8);
-            } else {
-                x = 740 - x2 + 75;
-                RESA.setVisible(true);
-                RESA.setLayoutX(x - 75);
-                thresholdLineLDA11.setLayoutX(x);
-                LDAText1.setLayoutX(x);
-                LDALine1.setStartX(32 + x);
-                thresholdLineTORA11.setLayoutX(x);
-                TORAText1.setLayoutX(x);
-                TORALine1.setStartX(32 + x);
-                thresholdLineASDA11.setLayoutX(x);
-                ASDAText1.setLayoutX(x);
-                ASDALine1.setStartX(32 + x);
-                thresholdLineTODA11.setLayoutX(x);
-                TODAText1.setLayoutX(x);
-                TODALine1.setStartX(32 + x);
+            thresholdLineTORA12.setLayoutX(x);
+            TORAText2.setLayoutX(x);
+            TORALine2.setStartX(38 + x);
+            ASDALine2.setStartX(x + 46);
+            ASDAArr12.setLayoutX(x + 20);
+            ASDAArr22.setLayoutX(x + 20);
+            thresholdLineASDA22.setLayoutX(x + 20);
+            TODALine2.setStartX(x + 46);
+            TODAArr12.setLayoutX(x + 30);
+            TODAArr22.setLayoutX(x + 30);
+            thresholdLineTODA22.setLayoutX(x + 30);
+            sideLineTORA2.setStartX(x);
+            sideArrTORA12.setLayoutX(x);
+            sideArrTORA22.setLayoutX(x);
+            sideThresholdTORA22.setLayoutX(x);
+            sideLineASDA2.setStartX(x + 20);
+            sideArrASDA12.setLayoutX(x + 20);
+            sideArrASDA22.setLayoutX(x + 20);
+            sideThresholdASDA22.setLayoutX(x + 20);
+            sideLineTODA2.setStartX(x + 30);
+            sideArrTODA12.setLayoutX(x + 30);
+            sideArrTODA22.setLayoutX(x + 30);
+            sideThresholdTODA22.setLayoutX(x + 30);
+            x = x1 + 60;
+            thresholdLineTORA11.setLayoutX(x);
+            TORAText1.setLayoutX(x);
+            TORALine1.setStartX(38 + x);
+            thresholdLineASDA11.setLayoutX(x);
+            ASDAText1.setLayoutX(x);
+            ASDALine1.setStartX(38 + x);
+            thresholdLineTODA11.setLayoutX(x);
+            TODAText1.setLayoutX(x);
+            TODALine1.setStartX(40 + x);
+            sideThresholdTORA11.setLayoutX(x);
+            sideTextTORA1.setLayoutX(x);
+            sideLineTORA1.setStartX(36 + x);
+            sideThresholdASDA11.setLayoutX(x);
+            sideTextASDA1.setLayoutX(x);
+            sideLineASDA1.setStartX(36 + x);
+            sideThresholdTODA11.setLayoutX(x);
+            sideTextTODA1.setLayoutX(x);
+            sideLineTODA1.setStartX(36 + x);
 
-                thresholdLineTORA12.setLayoutX(x);
-                TORAText2.setLayoutX(x);
-                TORALine2.setStartX(32 + x);
-                ASDALine2.setStartX(x + 42);
-                ASDAArr12.setLayoutX(x + 20);
-                ASDAArr22.setLayoutX(x + 20);
-                thresholdLineASDA22.setLayoutX(x + 20);
-                TODALine2.setStartX(x + 42);
-                TODAArr12.setLayoutX(x + 30);
-                TODAArr22.setLayoutX(x + 30);
-                thresholdLineTODA22.setLayoutX(x + 30);
-
-                sideThresholdLDA11.setLayoutX(x);
-                sideTextLDA1.setLayoutX(x);
-                sideLineLDA1.setStartX(32 + x);
-                sideThresholdTORA11.setLayoutX(x);
-                sideTextTORA1.setLayoutX(x);
-                sideLineTORA1.setStartX(32 + x);
-                sideThresholdASDA11.setLayoutX(x);
-                sideTextASDA1.setLayoutX(x);
-                sideLineASDA1.setStartX(32 + x);
-                sideThresholdTODA11.setLayoutX(x);
-                sideTextTODA1.setLayoutX(x);
-                sideLineTODA1.setStartX(32 + x);
-                sideLineLDA2.setStartX(x);
-                sideArrLDA12.setLayoutX(x);
-                sideArrLDA22.setLayoutX(x);
-                sideThresholdLDA22.setLayoutX(x);
-                sideLineTORA2.setStartX(x);
-                sideArrTORA12.setLayoutX(x);
-                sideArrTORA22.setLayoutX(x);
-                sideThresholdTORA22.setLayoutX(x);
-                sideLineASDA2.setStartX(x + 20);
-                sideArrASDA12.setLayoutX(x + 20);
-                sideArrASDA22.setLayoutX(x + 20);
-                sideThresholdASDA22.setLayoutX(x + 20);
-                sideLineTODA2.setStartX(x + 30);
-                sideArrTODA12.setLayoutX(x + 30);
-                sideArrTODA22.setLayoutX(x + 30);
-                sideThresholdTODA22.setLayoutX(x + 30);
-
-                LDALine2.setStartX(x);
-                LDAArr12.setLayoutX(x);
-                LDAArr22.setLayoutX(x);
-                thresholdLineLDA22.setLayoutX(x);
-            }
+            LDALine2.setStartX(x);
+            LDAArr12.setLayoutX(x);
+            LDAArr22.setLayoutX(x);
+            thresholdLineLDA22.setLayoutX(x);
+            sideLineLDA2.setStartX(x);
+            sideArrLDA12.setLayoutX(x);
+            sideArrLDA22.setLayoutX(x);
+            sideThresholdLDA22.setLayoutX(x);
         }
     }
 
@@ -1206,7 +1219,7 @@ public class InterfaceController {
     public Slider rotationSlider;
     public Group runwayGroup;
     public Slider zoomSlider;
-    public Group RESA;
+    public Group RESATop;
     public Group compass;
     public Line thresholdLineLDA11;
     public Text LDAText1;
@@ -1283,5 +1296,11 @@ public class InterfaceController {
     public ScrollPane logPane;
     public VBox logVBox;
     public Button saveLogButton;
+    public Line slope;
+    public Group slopeTop;
+    public Line slopeTopLine;
+    public Line slopeTopArr1;
+    public Line slopeTopArr2;
+    public Text slopeTopText;
 
 }

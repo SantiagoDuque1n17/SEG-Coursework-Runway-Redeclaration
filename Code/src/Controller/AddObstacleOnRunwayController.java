@@ -29,7 +29,7 @@ public class AddObstacleOnRunwayController
                 controller.getObstacleFromComboBox().setDistToCentreline((Integer.parseInt(distToCenter.getText().trim())));
                 controller.getObstacleFromComboBox().setDistToThreshold1((Integer.parseInt(distToLeftT.getText().trim())));
                 controller.getObstacleFromComboBox().setDistToThreshold2((Integer.parseInt(distToRightT.getText().trim())));
-                controller.showObstacle();
+                controller.executeCalculation();
 
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
