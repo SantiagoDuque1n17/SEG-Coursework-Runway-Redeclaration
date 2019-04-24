@@ -441,6 +441,30 @@
                   </Group>
                   <Button fx:id="resetLogButton" layoutX="656.0" layoutY="232.0" mnemonicParsing="false" onAction="#resetLog" prefHeight="26.0" prefWidth="87.0" text="Reset Log" />
                   <Button fx:id="saveLogButton" layoutX="754.0" layoutY="233.0" mnemonicParsing="false" onAction="#saveLog" prefHeight="26.0" prefWidth="87.0" text="Save log" />
+                  <Group fx:id="RESASide" translateX="70.0" translateY="168.0" visible="false">
+                     <children>
+                        <Line endX="48.0" />
+                        <Line endX="10.0" endY="3.0" />
+                        <Line endX="10.0" endY="-3.0" />
+                        <Line endX="-10.0" endY="3.0" layoutX="48.0" />
+                        <Line endX="-10.0" endY="-3.0" layoutX="48.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESA" x="11.0" y="10.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Group>
+                  <Group fx:id="slopeSide" layoutY="187.0" translateX="70.0" visible="false">
+                     <children>
+                        <Line fx:id="slopeSideLine" endX="60.0" />
+                        <Line endX="10.0" endY="5.0" />
+                        <Line endX="10.0" endY="-5.0" />
+                        <Line fx:id="slopeSideArr1" endX="-10.0" endY="5.0" layoutX="60.0" />
+                        <Line fx:id="slopeSideArr2" endX="-10.0" endY="-5.0" layoutX="60.0" />
+                        <Text fx:id="slopeSideText" strokeType="OUTSIDE" strokeWidth="0.0" text="slope" x="13.0" y="10.0" />
+                     </children>
+                  </Group>
                  </children>
               </AnchorPane>
             <ScrollPane fx:id="logPane" style="fx-background-color: black;" vbarPolicy="ALWAYS" GridPane.rowIndex="2">

@@ -458,7 +458,9 @@ public class InterfaceController {
         statusLabel2.setText("FREE");
 
         RESATop.setVisible(false);
+        RESASide.setVisible(false);
         slopeTop.setVisible(false);
+        slopeSide.setVisible(false);
         LDALine1.setEndX(737);
         LDAArr11.setLayoutX(737);
         LDAArr21.setLayoutX(737);
@@ -658,6 +660,9 @@ public class InterfaceController {
     public void runwaySelected() {
         PhysicalRunway runway = runwaySelection.getValue();
         RESATop.setVisible(false);
+        RESASide.setVisible(false);
+        slopeTop.setVisible(false);
+        slopeSide.setVisible(false);
         Runway runway1 = runway.getRunway1();
         Runway runway2 = runway.getRunway2();
 
@@ -845,6 +850,7 @@ public class InterfaceController {
         recalcASDA2.setText("-");
 
         obstacleTop.setVisible(false);
+        obstacleSide.setVisible(false);
         slope.setVisible(false);
     }
 
@@ -910,7 +916,9 @@ public class InterfaceController {
         obstacleSide.setVisible(true);
         slope.setVisible(true);
         slopeTop.setVisible(true);
+        slopeSide.setVisible(true);
         RESATop.setVisible(true);
+        RESASide.setVisible(true);
         double x1 = 740.0/runway.getRunway1().getOriginalTORA()*(runway.getObstacle().getDistToThreshold1()+runway.getRunway1().getDisplacedThreshold());
         double x2 = 740.0/runway.getRunway2().getOriginalTORA()*(runway.getObstacle().getDistToThreshold2()+runway.getRunway2().getDisplacedThreshold());
         obstacleTop.setLayoutY(-runway.getObstacle().getDistToCentreline() / 3.0 - Integer.signum(runway.getObstacle().getDistToCentreline())*10);
@@ -925,11 +933,17 @@ public class InterfaceController {
             slope.setStartX(x1);
             slope.setEndX(x1-diff);
             slopeTop.setLayoutX(x1 - diff);
+            slopeSide.setLayoutX(x1 - diff);
             slopeTopLine.setEndX(diff);
+            slopeSideLine.setEndX(diff);
             slopeTopArr1.setLayoutX(diff);
+            slopeSideArr1.setLayoutX(diff);
             slopeTopArr2.setLayoutX(diff);
+            slopeSideArr2.setLayoutX(diff);
             slopeTopText.setLayoutX(diff/2-20);
+            slopeSideText.setLayoutX(diff/2-20);
             RESATop.setLayoutX(x1 - 48);
+            RESASide.setLayoutX(x1 - 48);
             double x = x1 - 60;
             LDALine1.setEndX(x);
             LDAArr11.setLayoutX(x);
@@ -1000,11 +1014,17 @@ public class InterfaceController {
             slope.setStartX(x1);
             slope.setEndX(x1+diff);
             slopeTop.setLayoutX(x1);
+            slopeSide.setLayoutX(x1);
             slopeTopLine.setEndX(diff);
+            slopeSideLine.setEndX(diff);
             slopeTopArr1.setLayoutX(diff);
+            slopeSideArr1.setLayoutX(diff);
             slopeTopArr2.setLayoutX(diff);
+            slopeSideArr2.setLayoutX(diff);
             slopeTopText.setLayoutX(diff/2-20);
+            slopeSideText.setLayoutX(diff/2-20);
             RESATop.setLayoutX(x1);
+            RESASide.setLayoutX(x1);
             double x = x1 + diff + 12;
             if(diff<48)
                 x = x1 +60;
@@ -1220,6 +1240,7 @@ public class InterfaceController {
     public Group runwayGroup;
     public Slider zoomSlider;
     public Group RESATop;
+    public Group RESASide;
     public Group compass;
     public Line thresholdLineLDA11;
     public Text LDAText1;
@@ -1298,9 +1319,14 @@ public class InterfaceController {
     public Button saveLogButton;
     public Line slope;
     public Group slopeTop;
+    public Group slopeSide;
     public Line slopeTopLine;
+    public Line slopeSideLine;
     public Line slopeTopArr1;
+    public Line slopeSideArr1;
     public Line slopeTopArr2;
+    public Line slopeSideArr2;
     public Text slopeTopText;
+    public Text slopeSideText;
 
 }
