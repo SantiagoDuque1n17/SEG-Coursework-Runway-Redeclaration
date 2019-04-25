@@ -34,10 +34,7 @@ public class AddObstacleController
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
                 controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle " + "\"" + obstacle.getName() + "\" added to list.");
-                controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle height: " + controller.getObstacleFromComboBox().getHeight());
-                controller.setSystemLogText(sdf.format(cal.getTime()) + " Distance to centreline: " + controller.getObstacleFromComboBox().getDistToCentreline());
-                controller.setSystemLogText(sdf.format(cal.getTime()) + " Distance to threshold 1: " + controller.getObstacleFromComboBox().getDistToThreshold1());
-                controller.setSystemLogText(sdf.format(cal.getTime()) + " Distance to threshold 2: " + controller.getObstacleFromComboBox().getDistToThreshold2());
+                controller.setSystemLogText(sdf.format(cal.getTime()) + " Obstacle height: " + obstacle.getHeight());
                 ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
             }
             catch(NumberFormatException e)
