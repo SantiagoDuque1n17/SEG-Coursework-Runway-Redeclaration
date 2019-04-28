@@ -1348,17 +1348,21 @@ public class InterfaceController
     public Line slopeSideArr2;
     public Text slopeTopText;
     public Text slopeSideText;
-    public Pane viewPane;
+    public Pane viewPane, topView;
 
     public void saveViews(ActionEvent actionEvent) {
+        final Rectangle rectangle = new Rectangle(880, 470);
+        topView.setClip(rectangle);
         WritableImage img = new WritableImage(887, 812);
         viewPane.snapshot(null, img);
-        File file = new File("Image.png");
-
-
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
-        } catch (Exception s) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Image");
+        File file = fileChooser.showSaveDialog(new Stage());
+        if (file != null) {
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
+            } catch (Exception ignored) {
+            }
         }
     }
 }
