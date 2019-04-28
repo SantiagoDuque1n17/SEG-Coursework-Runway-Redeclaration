@@ -5,9 +5,12 @@ import Model.Runway;
 import Model.Airport;
 import Exceptions.DontNeedRedeclarationException;
 import Exceptions.NegativeParameterException;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -44,7 +47,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class InterfaceController {
+public class InterfaceController
+{
     private Airport airport = null;
     private SelectAirportController controller;
 
@@ -60,6 +64,8 @@ public class InterfaceController {
 
     @FXML
     private Label airportName;
+    @FXML
+    private Button helpButton;
 
     @FXML
     public Obstacle setSelectedObstacle() {
@@ -80,6 +86,14 @@ public class InterfaceController {
             runwaySelected();
         }
     }
+
+    public void handleHelpButton(ActionEvent event)
+    {
+        File file = new File("./1.pdf");
+        HostServices hostServices = controller.getHostServices();
+        hostServices.showDocument(file.getAbsolutePath());
+    }
+
     public void importButtonAction (ActionEvent event){
         FileChooser fc = new FileChooser();
         File selectedFile = fc.showOpenDialog(null);
@@ -565,6 +579,8 @@ public class InterfaceController {
         plusButton.requestLayout();
         addObsButton.setOnAction(this::handleAddObsButtonAction);
         removeObs.setOnAction(this::handleRemoveObsButtonAction);
+
+        helpButton.setOnAction(this::handleHelpButton);
 
         runwaySelected();
         setSelectedObstacle();
@@ -1328,5 +1344,4 @@ public class InterfaceController {
     public Line slopeSideArr2;
     public Text slopeTopText;
     public Text slopeSideText;
-
 }

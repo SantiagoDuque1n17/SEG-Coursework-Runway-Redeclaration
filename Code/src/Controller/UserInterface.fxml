@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.Double?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
@@ -25,7 +32,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -494,7 +501,7 @@
                       <Insets />
                   </GridPane.margin>
                  <children>
-                     <Button layoutX="252.0" layoutY="12.0" maxWidth="-Infinity" minHeight="12.0" minWidth="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" text="?">
+                     <Button fx:id="helpButton" layoutX="252.0" layoutY="12.0" maxWidth="-Infinity" minHeight="12.0" minWidth="23.0" mnemonicParsing="false" onAction="#handleHelpButton" prefHeight="23.0" prefWidth="23.0" text="?">
                          <tooltip>
                              <Tooltip text="Help" />
                          </tooltip>

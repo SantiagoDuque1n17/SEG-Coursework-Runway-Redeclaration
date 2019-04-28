@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,8 @@ public class SelectAirportController
     @FXML
     private Button importAirportButton;
 
+    private HostServices hostServices;
+
     public void handleSelectedAirportButtonAction(ActionEvent event)
     {
         try
@@ -45,8 +48,6 @@ public class SelectAirportController
             stage.setTitle("Runway Re-declaration tool");
             stage.setScene(new Scene(root, 1280, 800));
             stage.setResizable(false);
-
-
 
             stage.show();
             ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
@@ -128,5 +129,14 @@ public class SelectAirportController
     {
         selectHeathrowButton.setOnAction(this::handleSelectedAirportButtonAction);
         importAirportButton.setOnAction(this::handleImportAirportAction);
+    }
+
+    public HostServices getHostServices()
+    {
+        return hostServices;
+    }
+
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
     }
 }
