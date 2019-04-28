@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,8 +18,10 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -31,6 +34,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -1344,4 +1348,17 @@ public class InterfaceController
     public Line slopeSideArr2;
     public Text slopeTopText;
     public Text slopeSideText;
+    public Pane viewPane;
+
+    public void saveViews(ActionEvent actionEvent) {
+        WritableImage img = new WritableImage(887, 812);
+        viewPane.snapshot(null, img);
+        File file = new File("Image.png");
+
+
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
+        } catch (Exception s) {
+        }
+    }
 }
