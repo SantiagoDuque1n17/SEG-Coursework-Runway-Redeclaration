@@ -75,7 +75,11 @@ public class InterfaceController
     public Obstacle setSelectedObstacle() {
         Obstacle obstacle = obstacleSelection.getValue();
         selectedObstacle = obstacle;
-        System.out.println("Selected obstacle: " + selectedObstacle.getName());
+        
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+        setSystemLogText(sdf.format(cal.getTime()) + " Selected obstacle: " + selectedObstacle.getName());
+        
         return obstacle;
     }
 
@@ -839,7 +843,9 @@ public class InterfaceController
         this.rotationDiff = (Character.getNumericValue(runwayNames[0])*10+Character.getNumericValue(runwayNames[1])-9)*10;
         rotate();
 
-
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
+        setSystemLogText(sdf.format(cal.getTime()) + " Selected runway: " + selectedRunway.getName());
 
         selectedRunway = runwaySelection.getValue();
         originalLDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalLDA()));
