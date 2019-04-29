@@ -843,11 +843,12 @@ public class InterfaceController
         this.rotationDiff = (Character.getNumericValue(runwayNames[0])*10+Character.getNumericValue(runwayNames[1])-9)*10;
         rotate();
 
+        selectedRunway = runwaySelection.getValue();
+        
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]");
         setSystemLogText(sdf.format(cal.getTime()) + " Selected runway: " + selectedRunway.getName());
-
-        selectedRunway = runwaySelection.getValue();
+        
         originalLDA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalLDA()));
         originalTORA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTORA()));
         originalTODA1.setText(String.valueOf(selectedRunway.getRunway1().getOriginalTODA()));
