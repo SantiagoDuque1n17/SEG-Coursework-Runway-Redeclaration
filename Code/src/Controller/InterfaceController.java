@@ -86,7 +86,6 @@ public class InterfaceController
             runwaySelection.getItems().addAll(airport.getRunways());
             runwaySelection.getSelectionModel().select(airport.getRunways().get(0));
             runways = runwaySelection.getItems();
-            obstacleSelection.getItems().removeAll(obstacleSelection.getItems());
             runwaySelected();
         }
     }
