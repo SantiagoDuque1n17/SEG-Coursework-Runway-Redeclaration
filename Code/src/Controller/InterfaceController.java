@@ -96,7 +96,7 @@ public class InterfaceController
 
     public void handleHelpButton(ActionEvent event)
     {
-        File file = new File("./1.pdf");
+        File file = new File("./UserManual.pdf");
         HostServices hostServices = controller.getHostServices();
         hostServices.showDocument(file.getAbsolutePath());
     }
